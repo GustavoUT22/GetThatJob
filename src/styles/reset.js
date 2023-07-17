@@ -1,5 +1,11 @@
 /* Box sizing rules */
+import { css } from "@emotion/react";
+
+
 export const reset = css`
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap");
+
   *,
   *::before,
   *::after {
