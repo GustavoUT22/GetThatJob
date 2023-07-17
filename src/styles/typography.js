@@ -96,6 +96,7 @@ export const typography = {
 for (const size in typography.head) {
   typography.head[size] += `
   font-family: ${fonts.primary};
+  line-height: normal;
   `;
 }
 
