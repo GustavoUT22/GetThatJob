@@ -13,6 +13,7 @@ export const colors = {
     dark: "#BF5F82",
     pink: "#F48FB1",
     light: "#FFC1E3",
+    shallow: "rgba(244, 143, 177, 0.15)",
   },
 
   black: "#171717",
