@@ -14,9 +14,9 @@ const MainWrap = styled.div`
 const Wrapper = () => {
   return (
     <MainWrap>
-      <SideBar />
-      <JobDetails />
-      
+       <SideBar /> 
+      {/* <JobDetails /> */}
+      <ProfessionalProfile/>
     </MainWrap>
   );
 };
