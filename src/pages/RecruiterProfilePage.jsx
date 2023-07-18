@@ -84,8 +84,8 @@ function RecruiterProfile() {
         <Caption>PNG, JPG, IMG</Caption>
       </UploadFileContainer>
       <InputContainer>
-        <Input label={"Company Email"} type="email" name={"email"} />
-        <Input label={"Company Name"} name={"name"} />
+        <Input label={"Company Email"} type="email" name={"companyemail"} />
+        <Input label={"Company Name"} name={"companyname"} />
         <Input label={"Company Website"} type="url" name={"website"} />
         <TextArea label={"About The Company"} />
       </InputContainer>

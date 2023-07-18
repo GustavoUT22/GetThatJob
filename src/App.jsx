@@ -6,8 +6,8 @@ import Wrapper from "./components/Wrapper";
 function App() {
   return (
     <>
-      {/* <Wrapper /> */}
-      <LandingPage></LandingPage>
+      <Wrapper /> 
+    
     </>
   );
 }
