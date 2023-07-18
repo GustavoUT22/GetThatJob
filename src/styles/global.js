@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
 
 import { colors } from "./colors";
-// import "./reset.css";
 import { fonts } from "./typography";
 
 export const global = css`
