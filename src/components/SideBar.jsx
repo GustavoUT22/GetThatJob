@@ -52,6 +52,7 @@ const Image = styled.img`
 
 const Wrapper = styled.div`
   width: 240px;
+  display: block;
   background-color: #e1e2e1;
   height: 100vh;
   position: absolute;
@@ -123,7 +124,8 @@ const SideBar = () => {
         <InfoContainer>
           <p>&copy; 2023 - Get That Job</p>
           <p>
-            Codeable - Cohort X<br />
+            Codeable - Cohort 10
+            <br />
             Final Project
           </p>
           {/* Integrantes */}
