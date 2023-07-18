@@ -8,6 +8,7 @@ import ProfessionalProfile from "../pages/ProfessionalProfilePage";
 import RecruiterProfile from "../pages/RecruiterProfilePage";
 
 import { colors } from "../styles/colors";
+import JobPostings from "./jobPosting/JobPostings";
 
 const MainWrap = styled.div`
   display: grid;
@@ -19,9 +20,8 @@ const Wrapper = () => {
   return (
     <MainWrap>
       <SideBar />
-
       {/* <SearchJob /> */}
-      <NewJob/>
+      <JobPostings />
 
     </MainWrap>
   );
