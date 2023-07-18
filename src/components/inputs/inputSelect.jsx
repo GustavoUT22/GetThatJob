@@ -20,14 +20,29 @@ const StyleSelectInput = styled.select`
   background-repeat: no-repeat;
   background-position-y: center;
   background-position-x: calc(100% - 8px);
+  outline: none;
+  :hover {
+    border: 1px solid ${colors.pink.pink};
+  }
+  :focus {
+    border: 1px solid ${colors.pink.dark};
+  }
   option:first-of-type {
     opacity: 0.5;
     color: ${colors.gray.light};
+  }
+  option {
+    background-color: beige;
   }
 `;
 
 const DefaultOption = styled.option`
   color: ${colors.gray.light};
+`;
+
+const OptionSelect = styled.option`
+  font-size: 14px;
+  padding: 8px;
 `;
 
 const optionsDefault = [
@@ -44,9 +59,9 @@ function SelectInput({ label, options = optionsDefault, defaultValue }) {
           {defaultValue}
         </DefaultOption>
         {options.map((option) => (
-          <option key={option.value} value={option.value}>
+          <OptionSelect key={option.value} value={option.value}>
             {option.label}
-          </option>
+          </OptionSelect>
         ))}
       </StyleSelectInput>
     </div>
