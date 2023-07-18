@@ -73,8 +73,24 @@ const Label = styled.label`
   line-height: 24px; /* 171.429% */
   letter-spacing: 1.25px;
   text-transform: uppercase;
+  opacity: ${props => props.selectedRole ? "100%" : "50%"};
 `
 
+const InputContainer = styled.div`
+  display: flex;
+  width: fit-content;
+  padding: 0 8px;
+  gap: 6px;
+  flex-direction: column;
+  align-items: center;
+`
+
+const Rectangle = styled.div`
+  height: 2px;
+  background-color: ${props => props.selectedRole ? colors.pink.pink : colors.gray.light};
+  opacity: ${props => props.selectedRole ? "100%" : "50%"};
+  align-self: stretch;
+`
 
 
 export default function LoginPage() {
@@ -111,10 +127,16 @@ export default function LoginPage() {
             <Paragraph>Login to your account as...</Paragraph>
             <Form onSubmit={handleSubmit}>
               <RoleSection>
-                <input id="professional" name="role" value="professional" type="radio" checked={selectedRole === "professional"} onChange={handleRoleChange} hidden/>
-                <Label htmlFor="professional">professional</Label>
-                <input id="recruiter" name="role" value="recruiter" type="radio" checked={selectedRole === "recruiter"} onChange={handleRoleChange} hidden/>
-                <Label htmlFor="recruiter">recruiter</Label>
+                <InputContainer>
+                  <input id="professional" name="role" value="professional" type="radio" checked={selectedRole === "professional"} onChange={handleRoleChange} hidden/>
+                  <Label selectedRole={selectedRole === "professional"} htmlFor="professional">professional</Label>
+                  <Rectangle selectedRole={selectedRole === "professional"} />
+                </InputContainer>
+                <InputContainer>
+                  <input id="recruiter" name="role" value="recruiter" type="radio" checked={selectedRole === "recruiter"} onChange={handleRoleChange} hidden/>
+                  <Label selectedRole={selectedRole === "recruiter"} htmlFor="recruiter">recruiter</Label>
+                  <Rectangle selectedRole={selectedRole === "recruiter"}/>
+                </InputContainer>
               </RoleSection>
               <InfoSection>
                 <Input name="email" value={formData.email} onChange={handleChange} placeholder={"some.user@mail.com"} label={"email"}/>
