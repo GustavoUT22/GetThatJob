@@ -32,7 +32,7 @@ const LogoWrapper = styled.div`
 `;
 // const Category
 
-const JobTitle = styled.span`
+export const JobTitle = styled.span`
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
@@ -41,7 +41,7 @@ const JobTitle = styled.span`
   color: ${colors.gray.dark};
 `;
 
-const CompanyName = styled.span`
+export const CompanyName = styled.span`
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -50,7 +50,7 @@ const CompanyName = styled.span`
   color: ${colors.gray.gray};
 `;
 
-const CategoryJob = styled.span`
+export const CategoryJob = styled.span`
   display: flex;
   align-items: center;
   font-size: 12px;
@@ -62,7 +62,7 @@ const CategoryJob = styled.span`
   font-family: Inter;
 `;
 
-const JobTimeSalary = styled.div`
+export const JobTimeSalary = styled.div`
   display: flex;
   align-items: center;
   font-family: Inter;
