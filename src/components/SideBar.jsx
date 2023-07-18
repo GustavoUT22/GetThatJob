@@ -68,7 +68,6 @@ const NavContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 8px;
-    // background-color: green;
   }
   & > div > :nth-child(1) {
     width: 24px;

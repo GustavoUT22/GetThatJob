@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "@emotion/styled";
 import SideBar from "./SideBar";
-import JobDetails from "./JobDetails";
+// import JobDetails from "./JobDetails";
 import SearchJob from "../pages/SearchPage";
 import ProfessionalProfile from "../pages/ProfessionalProfilePage";
 import { colors } from "../styles/colors";
+import JobPostings from "./jobPosting/JobPostings";
 
 const MainWrap = styled.div`
   display: grid;
@@ -16,7 +17,8 @@ const Wrapper = () => {
   return (
     <MainWrap>
       <SideBar />
-      <SearchJob />
+      {/* <SearchJob /> */}
+      <JobPostings />
     </MainWrap>
   );
 };

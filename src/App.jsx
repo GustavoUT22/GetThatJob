@@ -6,8 +6,8 @@ import ProfessionalProfile from "./pages/ProfessionalProfilePage";
 function App() {
   return (
     <>
-      {/* <Wrapper /> */}
-      <LandingPage></LandingPage>
+      <Wrapper />
+      {/* <LandingPage></LandingPage> */}
     </>
   );
 }
