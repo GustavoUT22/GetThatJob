@@ -82,7 +82,6 @@ function sizeStyles(size, rounded) {
         padding: 0.5rem ${rounded ? "" : "1rem"};
         ${typography.button}
         line-height: 1em;
-        width: 10.0625rem;
         height: 2.5rem;
       `;
 
@@ -91,7 +90,6 @@ function sizeStyles(size, rounded) {
           padding: 1rem ${rounded ? "" : "1.5rem"};
           ${typography.button}
           line-height: 1em;
-          width: 11.0625rem;
           height: 3.5rem;
         `;
 
