@@ -4,6 +4,8 @@ import { colors } from "../styles/colors";
 import styled from "@emotion/styled";
 import Button from "../components/buttons/Button";
 import TeamMembers from "../components/Team-members";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import P1 from "../assets/images/people/scratching-head.png";
 import P2 from "../assets/images/people/confident.png";
 import P3 from "../assets/images/people/holding-tablet.png";
@@ -100,7 +102,7 @@ const PeopleImg = styled.img`
 
 const PeopleContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   gap: 1.31rem;
   margin: auto;
 `;
@@ -108,7 +110,7 @@ const PeopleContainer = styled.div`
 const LandingPage = () => {
   return (
     <>
-      <header>header</header>
+      <Header/>
       <FirstWrapper>
         <Title>
           The place where you get{" "}
@@ -155,7 +157,7 @@ const LandingPage = () => {
       <div>
         <TeamMembers />
       </div>
-      <footer>footer</footer>
+      <Footer/>
     </>
   );
 };
