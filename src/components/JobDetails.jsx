@@ -121,7 +121,7 @@ const JobDetails = () => {
           <h1>The job title</h1>
           <div>
             <RiTimeLine style={{ height: "15px", width: "15px" }} />
-            <span>Posted 2 days ago</span>
+            <span>Posted 2 days ago3</span>
           </div>
         </div>
         <div>
