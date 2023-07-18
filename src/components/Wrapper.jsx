@@ -15,8 +15,10 @@ const MainWrap = styled.div`
 const Wrapper = () => {
   return (
     <MainWrap>
+
       <SideBar />
       <SearchJob />
+
     </MainWrap>
   );
 };

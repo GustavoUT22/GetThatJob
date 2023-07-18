@@ -2,15 +2,15 @@ import styled from "@emotion/styled";
 import { colors } from "../../styles/colors";
 import PropTypes from "prop-types";
 
-const StyledInput = styled.input`
+const StyledTextArea = styled.textarea`
   display: flex;
   width: 23.75rem;
   align-items: center;
   gap: 8px;
   border-radius: 8px;
-  
-  height: 36px;
+  height: 56px;
   outline: none;
+  resize: none;
   border: 1px solid ${colors.pink.light};
   color: ${colors.gray.dark};
   :hover {
@@ -40,7 +40,7 @@ export const StyledLabel = styled.label`
   text-transform: uppercase;
 `;
 
-function Input({
+function TextArea({
   id,
   type = "text",
   name,
@@ -52,7 +52,7 @@ function Input({
   return (
     <InputWrapper>
       {label ? <StyledLabel htmlFor={id || name}>{label}</StyledLabel> : ""}
-      <StyledInput
+      <StyledTextArea
         id={id || name}
         type={type}
         name={name}
@@ -64,7 +64,7 @@ function Input({
   );
 }
 
-Input.propTypes = {
+TextArea.propTypes = {
   id: PropTypes.string,
   type: PropTypes.string,
   name: PropTypes.string,
@@ -74,14 +74,6 @@ Input.propTypes = {
   label: PropTypes.string,
 };
 
-export default Input;
+export default TextArea;
 
-// <Input
-//   id="email"
-//   type="email"
-//   name="email"
-//   value={email}
-//   onChange={handleChange}
-//   placeholder="example@mail.com"
-//   label="Email"
-// />;
+
