@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 
 const HeaderWrapper = styled.div`
   width: auto;
-  height: 64px;
+  height: 8vh;
   background-color: white;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
   display: flex;
