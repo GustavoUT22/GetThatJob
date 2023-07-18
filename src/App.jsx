@@ -6,7 +6,7 @@ import ProfessionalProfile from "./pages/ProfessionalProfilePage";
 function App() {
   return (
     <>
-        <Wrapper /> 
+      <Wrapper />
     </>
   );
 }

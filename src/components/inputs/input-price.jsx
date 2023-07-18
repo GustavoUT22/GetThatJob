@@ -5,8 +5,11 @@ import { colors } from "../../styles/colors";
 const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-content: center;
+  justify-content: center;
   margin-left: 65px;
   margin-bottom: 25px;
+  padding: 8px 0px;
 `;
 
 const InputBox = styled.div`
