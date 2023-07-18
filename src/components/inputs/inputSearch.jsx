@@ -7,6 +7,7 @@ const InputSearchWrapper = styled.div`
   display: flex;
   padding: 8px;
   align-items: center;
+  height: 36px;
   gap: 8px;
   align-self: stretch;
   border-radius: 8px;
@@ -38,9 +39,17 @@ const SearchInput = styled.input`
   }
 `;
 
+const SearchWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+  gap: 4px;
+  margin-bottom: 8px;
+`;
+
 function InputSearch() {
   return (
-    <InputWrapper>
+    <SearchWrapper>
       <StyledLabel>search by job title or company name</StyledLabel>
       <InputSearchWrapper>
         <CiSearch
@@ -52,7 +61,7 @@ function InputSearch() {
         />
         <SearchInput placeholder="manufacturing, sales, swim" />
       </InputSearchWrapper>
-    </InputWrapper>
+    </SearchWrapper>
   );
 }
 

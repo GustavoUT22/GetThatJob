@@ -90,6 +90,7 @@ const BenefitsWrapper = styled.div`
 const SeeMore = styled.div`
   display: flex;
   padding: 8px 16px;
+  height: 40px;
   align-items: center;
   border-radius: 16px;
   border: 1px solid ${colors.pink.pink};
