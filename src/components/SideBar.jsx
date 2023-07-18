@@ -54,8 +54,10 @@ const Wrapper = styled.div`
   width: 240px;
   display: block;
   background-color: #e1e2e1;
-  height: 100vh;
-  position: absolute;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  bottom: 0;
 `;
 
 const NavContainer = styled.div`
