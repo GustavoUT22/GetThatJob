@@ -1,4 +1,3 @@
-import React from "react";
 import rubyLogo from "../assets/footer/ruby-logo.svg";
 import reactLogo from "../assets/footer/react-logo.svg";
 import styled from "@emotion/styled";

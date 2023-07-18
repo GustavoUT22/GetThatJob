@@ -1,6 +1,4 @@
 import { useState } from "react";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 // import "./App.css";
 
 function App() {
@@ -8,9 +6,7 @@ function App() {
 
   return (
     <>
-      <Header/>
-      <br></br>
-      <Footer/>
+      <h1>Get That Job</h1>
     </>
   );
 }

@@ -1,4 +1,3 @@
-import React from "react";
 import getThatJobLogo from "../assets/header/gtj-logo.png";
 import signupLogo from "../assets/header/signup-logo.svg";
 import loginLogo from "../assets/header/login-logo.svg";
