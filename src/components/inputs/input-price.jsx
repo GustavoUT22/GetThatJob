@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 import { StyledLabel } from "./Input";
 import { colors } from "../../styles/colors";
+import { typography } from "../../styles/typography";
 
 const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  margin-left: 65px;
   margin-bottom: 25px;
   padding: 8px 0px;
 `;
@@ -34,6 +34,11 @@ const AmountInput = styled.input`
     outline: #fa4a0c;
     border: 1px solid ${colors.pink.pink};
   }
+  
+  ::placeholder {
+    color: ${colors.gray.light};
+    ${typography.body.sm};
+  }
 `;
 
 function Price() {
@@ -42,9 +47,9 @@ function Price() {
       <FormContainer>
         <StyledLabel>Salary Range</StyledLabel>
         <InputBox>
-          <AmountInput type="number" placeholder="Min"></AmountInput>
+          <AmountInput type="number" placeholder="min"></AmountInput>
           <div>-</div>
-          <AmountInput type="number" placeholder="Max"></AmountInput>
+          <AmountInput type="number" placeholder="max"></AmountInput>
         </InputBox>
       </FormContainer>
     </div>

@@ -12,7 +12,7 @@ const ContainerSearch = styled.div`
   height: 100vh;
 `;
 
-const Title = styled.div`
+export const Title = styled.div`
   font-size: 34px;
   font-style: normal;
   font-weight: 400;
@@ -35,7 +35,7 @@ const CountJobs = styled.div`
   color: ${colors.gray.dark};
 `;
 
-const ContainerCards = styled.div`
+export const ContainerCards = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 4px 10px;
@@ -57,7 +57,7 @@ const ContainerCards = styled.div`
   ::-webkit-scrollbar-track {
     background-color: white;
   }
-  height: 61vh;
+  height: 59vh;
   margin-top: 16px;
 `;
 function SearchJob() {

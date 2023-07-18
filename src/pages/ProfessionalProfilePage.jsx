@@ -95,10 +95,13 @@ const InputLabel = styled.label`
 `;
 
 
-
 const Caption = styled.p`
   ${typography.caption};
   color: ${colors.gray.light};
+`;
+
+const InputContainer = styled.div`
+  width: 18.75rem;
 `;
 
 function ProfessionalProfile() {
@@ -107,18 +110,22 @@ function ProfessionalProfile() {
       <Profile>Profile</Profile>
       <PersonalContainer>
         <Subtitle>Personal Information</Subtitle>
+        <InputContainer>
         <Input label={"Email"} type="email" name={"email"} />
         <Input label={"Name"} name={"name"} />
         <Input label={"Phone"} type="phone" name={"phone"} />
         <Input label={"Birthdate"} type="date" name={"date"} />
         <Input label={"LinkedIn URL"} type="url" name={"linkedin"} />
+        </InputContainer>
       </PersonalContainer>
       <ProfessionalContainer>
         <Subtitle>Professional Information</Subtitle>
         <Note>
           Changes made here will be reflected in your future applications
         </Note>
+        <InputContainer>
         <Input label={"Title"} name={"title"} />
+        </InputContainer>
         <TextArea label={"Professional Experience"} />
         <TextArea label={"Education"} />
 
