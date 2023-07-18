@@ -45,7 +45,7 @@ const Subtitle = styled.h2`
 
 const MainContainer = styled.div`
   display: flex;
-  width: 23.75rem;
+  width: 18.75rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
@@ -63,22 +63,51 @@ const AdditionalContainer = styled.div`
   margin-bottom: 1.5rem;
 `;
 
+const InputContainer = styled.div`
+  width: 18.75rem;
+`;
+
 function NewJob() {
   return (
     <Container>
       <Profile>Create new job posting</Profile>
       <MainContainer>
         <Subtitle>Main Information</Subtitle>
-        <Input label={"Job Title"} placeholder={"Software Engineer"} name={"jobtitle"} />
-        <SelectInput label={"Job Category"} placeholder={"Select or create a category"} name={"category"} />
-        <SelectInput label={"Type"} placeholder={"Select a type"} name={"type"} />
-        <Price label={"Salary Range"}  name={"salary"} />
+        <InputContainer>
+          <Input
+            label={"Job Title"}
+            placeholder={"Software Engineer"}
+            name={"jobtitle"}
+          />
+          <SelectInput
+            label={"Job Category"}
+            placeholder={"Select or create a category"}
+            name={"category"}
+          />
+          <SelectInput
+            label={"Type"}
+            placeholder={"Select a type"}
+            name={"type"}
+          />
+          <Price label={"Salary Range"} name={"salary"} />
+        </InputContainer>
       </MainContainer>
       <AdditionalContainer>
         <Subtitle>Additional Information</Subtitle>
-        <TextArea label={"About the Job Position"} placeholder={"Describe the main functions and characteristics of your job position"}/>
-        <TextArea label={"Mandatory Requirements"} placeholder={"List each mandatory requirement in a new line"}/>
-        <TextArea label={"Optional Requirements"} placeholder={"List each optional requirement in a new line"} />
+        <TextArea
+          label={"About the Job Position"}
+          placeholder={
+            "Describe the main functions and characteristics of your job position"
+          }
+        />
+        <TextArea
+          label={"Mandatory Requirements"}
+          placeholder={"List each mandatory requirement in a new line"}
+        />
+        <TextArea
+          label={"Optional Requirements"}
+          placeholder={"List each optional requirement in a new line"}
+        />
       </AdditionalContainer>
       <Button type="primary" size={"sm"}>
         Post this job

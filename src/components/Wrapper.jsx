@@ -9,6 +9,7 @@ import RecruiterProfile from "../pages/RecruiterProfilePage";
 import YourApplicationsPage from "../pages/YourApplicationPage";
 
 import { colors } from "../styles/colors";
+import JobPostings from "./jobPosting/JobPostings";
 
 const MainWrap = styled.div`
   display: grid;
@@ -20,9 +21,8 @@ const Wrapper = () => {
   return (
     <MainWrap>
       <SideBar />
-
       {/* <SearchJob /> */}
-      <YourApplicationsPage />
+      <JobPostings />
     </MainWrap>
   );
 };
