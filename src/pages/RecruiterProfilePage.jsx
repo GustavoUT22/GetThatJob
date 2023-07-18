@@ -37,7 +37,7 @@ const Profile = styled.h1`
 
 const InputContainer = styled.div`
   display: flex;
-  width: 23.75rem;
+  width: 18.75rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
