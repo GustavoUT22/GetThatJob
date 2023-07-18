@@ -1,15 +1,18 @@
 import styled from "@emotion/styled";
-import { colors } from "../../styles/colors";
 import PropTypes from "prop-types";
+
+import { colors } from "../../styles/colors";
+import { typography } from "../../styles/typography";
 
 const StyledInput = styled.input`
   display: flex;
-  width: 23.75rem;
+  width: 18.75rem;
   align-items: center;
-  gap: 8px;
-  border-radius: 8px;
-  
-  height: 36px;
+  gap: 0.5rem;
+  align-self: stretch;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  height: 2.25rem;
   outline: none;
   border: 1px solid ${colors.pink.light};
   color: ${colors.gray.dark};
@@ -22,6 +25,7 @@ const StyledInput = styled.input`
 
   ::placeholder {
     color: ${colors.gray.light};
+    ${typography.body.sm};
   }
 `;
 
@@ -32,12 +36,9 @@ export const InputWrapper = styled.div`
 `;
 
 export const StyledLabel = styled.label`
-  font-size: 10px;
   font-style: normal;
-  font-weight: 400;
   line-height: normal;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
+  ${typography.overline};
 `;
 
 function Input({

@@ -1,10 +1,11 @@
 import styled from "@emotion/styled";
-import { colors } from "../../styles/colors";
 import PropTypes from "prop-types";
+import { colors } from "../../styles/colors";
+import { typography } from "../../styles/typography";
 
 const StyledTextArea = styled.textarea`
   display: flex;
-  width: 23.75rem;
+  width: 47.5rem;
   align-items: center;
   gap: 8px;
   border-radius: 8px;
@@ -22,6 +23,7 @@ const StyledTextArea = styled.textarea`
 
   ::placeholder {
     color: ${colors.gray.light};
+    ${typography.body.sm};
   }
 `;
 
@@ -32,12 +34,9 @@ export const InputWrapper = styled.div`
 `;
 
 export const StyledLabel = styled.label`
-  font-size: 10px;
   font-style: normal;
-  font-weight: 400;
   line-height: normal;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
+  ${typography.overline};
 `;
 
 function TextArea({
