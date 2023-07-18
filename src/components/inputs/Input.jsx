@@ -6,7 +6,7 @@ import { typography } from "../../styles/typography";
 
 const StyledInput = styled.input`
   display: flex;
-  width: 18.75rem;
+  width: 100%;
   align-items: center;
   gap: 0.5rem;
   align-self: stretch;
