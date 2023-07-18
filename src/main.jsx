@@ -6,9 +6,9 @@ import { reset } from "./styles/reset.js";
 import { global } from "./styles/global.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <React.Fragment>
     <Global styles={reset} />
     <Global styles={global} />
     <App />
-  </React.StrictMode>
+  </React.Fragment>
 );

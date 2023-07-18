@@ -22,7 +22,6 @@ const Wrapper = () => {
       <SideBar />
       {/* <SearchJob /> */}
       <JobPostings />
-
     </MainWrap>
   );
 };
