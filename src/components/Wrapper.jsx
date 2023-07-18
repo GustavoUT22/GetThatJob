@@ -6,6 +6,7 @@ import SearchJob from "../pages/SearchPage";
 import NewJob from "../pages/NewJobPage";
 import ProfessionalProfile from "../pages/ProfessionalProfilePage";
 import RecruiterProfile from "../pages/RecruiterProfilePage";
+import YourApplicationsPage from "../pages/YourApplicationPage";
 
 import { colors } from "../styles/colors";
 
@@ -21,8 +22,7 @@ const Wrapper = () => {
       <SideBar />
 
       {/* <SearchJob /> */}
-      <NewJob/>
-
+      <YourApplicationsPage />
     </MainWrap>
   );
 };

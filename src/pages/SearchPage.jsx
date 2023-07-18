@@ -6,7 +6,7 @@ import { BiCategory } from "react-icons/bi";
 import CardJob from "../components/CardJob";
 import Price from "../components/inputs/input-price";
 import SelectInput from "../components/inputs/inputSelect";
-const ContainerSearch = styled.div`
+export const ContainerSearch = styled.div`
   display: "flex";
   padding: 32px 120px;
   height: 100vh;
