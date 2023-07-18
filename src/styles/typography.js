@@ -68,7 +68,7 @@ export const typography = {
   },
 
   button: `
-  font-family: ${fonts.secondary}
+  font-family: ${fonts.secondary};
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.5rem; 
@@ -77,7 +77,7 @@ export const typography = {
   `,
 
   caption: `
-  font-family: ${fonts.secondary}
+  font-family: ${fonts.secondary};
   font-size: 0.75rem;
   font-weight: 400;
   line-height: 1rem; 
@@ -85,7 +85,7 @@ export const typography = {
   `,
 
   overline: `
-  font-family: ${fonts.secondary}
+  font-family: ${fonts.secondary};
   font-size: 0.625rem;
   font-weight: 400;
   letter-spacing: 0.09375rem;

@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 import { colors } from "../../styles/colors";
+import PropTypes from "prop-types";
 
 const StyledInput = styled.input`
   display: flex;
-  padding: 8px;
+  width: 23.75rem;
   align-items: center;
   gap: 8px;
   border-radius: 8px;
-  width: 100%;
   outline: none;
   border: 1px solid ${colors.pink.light};
   color: ${colors.gray.dark};
@@ -61,6 +61,16 @@ function Input({
     </InputWrapper>
   );
 }
+
+Input.propTypes = {
+  id: PropTypes.string,
+  type: PropTypes.string,
+  name: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  label: PropTypes.string,
+};
 
 export default Input;
 
