@@ -4,7 +4,7 @@ import CardJob from "../components/CardJob";
 import { colors } from "../styles/colors";
 import { ContainerCards } from "./SearchPage";
 
-const ContainerFollowing = styled.div`
+export const ContainerFollowing = styled.div`
   display: "flex";
   padding: 32px 120px;
   height: 100vh;
