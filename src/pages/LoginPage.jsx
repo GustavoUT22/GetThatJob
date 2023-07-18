@@ -1,6 +1,11 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
+
 import { colors } from "../styles";
+import Header from "../components/Header";
+import Input from "../components/inputs/Input";
+import Button from "../components/buttons/Button";
+import person from "../assets/images/people/login-person.svg"
 
 
 const Container = styled.div`
@@ -14,18 +19,63 @@ const Main = styled.main`
   display: flex;
   flex-direction: row;
   width: auto;
-  height: auto;
-  align-items: center;
+  height: 92vh;
+  align-items: flex-start;
   justify-content: center;
+  padding: 200px 0;
   background-color: ${colors.gray.bg_dark}
 `
 
 const Section = styled.section`
   display: flex;
   flex-direction: column;
+  width: 360px;
   padding: 5px 0;
-  gap: 2px;
+  gap: 18px;
 `
+
+const RoleSection = styled.div`
+  display: flex;
+  gap: 12px;
+  min-height: 15px;
+`
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  `
+  
+  const InfoSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`
+
+const Title = styled.h1`
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+`
+
+const Paragraph = styled.p`
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px; /* 140% */
+  letter-spacing: 0.15px;
+`
+const Label = styled.label`
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 171.429% */
+  letter-spacing: 1.25px;
+  text-transform: uppercase;
+`
+
+
 
 export default function LoginPage() {
   function handleSubmit(event) {
@@ -54,27 +104,28 @@ export default function LoginPage() {
   return (
     <>
       <Container>
-        <header>Get That Job logo</header>
+        <Header/>
         <Main>
           <Section>
-            <h1>Welcome back</h1>
-            <p>Login to your account as...</p>
-            <form onSubmit={handleSubmit}>
-              <div>
+            <Title>Welcome back</Title>
+            <Paragraph>Login to your account as...</Paragraph>
+            <Form onSubmit={handleSubmit}>
+              <RoleSection>
                 <input id="professional" name="role" value="professional" type="radio" checked={selectedRole === "professional"} onChange={handleRoleChange} hidden/>
-                <label htmlFor="professional">Professional</label>
+                <Label htmlFor="professional">professional</Label>
                 <input id="recruiter" name="role" value="recruiter" type="radio" checked={selectedRole === "recruiter"} onChange={handleRoleChange} hidden/>
-                <label htmlFor="recruiter">Recruiter</label>
-              </div>
-              <div>
-                <label htmlFor="email">EMAIL</label>
-                <input id="email" type="text" name="email" value={formData.email} onChange={handleChange}/>
-                <label htmlFor="password">PASSWORD</label>
-                <input id="password" type="password" name="password" value={formData.password} onChange={handleChange}/>
-              </div>
-              <button type="submit">Login</button>
-            </form>  
+                <Label htmlFor="recruiter">recruiter</Label>
+              </RoleSection>
+              <InfoSection>
+                <Input name="email" value={formData.email} onChange={handleChange} placeholder={"some.user@mail.com"} label={"email"}/>
+                <Input type="password" name="password" value={formData.password} onChange={handleChange} placeholder={"******"} label={"password"}/>
+              </InfoSection>
+              <Button style={{alignSelf: "flex-end"}} type={"primary"} size={"sm"}>Login</Button>
+            </Form>  
           </Section>
+          <section>
+            <img src={person} alt="icon"/>
+          </section>
         </Main>
       </Container>
     </>
