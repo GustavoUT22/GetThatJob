@@ -16,10 +16,9 @@ const MainWrap = styled.div`
 const Wrapper = () => {
   return (
     <MainWrap>
-
       <SideBar />
-      {/* <SearchJob /> */}
-      <RecruiterProfile/>
+
+      <SearchJob />
 
     </MainWrap>
   );
