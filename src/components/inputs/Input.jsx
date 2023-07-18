@@ -8,10 +8,8 @@ const StyledInput = styled.input`
   align-items: center;
   gap: 8px;
   border-radius: 8px;
-
   width: 100%;
   height: 36px;
-
   outline: none;
   border: 1px solid ${colors.pink.light};
   color: ${colors.gray.dark};
