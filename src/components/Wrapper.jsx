@@ -4,6 +4,7 @@ import SideBar from "./SideBar";
 import JobDetails from "./JobDetails";
 import SearchJob from "../pages/SearchPage";
 import ProfessionalProfile from "../pages/ProfessionalProfilePage";
+import RecruiterProfile from "../pages/RecruiterProfilePage";
 import { colors } from "../styles/colors";
 
 const MainWrap = styled.div`
@@ -16,7 +17,9 @@ const Wrapper = () => {
   return (
     <MainWrap>
       <SideBar />
+
       <SearchJob />
+
     </MainWrap>
   );
 };
