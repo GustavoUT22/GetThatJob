@@ -60,7 +60,7 @@ const Wrapper = styled.div`
 
 const NavContainer = styled.div`
   width: 100%;
-  &>div {
+  & > div {
     padding: 12px 16px;
     cursor: pointer;
     display: flex;
@@ -68,17 +68,16 @@ const NavContainer = styled.div`
     gap: 8px;
     // background-color: green;
   }
-  &>div>:nth-child(1){
+  & > div > :nth-child(1) {
     width: 24px;
     height: 24px;
   }
-  &>div>:nth-child(2){
+  & > div > :nth-child(2) {
     font-size: 16px;
     font-weight: 400;
     line-height: 150%; /* 24px */
     letter-spacing: 0.5px;
   }
-}
 `;
 
 const InfoContainer = styled.div`
