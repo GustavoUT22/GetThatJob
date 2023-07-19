@@ -165,31 +165,15 @@ export default function SignupForm() {
         </InputContainer>
       </RoleSection>
       <Steps>
-        {selectedRole === "professional" ? 
-        <>
-          {stepsInfo.professional.map((info, index) => (
-            <Step key={index}>
-              <img src={info.img} alt={info.label + " icon"}/>
-              <StepInfo>
-                <label>{info.status}</label>
-                <label>{info.label}</label>
-              </StepInfo>
-            </Step>
-          ))}
-        </>
-        : 
-        <>
-          {stepsInfo.recruiter.map((info, index) => (
-            <Step key={index}>
-              <img src={info.img} alt={info.label + " icon"}/>
-              <StepInfo>
-                <label>{info.status}</label>
-                <label>{info.label}</label>
-              </StepInfo>
-            </Step>
-          ))}
-      </>
-        }
+        {stepsInfo[selectedRole].map((info, index) => (
+          <Step key={index}>
+            <img src={info.img} alt={info.label + " icon"}/>
+            <StepInfo>
+              <label>{info.status}</label>
+              <label>{info.label}</label>
+            </StepInfo>
+          </Step>
+        ))}
       </Steps>
       <Form onSubmit={handleSubmit}>
         <InfoSection>
