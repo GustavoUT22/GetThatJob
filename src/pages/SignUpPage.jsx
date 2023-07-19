@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { colors } from "../styles";
 import Header from "../components/Header";
 import SignupForm from "../components/SignupForm";
+import signupPerson from "../assets/images/people/signup-person.svg"
 
 const Container = styled.div`
   display: flex;
@@ -17,17 +18,21 @@ const Main = styled.main`
   width: auto;
   height: 92vh;
   align-items: flex-start;
-  justify-content: center;
-  padding: 17px 0;
+  justify-content: space-around;
+  padding: 17px 50px 0 50px;
   background-color: ${colors.gray.bg_dark}
 `
 
 const Section = styled.section`
   display: flex;
   flex-direction: column;
-  width: 360px;
+  min-width: 360px;
   padding: 5px 0;
   gap: 18px;
+`
+
+const PersonSection = styled.section`
+  align-self: flex-end;
 `
 
 const Title = styled.h1`
@@ -58,6 +63,9 @@ export default function SignUpPage() {
             <Paragraph>Create a new account as...</Paragraph>
             <SignupForm /> 
           </Section>
+          <PersonSection>
+            <img src={signupPerson} alt="icon"/>
+          </PersonSection>
         </Main>
       </Container>
     </>
