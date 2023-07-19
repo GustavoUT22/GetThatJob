@@ -49,6 +49,7 @@ function Input({
   onChange,
   placeholder,
   label,
+  required,
 }) {
   return (
     <InputWrapper>
@@ -60,6 +61,7 @@ function Input({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        required={required}
       />
     </InputWrapper>
   );
@@ -73,6 +75,7 @@ Input.propTypes = {
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
   label: PropTypes.string,
+  required: PropTypes.bool,
 };
 
 export default Input;
