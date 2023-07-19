@@ -61,7 +61,7 @@ export default function SignUpPage() {
           <Section>
             <Title>Good Choice!</Title>
             <Paragraph>Create a new account as...</Paragraph>
-            <SignupForm /> 
+            <SignupForm />
           </Section>
           <PersonSection>
             <img src={signupPerson} alt="icon"/>
