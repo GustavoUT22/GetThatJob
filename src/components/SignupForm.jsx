@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 
 import { colors } from "../styles";
-import Input from "../components/inputs/Input";
-import Button from "../components/buttons/Button";
 import step1 from "../assets/images/step1.svg"
 import step2 from "../assets/images/step2.svg"
 import step3 from "../assets/images/step3.svg"
+import RecruiterForm from "./RecruiterForm";
+
 
 const RoleSection = styled.div`
   display: flex;
@@ -59,67 +59,9 @@ const Rectangle = styled.div`
   align-self: stretch;
 `
 
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 360px;
-  gap: 16px;
-  `
-  
-const InfoSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`
-
 export default function SignupForm() {
-  function handleSubmit(event) {
-    event.preventDefault()
-    if (formData.password === formData.passwordConfirmation) {
-      console.log(selectedRole, selectedRole === "recruiter" ? formData.companyName : null, formData.email, formData.password, formData.passwordConfirmation)
-      setFormData({
-        email: "",
-        password: "",
-        passwordConfirmation: "",
-        companyName: "",
-      })
-
-      switch (status.step) {
-        case 1:
-          setStatus({
-            step: 2,
-            0: "Done!",
-            1: "In Progress",
-            2: "Pending",
-          })
-        break;
-        case 2:
-          setStatus({
-            ...status, 
-            0: "Done!",
-            1: "Done!",
-            2: "In Progress",
-          })
-        break;
-        default:
-          break;
-      }
-    } else {
-      console.log("Passwords doesn't match.")
-    }
-  }
-  
   function handleRoleChange(event) {
     setSelectedRole(event.target.value)
-  }
-
-  function handleChange(event) {
-    const { name, value } = event.target
-
-    setFormData({
-      ...formData,
-      [name]: name === "companyName" ? value : value.trim(),
-    });
   }
 
   const [selectedRole, setSelectedRole] = useState("professional");
@@ -129,16 +71,17 @@ export default function SignupForm() {
     1: "Pending",
     2: "Pending",
   })
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    passwordConfirmation: "",
-    companyName: "",
-  })
-
+  
   const stepsInfo = {
-    "professional": [{img: step1, status: status[0], label: "Login Information"}, {img: step2, status: status[1], label: "Personal Information"}, {img: step3, status: status[2], label: "Professional Information"}],
-    "recruiter": [{img: step1, status: status[0], label: "Login Information"}, {img: step2, status: status[1], label: "Company Information"}]
+    "professional": [
+      {img: step1, status: status[0], label: "Login Information"}, 
+      {img: step2, status: status[1], label: "Personal Information"}, 
+      {img: step3, status: status[2], label: "Professional Information"}
+    ],
+    "recruiter": [
+      {img: step1, status: status[0], label: "Login Information"}, 
+      {img: step2, status: status[1], label: "Company Information"}
+    ]
   }
 
   useEffect(() => (
@@ -175,15 +118,7 @@ export default function SignupForm() {
           </Step>
         ))}
       </Steps>
-      <Form onSubmit={handleSubmit}>
-        <InfoSection>
-          {selectedRole === "recruiter" ? <Input name="companyName" value={formData.companyName} onChange={handleChange} placeholder={"some.user@mail.com"} label={"company name"}/> : null}
-          <Input name="email" value={formData.email} onChange={handleChange} placeholder={"some.user@mail.com"} label={"email"}/>
-          <Input type="password" name="password" value={formData.password} onChange={handleChange} placeholder={"******"} label={"password"}/>
-          <Input type="password" name="passwordConfirmation" value={formData.passwordConfirmation} onChange={handleChange} placeholder={"******"} label={"password confirmation"}/>
-        </InfoSection>
-        <Button style={{alignSelf: "center"}} type={"primary"} size={"sm"}>Next</Button>
-      </Form> 
+      {selectedRole === "recruiter" ? <RecruiterForm step={status.step} setStatus={setStatus}/> : <p>hola</p>}
     </>
   )
 }
