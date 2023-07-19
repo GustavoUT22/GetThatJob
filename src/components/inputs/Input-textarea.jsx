@@ -5,7 +5,7 @@ import { typography } from "../../styles/typography";
 
 const StyledTextArea = styled.textarea`
   display: flex;
-  width: 47.5rem;
+  width: auto;
   align-items: center;
   gap: 8px;
   border-radius: 8px;
@@ -31,6 +31,7 @@ export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+  width: auto;
 `;
 
 export const StyledLabel = styled.label`
