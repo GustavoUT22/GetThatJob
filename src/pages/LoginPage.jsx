@@ -6,8 +6,8 @@ import Header from "../components/Header";
 import Input from "../components/inputs/Input";
 import Button from "../components/buttons/Button";
 import person from "../assets/images/people/login-person.svg";
-import { login } from "../services/professional-services";
 import { loginRecruiter } from "../services/recruiter-session";
+import { useAuth } from "../context/auth-context";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -94,6 +94,7 @@ const Rectangle = styled.div`
 `;
 
 export default function LoginPage() {
+  const { login } = useAuth();
   async function handleSubmit(event) {
     event.preventDefault();
     console.log(selectedRole, formData.email, formData.password);
