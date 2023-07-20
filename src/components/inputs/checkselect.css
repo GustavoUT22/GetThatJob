@@ -1,0 +1,125 @@
+.ant-select-selection-item .ant-checkbox {
+  display: none;
+}
+
+.ant-select-dropdown .ant-select-item-option-state {
+  display: none;
+}
+
+.ant-select.ant-select-multiple.ant-select-show-arrow.ant-select-show-search {
+  background-color: red;
+}
+
+.ant-select.ant-select-multiple.ant-select-show-arrow.ant-select-show-search
+  .ant-select-selector:hover {
+  border: 1px solid var(--pink, #f48fb1);
+  background: var(--white, #fff);
+}
+
+.ant-select.ant-select-multiple.ant-select-show-arrow.ant-select-show-search
+  .ant-select-selector:focus {
+  border: none;
+  outline: 1px solid var(--pink, #f48fb1);
+  background: var(--white, #fff);
+}
+
+.ant-select.ant-select-multiple.ant-select-show-arrow.ant-select-show-search
+  .ant-select-selector:active {
+  border: none;
+  outline: 1px solid var(--pink, #f48fb1);
+  background: var(--white, #fff);
+}
+
+.ant-select.ant-select-multiple.ant-select-show-arrow.ant-select-show-search
+  .ant-select-selector
+  .ant-select-selection-overflow
+  .ant-select-selection-overflow-item
+  span {
+  background: rgba(244, 143, 177, 0.15);
+}
+
+.ant-select.ant-select-multiple.ant-select-show-arrow.ant-select-show-search
+  .ant-select-selector
+  .ant-select-selection-overflow
+  .ant-select-selection-overflow-item
+  span
+  .ant-select-selection-item-content {
+  background: none;
+}
+
+.ant-select.ant-select-multiple.ant-select-show-arrow.ant-select-show-search
+  .ant-select-selector
+  .ant-select-selection-overflow
+  .ant-select-selection-overflow-item
+  span
+  .ant-select-selection-item-content
+  label
+  span {
+  background: none;
+}
+
+.ant-select.ant-select-multiple.ant-select-show-arrow.ant-select-show-search
+  .ant-select-selector
+  .ant-select-selection-overflow
+  .ant-select-selection-overflow-item
+  span
+  .ant-select-selection-item-remove {
+  background: none;
+}
+
+.ant-select.ant-select-multiple.ant-select-show-arrow.ant-select-show-search
+  .ant-select-selector
+  .ant-select-selection-overflow
+  .ant-select-selection-overflow-item
+  span
+  .ant-select-selection-item-remove
+  span {
+  background: none;
+}
+
+.ant-select-selection {
+  background-color: green;
+}
+
+.ant-checkbox .ant-checkbox-inner {
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  border-color: pink;
+}
+
+.ant-checkbox-disabled .ant-checkbox-inner {
+  width: 25px;
+  height: 25px;
+  background-color: pink;
+  border-color: pink;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  width: 25px;
+  height: 25px;
+  background-color: pink;
+}
+.ant-checkbox-checked:hover .ant-checkbox-inner:hover {
+  width: 25px;
+  height: 25px;
+  background-color: pink;
+  border-color: pink;
+}
+
+.ant-checkbox-checked:hover {
+  background-color: #f48fb1;
+}
+
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover
+  .ant-checkbox-inner,
+.ant-checkbox:not(.ant-checkbox-disabled):hover .ant-checkbox-inner {
+  background-color: #f48fb1;
+  border: none;
+}
+
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover
+  .ant-checkbox-checked:not(.ant-checkbox-disabled)
+  .ant-checkbox-inner {
+  background-color: pink;
+}
