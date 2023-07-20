@@ -1,12 +1,11 @@
 // import SideBar from "./components/SideBar";
-
-import Wrapper from "./components/Wrapper";
-
+import LoginPage from "./pages/LoginPage";
 function App() {
   return (
     <>
-      <Wrapper />
+      {/* <Wrapper /> */}
       {/* <LandingPage></LandingPage> */}
+      <LoginPage />
     </>
   );
 }
