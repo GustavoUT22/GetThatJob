@@ -6,6 +6,7 @@ import styled from "@emotion/styled";
 const HeaderWrapper = styled.div`
   width: auto;
   height: 8vh;
+  padding: 0 32px;
   background-color: white;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -14,7 +15,7 @@ const HeaderWrapper = styled.div`
 `;
 
 const HeaderContent = styled.div`
-  width: 1200px;
+  width: 80%;
   height: 40px;
   display: flex;
   justify-content: space-between;
