@@ -32,7 +32,7 @@ const ButtonSection = styled.div`
 `
 
 export default function RecruiterForm({step, setStatus}) {
-  const [recFormData, setRecFormData] = useState({
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
     passwordConfirmation: "",
@@ -41,9 +41,11 @@ export default function RecruiterForm({step, setStatus}) {
     about: "",
   })
 
+  const { email, password, passwordConfirmation, companyName, website, about } = formData;
+
   function handleSubmit(event) {
     event.preventDefault()
-    if (recFormData.password === recFormData.passwordConfirmation) {
+    if (password === passwordConfirmation) {
 
       switch (step) {
         case 1:
@@ -73,7 +75,7 @@ export default function RecruiterForm({step, setStatus}) {
   function handleFinish(event) {
     event.preventDefault()
 
-    Object.entries(recFormData).map(([key, value]) => {
+    Object.entries(formData).map(([key, value]) => {
       console.log(`${key}: ${value}`);
     });
   }
@@ -81,22 +83,14 @@ export default function RecruiterForm({step, setStatus}) {
   function handleSkip(event) {
     event.preventDefault()
 
-    setRecFormData({
-      ...recFormData,
-      companyWebsite: "",
-      about: "",
-    })
-
-    Object.entries(recFormData).map(([key, value]) => {
-      console.log(`${key}: ${value}`);
-    });
+    console.log(companyName, email, password, passwordConfirmation)
   }
 
   function handleChange(event) {
     const { name, value } = event.target
 
-    setRecFormData({
-      ...recFormData,
+    setFormData({
+      ...formData,
       [name]: name === "companyName" || name ==="about" ? value : value.trim(),
     });
   }
@@ -107,10 +101,10 @@ export default function RecruiterForm({step, setStatus}) {
      form =
      <Form onSubmit={handleSubmit}>
         <InfoSection>
-          <Input name="companyName" value={recFormData.companyName} onChange={handleChange} placeholder={"some.user@mail.com"} label={"company name"} required/>
-          <Input name="email" type="email" value={recFormData.email} onChange={handleChange} placeholder={"some.user@mail.com"} label={"email"} required/>
-          <Input type="password" name="password" value={recFormData.password} onChange={handleChange} placeholder={"******"} label={"password"} required/>
-          <Input type="password" name="passwordConfirmation" value={recFormData.passwordConfirmation} onChange={handleChange} placeholder={"******"} label={"password confirmation"} required/>
+          <Input name="companyName" value={companyName} onChange={handleChange} placeholder={"some.user@mail.com"} label={"company name"} required/>
+          <Input name="email" type="email" value={email} onChange={handleChange} placeholder={"some.user@mail.com"} label={"email"} required/>
+          <Input type="password" name="password" value={password} onChange={handleChange} placeholder={"******"} label={"password"} required/>
+          <Input type="password" name="passwordConfirmation" value={passwordConfirmation} onChange={handleChange} placeholder={"******"} label={"password confirmation"} required/>
         </InfoSection>
         <Button style={{alignSelf: "center", flexDirection: "row-reverse"}} type={"primary"} size={"sm"} icon={<RiArrowRightSLine/>}>Next</Button>
       </Form> 
@@ -120,8 +114,8 @@ export default function RecruiterForm({step, setStatus}) {
       <Form>
         <Label>You can complete this information later but we recommend you to do it now</Label>
         <InfoSection>
-          <Input name="companyWebsite" type="url" value={recFormData.website} onChange={handleChange} placeholder={"https://www.mycompany.sa"} label={"company website"}/>
-          <TextArea name="about" value={recFormData.about} onChange={handleChange} placeholder={"My Company SA has the vision to change the way how..."} label={"About the company"}/>
+          <Input name="companyWebsite" value={website} onChange={handleChange} placeholder={"https://www.mycompany.sa"} label={"company website"}/>
+          <TextArea name="about" value={about} onChange={handleChange} placeholder={"My Company SA has the vision to change the way how..."} label={"About the company"}/>
         </InfoSection>
         <ButtonSection>
           <Button type={"secondary"} size={"sm"} onClick={handleSkip}>skip this!</Button>
