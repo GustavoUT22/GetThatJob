@@ -1,0 +1,31 @@
+.CircularCheckboxWrapper input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.CircularCheckboxWrapper {
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #f48fb1;
+  overflow: hidden;
+}
+
+.CircleCheckmark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #f48fb1;
+  display: none;
+}
+
+.CircularCheckboxWrapper input[type="checkbox"]:checked + .CircleCheckmark {
+  display: block;
+}
