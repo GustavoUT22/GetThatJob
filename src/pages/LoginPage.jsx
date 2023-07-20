@@ -94,7 +94,7 @@ const Rectangle = styled.div`
 `;
 
 export default function LoginPage() {
-  const { login } = useAuth();
+  const { login, loginRecruiter } = useAuth();
   async function handleSubmit(event) {
     event.preventDefault();
     console.log(selectedRole, formData.email, formData.password);

@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 // import { createUser, getUser } from "../services/user-service";
 import * as auth from "../services/professional-services";
-import { loginRecruiter } from "../services/recruiter-session";
+import * as AuthRecruiter from "../services/recruiter-session";
 import { tokenKey } from "../config";
 import { getUser } from "../services/user-service";
 
@@ -22,6 +22,10 @@ function AuthProvider(props) {
     auth.login(credentials).then(setUser).catch(console.log);
   }
 
+  function loginRecruiter(credentials) {
+    console.log("Login");
+    AuthRecruiter.loginRecruiter(credentials).then(setUser).catch(console.log);
+  }
   // function signup(userData) {
   //   createUser(userData).then(setUser).catch(console.log);
   // }
@@ -38,6 +42,7 @@ function AuthProvider(props) {
     login,
     // signup,
     logout,
+    loginRecruiter,
   };
 
   return <AuthContext.Provider value={value} {...props} />;
