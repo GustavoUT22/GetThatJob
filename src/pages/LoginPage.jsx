@@ -7,6 +7,7 @@ import Input from "../components/inputs/Input";
 import Button from "../components/buttons/Button";
 import person from "../assets/images/people/login-person.svg";
 import { login } from "../services/professional-services";
+import { loginRecruiter } from "../services/recruiter-session";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -93,10 +94,19 @@ const Rectangle = styled.div`
 `;
 
 export default function LoginPage() {
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     console.log(selectedRole, formData.email, formData.password);
-    login(formData).then(console.log).catch(console.log);
+    // try {
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    if (selectedRole === "professional") {
+      await login(formData).then(console.log);
+    }
+    if (selectedRole === "recruiter") {
+      await loginRecruiter(formData).then(console.log);
+    }
   }
 
   function handleRoleChange(event) {

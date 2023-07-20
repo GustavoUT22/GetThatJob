@@ -1,8 +1,8 @@
 import getJobClient from "./api-fecth";
 import { tokenKey } from "../config";
 
-export async function login(credentials) {
-  const { token, ...user } = await getJobClient("login/professionals", {
+export async function loginRecruiter(credentials) {
+  const { token, ...user } = await getJobClient("login/recruiters", {
     method: "POST",
     body: credentials,
   });
