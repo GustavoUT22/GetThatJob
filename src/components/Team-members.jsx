@@ -3,6 +3,7 @@ import { AiFillGithub, AiOutlineLinkedin } from "react-icons/ai";
 import Anonimo from "../assets/user-anonimo.png";
 import Gustavo from "../assets/members/gustavo.jpg";
 import Amanda from "../assets/members/amanda.png";
+import Fernando from "../assets/members/fernando.jpg"
 import { colors } from "../styles/colors";
 
 const CardWrapper = styled.div`
@@ -87,7 +88,7 @@ const membersData = [
   },
   {
     name: "Fernando Mondragon",
-    photo: Anonimo,
+    photo: Fernando,
     github: "https://github.com/FMondragon7",
     linkedin: "https://www.linkedin.com/in/fernando-mondragon-maytorena/",
   },
