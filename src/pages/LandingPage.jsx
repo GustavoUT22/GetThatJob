@@ -139,11 +139,11 @@ const LandingPage = () => {
           <FindTitle>Find your next job</FindTitle>
           <FindContent>
             Our Machine learning algorithm is so good that it’s even illegal in
-            some countries. Join us to use our barelly legal algorithm that is
+            some countries. Join us to use our barely legal algorithm that is
             actually a group of interns that work on our basement.
             <br />
             <br />
-            We have a jobfor you, no matter your background or previous
+            We have a job for you, no matter your background or previous
             experience. Is sending random memes through chat your only skill?
             That’s ok, we got you, our Rock Star Meme Curator role is here for
             you.
