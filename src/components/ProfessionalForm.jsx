@@ -152,7 +152,7 @@ export default function ProfessionalForm({step, setStatus}) {
         <ButtonSection>
           <Button type={"primary"} size={"sm"} onClick={handlePrevious} icon={<RiArrowLeftSLine/>}>previous</Button>
           <Button type={"secondary"} size={"sm"} onClick={handleSkip}>skip this!</Button>
-          <Button style={{flexDirection: "row-reverse"}} type={"primary"} size={"sm"} onClick={handleFinish} icon={<RiArrowRightSLine/>}>next</Button>
+          <Button style={{flexDirection: "row-reverse"}} type={"primary"} size={"sm"} onClick={handleFinish} icon={<RiArrowRightSLine/>}>finish</Button>
         </ButtonSection>
       </Form>
       break;
