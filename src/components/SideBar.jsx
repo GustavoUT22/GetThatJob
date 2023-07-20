@@ -11,29 +11,7 @@ import { BiTargetLock } from "react-icons/bi";
 import { DiRuby } from "react-icons/di";
 import styled from "@emotion/styled";
 import logo from "./../assets/logo.png";
-
-const nav = [
-  {
-    icon: <RiSearchLine />,
-    name: "Find that job",
-  },
-  {
-    icon: <RiArticleLine />,
-    name: "Your applications",
-  },
-  {
-    icon: <BiTargetLock />,
-    name: "Following",
-  },
-  {
-    icon: <RiUserLine />,
-    name: "Profile",
-  },
-  {
-    icon: <RiLogoutCircleLine />,
-    name: "Log out",
-  },
-];
+import { useAuth } from "../context/auth-context";
 
 const integrants = [
   { name: "Amanda Trigueros" },
@@ -108,6 +86,34 @@ const InfoContainer = styled.div`
 `;
 
 const SideBar = () => {
+  const { logout } = useAuth();
+  const nav = [
+    {
+      icon: <RiSearchLine />,
+      name: "Find that job",
+    },
+    {
+      icon: <RiArticleLine />,
+      name: "Your applications",
+    },
+    {
+      icon: <BiTargetLock />,
+      name: "Following",
+    },
+    {
+      icon: <RiUserLine />,
+      name: "Profile",
+    },
+    {
+      icon: <RiLogoutCircleLine />,
+      name: "Log out",
+      onClick: handleLogout,
+    },
+  ];
+  async function handleLogout() {
+    console.log("logout");
+    await logout();
+  }
   return (
     <div>
       <Wrapper>
@@ -115,7 +121,7 @@ const SideBar = () => {
         {/* Navbar */}
         {nav.map((navLink, index) => (
           <NavContainer key={index}>
-            <div>
+            <div onClick={navLink.onClick}>
               {navLink.icon}
               <span>{navLink.name}</span>
             </div>

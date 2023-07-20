@@ -26,19 +26,19 @@ const FooterContent = styled.div`
 `;
 
 const Text = styled.div`
-display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-bottom: 4px;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 4px;
+  gap: 8px;
 `;
 
 const SourceCodes = styled.div`
-display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-}`;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+`;
 
 const SourceCodeContainer = styled.div``;
 
@@ -60,7 +60,7 @@ function Footer() {
             </Text>
           </SourceCodes>
         </SourceCodeContainer>
-        <Text>Codeable - Cohort X Final Project</Text>
+        <Text>Codeable - Cohort 10 Final Project</Text>
       </FooterContent>
     </FooterWrapper>
   );

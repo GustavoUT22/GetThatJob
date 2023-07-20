@@ -26,18 +26,18 @@ function AuthProvider(props) {
   //   createUser(userData).then(setUser).catch(console.log);
   // }
 
-  // function logout() {
-  //   auth.logout().then(() => {
-  //     sessionStorage.removeItem(tokenKey);
-  //     setUser(null);
-  //   });
-  // }
+  function logout() {
+    auth.logout().then(() => {
+      sessionStorage.removeItem(tokenKey);
+      setUser(null);
+    });
+  }
 
   const value = {
     user,
     login,
     // signup,
-    // logout,
+    logout,
   };
 
   return <AuthContext.Provider value={value} {...props} />;

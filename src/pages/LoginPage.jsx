@@ -103,10 +103,10 @@ export default function LoginPage() {
     //   console.log(error);
     // }
     if (selectedRole === "professional") {
-      await login(formData).then(console.log);
+      await login(formData);
     }
     if (selectedRole === "recruiter") {
-      await loginRecruiter(formData).then(console.log);
+      await loginRecruiter(formData);
     }
   }
 

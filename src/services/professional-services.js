@@ -13,8 +13,8 @@ export async function login(credentials) {
 }
 
 export async function logout() {
-  getJobClient("logout/professionals", { method: "DELETE" });
-  sessionStorage.removeItem(tokenKey);
+  await getJobClient("logout/professionals", { method: "DELETE" });
+  // sessionStorage.removeItem(tokenKey);
 }
 
 // export async function login(credentials) {

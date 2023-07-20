@@ -1,5 +1,7 @@
 import React from "react";
 import Wrapper from "./components/Wrapper";
+import { Routes, Route, Router, Navigate } from "react-router-dom";
+
 const AuthenticatedApp = () => {
   return (
     <div>
@@ -9,3 +11,8 @@ const AuthenticatedApp = () => {
 };
 
 export default AuthenticatedApp;
+{
+  /* <Routes>
+<Route path="/" element={<Navigate to={"/"}/>}/>
+</Routes>   */
+}

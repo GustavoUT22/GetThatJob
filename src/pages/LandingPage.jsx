@@ -110,7 +110,7 @@ const PeopleContainer = styled.div`
 const LandingPage = () => {
   return (
     <>
-      <Header/>
+      <Header />
       <FirstWrapper>
         <Title>
           The place where you get{" "}
@@ -157,7 +157,7 @@ const LandingPage = () => {
       <div>
         <TeamMembers />
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

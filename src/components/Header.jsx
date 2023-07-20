@@ -2,6 +2,7 @@ import getThatJobLogo from "../assets/header/gtj-logo.png";
 import signupLogo from "../assets/header/signup-logo.svg";
 import loginLogo from "../assets/header/login-logo.svg";
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router";
 
 const HeaderWrapper = styled.div`
   width: auto;
@@ -45,20 +46,23 @@ const Button = styled.div`
 `;
 
 function Header() {
+  const navigate = useNavigate();
   return (
     <HeaderWrapper>
       <HeaderContent>
         <img
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/")}
           src={getThatJobLogo}
           className="gtj-logo"
           alt="Logo de GetThatJob"
         />
         <ButtonContainer>
-          <Button>
+          <Button onClick={() => navigate("/signup")}>
             <img src={signupLogo} alt="icon" />
             SIGN UP
           </Button>
-          <Button>
+          <Button onClick={() => navigate("/login")}>
             <img src={loginLogo} alt="icon" />
             LOGIN
           </Button>
