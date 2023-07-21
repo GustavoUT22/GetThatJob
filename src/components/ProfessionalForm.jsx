@@ -7,7 +7,11 @@ import Input from "./inputs/Input";
 import TextArea from "./inputs/Input-textarea";
 import Button from "../components/buttons/Button";
 import InputFile from "./inputs/InputFile";
-import { createUser, updateSignupUser, updateUser } from "../services/professional-services";
+import {
+  createUser,
+  updateSignupUser,
+  updateUser,
+} from "../services/professional-services";
 import { useNavigate } from "react-router";
 import { useAuth } from "../context/auth-context";
 
@@ -37,8 +41,7 @@ const ButtonSection = styled.div`
 `;
 
 export default function ProfessionalForm({ step, setStatus }) {
-  const navigate = useNavigate();
-  const { login } = useAuth()
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -53,19 +56,19 @@ export default function ProfessionalForm({ step, setStatus }) {
     file: null,
   });
 
-   const {
-     email,
-     password,
-     passwordConfirmation,
-     name,
-     phone,
-     birth_date,
-     linkedin,
-     title,
-     experience,
-     education,
-     file,
-   } = formData;
+  const {
+    email,
+    password,
+    passwordConfirmation,
+    name,
+    phone,
+    birth_date,
+    linkedin,
+    title,
+    experience,
+    education,
+    file,
+  } = formData;
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -81,13 +84,14 @@ export default function ProfessionalForm({ step, setStatus }) {
           });
           const userData = {
             email,
-            password
+            password,
           };
           // Add fetch to create new User
-          console.log(userData)
+          console.log(userData);
           try {
-            await createUser(userData).then(console.log("User created successfully.")).catch(console.log);
-
+            await createUser(userData)
+              .then(console.log("User created successfully."))
+              .catch(console.log);
           } catch (error) {
             console.error("Error creating user:", error);
           }
@@ -108,26 +112,27 @@ export default function ProfessionalForm({ step, setStatus }) {
             linkedin,
           };
 
-           const userData1 = Object.keys(data).reduce((acc, key) => {
-             if (formData[key] !== "") {
-               acc[key] = formData[key];
-             }
-             return acc;
-           }, {});
-           // Add fetch to update user data using userData1
-           console.log(userData1);
-           try {
-            await updateSignupUser(userData1).then(console.log("User info saved successfully.")).catch(console.log);
-
+          const userData1 = Object.keys(data).reduce((acc, key) => {
+            if (formData[key] !== "") {
+              acc[key] = formData[key];
+            }
+            return acc;
+          }, {});
+          // Add fetch to update user data using userData1
+          console.log(userData1);
+          try {
+            await updateSignupUser(userData1)
+              .then(console.log("User info saved successfully."))
+              .catch(console.log);
           } catch (error) {
-            console.error("Error saving info user:", error);
+            console.error("Error saving user info:", error);
           }
-           break;
-         default:
           break;
-       }
-     } else {
-       console.log("Passwords doesn't match.");
+        default:
+          break;
+      }
+    } else {
+      console.log("Passwords doesn't match.");
     }
   }
 
@@ -161,14 +166,13 @@ export default function ProfessionalForm({ step, setStatus }) {
 
     const formFile = new FormData();
     formFile.append("file", file);
-    
+
     userData.file = formFile;
     console.log(userData);
-     
-    const credentials = { email, password }
-    console.log(credentials)
-    login(credentials)
-     
+
+    const credentials = { email, password };
+    console.log(credentials);
+    login(credentials);
   }
 
   function handleSkip(event) {
@@ -199,6 +203,9 @@ export default function ProfessionalForm({ step, setStatus }) {
           file: null,
         });
         // redirect to user main page
+        const credentials = { email, password };
+        console.log(credentials);
+        login(credentials);
         break;
       default:
         break;
@@ -266,7 +273,6 @@ export default function ProfessionalForm({ step, setStatus }) {
             type={"primary"}
             size={"sm"}
             icon={<RiArrowRightSLine />}
-            
           >
             Next
           </Button>
@@ -389,7 +395,6 @@ export default function ProfessionalForm({ step, setStatus }) {
               size={"sm"}
               onClick={handleFinish}
               icon={<RiArrowRightSLine />}
-              
             >
               finish
             </Button>

@@ -7,6 +7,8 @@ import TextArea from "./inputs/Input-textarea";
 import Button from "../components/buttons/Button";
 import InputFile from "./inputs/InputFile";
 import { createUser, updateSignupRecruiter } from "../services/recruiter-service";
+import { useAuth } from "../context/auth-context";
+
 
 const Form = styled.form`
   display: flex;
@@ -34,6 +36,7 @@ const ButtonSection = styled.div`
 `
 
 export default function RecruiterForm({step, setStatus}) {
+  const { loginRecruiter } = useAuth()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -92,24 +95,21 @@ export default function RecruiterForm({step, setStatus}) {
           // file format for  fetch "POST"
           const formFile = new FormData();
           formFile.append("file", file)
-          // formFile is for fetch "POST"
-          // example:
-          // fetch(endpoint,{
-          //   method: "POST",
-          //   body: formFile,
-          // })
 
           userData1.file = formFile
           console.log(userData1)
           // Add fetch to update user data using userData1
 
           try {
-            await updateSignupRecruiter(userData1).then(console.log("User info saved successfully.")).catch(console.log);
+            await updateSignupRecruiter(userData1).then(console.log("Recruiter info saved successfully.")).catch(console.log);
 
           } catch (error) {
-            console.error("Error saving info user:", error);
+            console.error("Error saving recruiter info:", error);
           }
           // Redirect to user main page
+          const credentials = { email, password }
+          console.log(credentials)
+          loginRecruiter(credentials)
         break;
         default:
           break;
@@ -129,6 +129,9 @@ export default function RecruiterForm({step, setStatus}) {
       file: null,
     })
     // redirect to recruiter user main page
+    const credentials = { email, password }
+    console.log(credentials)
+    login(credentials)
   }
 
   function handleChange(event) {

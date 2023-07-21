@@ -16,6 +16,7 @@ import P7 from "../assets/images/people/phone.svg";
 import P8 from "../assets/images/people/glasses.svg";
 import Magnascope from "../assets/images/Magnascope.svg";
 import File from "../assets/images/File.svg";
+import { useNavigate } from "react-router";
 
 const FirstWrapper = styled.div`
   display: flex;
@@ -110,6 +111,7 @@ const PeopleContainer = styled.div`
 `;
 
 const LandingPage = () => {
+  const navigate = useNavigate()
   return (
     <>
       <Header />
@@ -122,7 +124,7 @@ const LandingPage = () => {
           With our Machine Learning algorithm you will get that job in no time.
           We promise you! Just give us the money and we will take care of it.
         </Intro>
-        <Button type={"primary"} size={"lg"}>
+        <Button type={"primary"} size={"lg"} onClick={() => navigate("/signup")}>
           Create an account now
         </Button>
         <PeopleContainer>
