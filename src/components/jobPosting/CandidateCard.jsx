@@ -1,24 +1,22 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
-
-import PropTypes from "prop-types";
-
 import {
-  RiAccountCircleLine,
+  RiLinkedinBoxLine,
   RiMailOpenLine,
-  RiBuilding3Line,
-  RiCalendar2Line,
-  RiMoneyDollarCircleLine,
-  RiSearchLine,
+  RiMailLine,
+  RiPhoneLine,
+  RiPauseCircleLine,
   RiArrowDownSLine,
-  RiArrowUpSLine,
 } from "react-icons/ri";
 import { useNavigate } from "react-router";
+import { useAuth } from "../../context/auth-context";
 
 const Container = styled.div`
   diplay: flex;
   flex-direction: column;
   background-color: blue;
+  margin-top: 8px;
+  margin-bottom: 8px;
   padding: 1rem;
   border-radius: 8px;
   border: 1px solid #e1e2e1;
@@ -58,11 +56,28 @@ const CardContainer = styled.div`
     }
   }
   & > div:nth-of-type(2) {
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; /* 133.333% */
+    letter-spacing: 0.4px;
+    color: #8e8e8e;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    & div {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+  }
+  & > div:nth-of-type(3) {
     display: flex;
     gap: 4px;
   }
 
-  & > div:nth-of-type(2) > div {
+  & > div:nth-of-type(3) > div {
     text-align: center;
     font-family: Inter;
     font-size: 12px;
@@ -74,13 +89,13 @@ const CardContainer = styled.div`
     width: 80px;
     height: 48px;
   }
-  & > div:nth-of-type(2) > div:last-child {
+  & > div:nth-of-type(3) > div:last-child {
     color: #f48fb1;
   }
-  & > div:nth-of-type(3) {
+  & > div:nth-of-type(4) {
     display: flex;
   }
-  & > div:nth-of-type(3) > div {
+  & > div:nth-of-type(4) > div {
     padding-right: 16px;
   }
 `;
@@ -112,29 +127,12 @@ const JobDetailCard = styled.div`
   }
 `;
 
-function JobPostCard({
-  id,
-  title,
-  category,
-  job_type,
-  salary,
-  about,
-  mandatory,
-  optional_req,
-}) {
+const CandidateCard = ({ job }) => {
+  console.log(job);
+  const { user } = useAuth();
   const navigate = useNavigate();
+  console.log(user);
   const [showDetail, setShowDetail] = useState(false);
-  const jobPostInfo = [
-    { title: "Category", icon: <RiBuilding3Line />, value: category },
-    { title: "Category", icon: <RiCalendar2Line />, value: job_type },
-    {
-      title: "Category",
-      icon: <RiMoneyDollarCircleLine />,
-      value: salary,
-    },
-  ];
-  console.log(title);
-
   function handleShowDetail() {
     if (showDetail) {
       setShowDetail(false);
@@ -145,49 +143,46 @@ function JobPostCard({
   }
 
   function handleShow() {
-    navigate(`/jobs/${id}`);
+    navigate(`/jobs`);
   }
   return (
     <Container>
       <CardContainer>
         <div>
-          <h3>{title}</h3>
+          <h3>{job.company_name}</h3>
           <div>
-            {jobPostInfo.map((jobPost, index) => (
-              <div key={index}>
-                {jobPost.icon}
-                <span>{jobPost.value}</span>
-              </div>
-            ))}
+            <RiLinkedinBoxLine />
+            <span>{job.professional.name}</span>
           </div>
         </div>
         <div>
           <div>
-            <RiMailOpenLine />
-            <p>Open on</p>
-            <p>07/11/20</p>
+            <RiMailLine />
+            <span>{job.professional.email}</span>
           </div>
           <div>
-            <div>
-              <RiAccountCircleLine />
-              <span>5</span>
-            </div>
-            <p>Total</p>
-            <p>Candidates</p>
-          </div>
-          <div>
-            <div>
-              <RiAccountCircleLine />
-              <span>3</span>
-            </div>
-            <p>Candidates</p>
-            <p>on Track</p>
+            <RiPhoneLine />
+            <span>{job.professional.phone}</span>
           </div>
         </div>
         <div>
           <div>
-            <button onClick={handleShow}>Show</button>
-            <button>Close</button>
+            <RiMailLine />
+            <p>Send 1 day</p>
+            <p>ago</p>
+          </div>
+
+          <div>
+            <div>
+              <RiPauseCircleLine />
+            </div>
+            <p>Waiting for</p>
+            <p>review</p>
+          </div>
+        </div>
+        <div>
+          <div>
+            <button onClick={handleShow}>MARK AS STARTED</button>
           </div>
           <div onClick={handleShowDetail}>
             <RiArrowDownSLine />
@@ -197,25 +192,17 @@ function JobPostCard({
       {showDetail && (
         <JobDetailCard>
           <div>
-            <h3>About the job position</h3>
-            <p>{about}</p>
+            <h3>Professional Experience</h3>
+            {/* <p>{about}</p> */}
           </div>
           <div>
-            <h3>Mandatory Requirements</h3>
-            <p>{mandatory}</p>
-          </div>
-          <div>
-            <h3>Optional Requirements</h3>
-            <p>{optional_req}</p>
+            <h3>Why are you interested in working at The company name SA</h3>
+            {/* <p>{mandatory}</p> */}
           </div>
         </JobDetailCard>
       )}
     </Container>
   );
-}
-
-JobPostCard.propTypes = {
-  job: PropTypes.object, // Cambia "object" al tipo correcto esperado para la prop job
 };
 
-export default JobPostCard;
+export default CandidateCard;

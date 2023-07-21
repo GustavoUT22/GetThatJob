@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import JobPostCard from "./JobPostCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getJobs } from "../../services/jobs-pro-services";
 const Container = styled.div`
   display: block;
   width: 960px;
@@ -64,6 +65,12 @@ const JobPostContainer = styled.div`
 `;
 
 const JobPostings = () => {
+  const [jobsData, setJobsData] = useState([]);
+
+  useEffect(() => {
+    getJobs().then(setJobsData).catch(console.log);
+  }, []);
+  console.log(jobsData);
   return (
     <Container>
       <h1>Job Postings</h1>
@@ -80,12 +87,21 @@ const JobPostings = () => {
           </div>
         </div>
         <div>
-          <h3>4 jobs postings found</h3>
+          <h3>{jobsData.length} jobs postings found</h3>
           <div>
-            <JobPostCard />
-            <JobPostCard />
-            <JobPostCard />
-            <JobPostCard />
+            {jobsData.map((job, index) => (
+              <JobPostCard
+                id={job.id}
+                title={job.title}
+                category={job.category}
+                job_type={job.job_type}
+                salary={job.salary}
+                about={job.about}
+                mandatory={job.mandatory}
+                optional_req={job.optional_req}
+                key={index}
+              />
+            ))}
           </div>
         </div>
       </JobPostContainer>
