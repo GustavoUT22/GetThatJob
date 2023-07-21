@@ -35,7 +35,7 @@ export async function logout() {
     method: "POST",
      body: userData,
    });
-
+   sessionStorage.setItem(tokenKey, token);
    return user;
  }
 
@@ -53,3 +53,11 @@ export async function getUser() {
    });
    return user;
  }
+
+ export async function updateSignupUser(userData) {
+  const { token, ...user } = await getJobClient("signup/professionals", {
+    method: "PATCH",
+    body: userData,
+  });
+  return user;
+}

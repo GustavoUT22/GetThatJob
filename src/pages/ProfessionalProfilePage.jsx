@@ -178,7 +178,7 @@ console.log(user)
             <Input
               label={"Name"}
               name={"name"}
-              value={user.name}
+              value={user.name ? user.name : ""}
               onChange={handleChange}
             />
             <Input
