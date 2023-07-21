@@ -7,6 +7,7 @@ import SelectInput from "../components/inputs/inputSelect";
 import Price from "../components/inputs/input-price";
 import { typography } from "../styles/typography";
 import { colors } from "../styles/colors";
+import { useState, useCallback } from "react";
 
 const Container = styled.div`
   display: block;
@@ -68,50 +69,116 @@ const InputContainer = styled.div`
 `;
 
 function NewJob() {
+  const [job, setJobs] = useState({});
+  const [category, setCategory] = useState("");
+
+  const handleChange = (e) => {
+    setJobs({
+      ...job,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = useCallback(async (e) => {
+    e.preventDefault();
+    const {
+      title,
+      // category,
+      // job_type,
+      // salary,
+      mandatory,
+      optional_req,
+      about,
+    } = e.target.elements;
+
+    const updatedJob = {
+      title: title.value,
+      // category: category.value,
+      // job_type: job_type.value,
+      // salary: salary.value,
+      mandatory: mandatory.value,
+      optional_req: optional_req.value,
+      about: about.value,
+    };
+
+    console.log(updatedJob);
+    // try {
+    //   await updateRecruiter(updatedRecruiter)
+    //     .then(console.log("Recruiter updated successfully."))
+    //     .catch(console.log);
+    // } catch (error) {
+    //   console.error("Error updating recruiter:", error);
+    // }
+  }, []);
+
+  // console.log(recruiter);
+
   return (
     <Container>
       <Profile>Create new job posting</Profile>
-      <MainContainer>
-        <Subtitle>Main Information</Subtitle>
-        <InputContainer>
-          <Input
-            label={"Job Title"}
-            placeholder={"Software Engineer"}
-            name={"jobtitle"}
+      <form onSubmit={handleSubmit}>
+        <MainContainer>
+          <Subtitle>Main Information</Subtitle>
+          <InputContainer>
+            <Input
+              label={"Job Title"}
+              placeholder={"Software Engineer"}
+              name={"title"}
+              value={job.title ? job.title : ""}
+              onChange={handleChange}
+            />
+            <SelectInput
+              label={"Job Category"}
+              placeholder={"Select or create a category"}
+              name={"category"}
+              value={job.category ? job.category : ""}
+              onChange={(e) => setCategory(e.target.value)}
+            />
+            <SelectInput
+              label={"Type"}
+              placeholder={"Select a type"}
+              name={"type"}
+              value={job.type ? job.type : ""}
+              onChange={handleChange}
+            />
+            <Price
+              label={"Salary Range"}
+              name={"salary"}
+              value={job.salary ? job.salary : ""}
+              onChange={handleChange}
+            />
+          </InputContainer>
+        </MainContainer>
+        <AdditionalContainer>
+          <Subtitle>Additional Information</Subtitle>
+          <TextArea
+            label={"About the Job Position"}
+            placeholder={
+              "Describe the main functions and characteristics of your job position"
+            }
+            name={"about"}
+            value={job.about ? job.about : ""}
+            onChange={handleChange}
           />
-          <SelectInput
-            label={"Job Category"}
-            placeholder={"Select or create a category"}
-            name={"category"}
+          <TextArea
+            label={"Mandatory Requirements"}
+            placeholder={"List each mandatory requirement in a new line"}
+            name={"mandatory"}
+            value={job.mandatory ? job.mandatory : ""}
+            onChange={handleChange}
           />
-          <SelectInput
-            label={"Type"}
-            placeholder={"Select a type"}
-            name={"type"}
+          <TextArea
+            label={"Optional Requirements"}
+            placeholder={"List each optional requirement in a new line"}
+            name={"optional_req"}
+            value={job.optional_req ? job.optional_req : ""}
+            onChange={handleChange}
           />
-          <Price label={"Salary Range"} name={"salary"} />
-        </InputContainer>
-      </MainContainer>
-      <AdditionalContainer>
-        <Subtitle>Additional Information</Subtitle>
-        <TextArea
-          label={"About the Job Position"}
-          placeholder={
-            "Describe the main functions and characteristics of your job position"
-          }
-        />
-        <TextArea
-          label={"Mandatory Requirements"}
-          placeholder={"List each mandatory requirement in a new line"}
-        />
-        <TextArea
-          label={"Optional Requirements"}
-          placeholder={"List each optional requirement in a new line"}
-        />
-      </AdditionalContainer>
-      <Button type="primary" size={"sm"}>
-        Post this job
-      </Button>
+        </AdditionalContainer>
+        <Button type="primary" size={"sm"}>
+          Post this job
+        </Button>
+      </form>
     </Container>
   );
 }
