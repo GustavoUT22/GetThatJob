@@ -67,22 +67,51 @@ export const ContainerCards = styled.div`
 `;
 
 function SearchJob() {
-  const [jobsData, setJobsData] = useState([]);
+  const [jobsData, setJobsData] = useState({
+    all: [],
+    filtered: [],
+  });
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  function handleChange(value) {
+    setSelectedOptions(value);
+  }
 
   const options = [
-    { value: "manufacturing", label: "Manufacturing" },
-    { value: "legal", label: "Legal" },
-    { value: "education", label: "Education" },
-    { value: "government", label: "Government" },
-    { value: "sales", label: "Sales" },
+    { value: "Manufacturing", label: "Manufacturing" },
+    { value: "Legal", label: "Legal" },
+    { value: "Education", label: "Education" },
+    { value: "Government", label: "Government" },
+    { value: "Sales", label: "Sales" },
   ];
 
   useEffect(() => {
-    getJobs().then(setJobsData).catch(console.log);
+    getJobs().then((data) => {
+      setJobsData({
+        all: data,
+        filtered: data,
+      })
+    }).catch(console.log);
   }, []);
-  console.log(jobsData);
-  const countJobs = `${jobsData.length} jobs for you`;
-  console.log(countJobs);
+  
+  useEffect(() => {
+    if(selectedOptions.length !== 0) {
+      const filterJobs = jobsData.all.filter((job) => (
+        selectedOptions.some((option) => job.category.includes(option)) 
+      ))
+      setJobsData({
+        ...jobsData,
+        filtered: filterJobs,
+      })
+    } else {
+      setJobsData({
+        ...jobsData,
+        filtered: jobsData.all
+      })
+    }
+  }, [selectedOptions])
+
+  const countJobs = `${jobsData.filtered.length} Jobs for you`;
 
   return (
     <ContainerSearch>
@@ -98,21 +127,21 @@ function SearchJob() {
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
           <StyledLabel>category</StyledLabel>
-          <CheckSelect options={options} />
+          <CheckSelect options={options} selectedOptions={selectedOptions} onChange={handleChange}/>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+        {/* <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
           <StyledLabel>type</StyledLabel>
           <CheckSelect options={options} />
-        </div>
+        </div> */}
         <div>
           <Price />
         </div>
       </div>
       <ContainerJobCards>
-        <CountJobs>Jobs for you</CountJobs>
+        <CountJobs>{countJobs}</CountJobs>
         <ContainerCards>
-          {jobsData.map((job) => (
-            <CardJob props={job} />
+          {jobsData.filtered.map((job, index) => (
+            <CardJob key={index} props={job} />
           ))}
         </ContainerCards>
       </ContainerJobCards>
