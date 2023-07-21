@@ -39,18 +39,17 @@ export async function logout() {
 //   return user;
 // }
 
-// export async function getUser() {
-//   const { token, ...user } = await getJobClient("/profile/professionals");
+export async function getUser() {
+  const { token, ...user } = await getJobClient("profile/professionals", {
+    method: "GET"
+  });
+  return user;
+}
 
-//   return user;
-// }
-
-// export async function updateUser(userData) {
-//   const { token, ...user } = await getJobClient("/profile/professionals", {
-//     method: "PATCH",
-//     body: userData,
-//   });
-
-//   sessionStorage.setItem(tokenKey, token);
-//   return user;
-// }
+ export async function updateUser(userData) {
+   const { token, ...user } = await getJobClient("profile/professionals", {
+     method: "PATCH",
+     body: userData,
+   });
+   return user;
+ }
