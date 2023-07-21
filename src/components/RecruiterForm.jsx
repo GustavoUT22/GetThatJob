@@ -6,7 +6,7 @@ import Input from "./inputs/Input";
 import TextArea from "./inputs/Input-textarea";
 import Button from "../components/buttons/Button";
 import InputFile from "./inputs/InputFile";
-import { createUser } from "../services/recruiter-service";
+import { createUser, updateSignupRecruiter } from "../services/recruiter-service";
 
 const Form = styled.form`
   display: flex;
@@ -102,6 +102,13 @@ export default function RecruiterForm({step, setStatus}) {
           userData1.file = formFile
           console.log(userData1)
           // Add fetch to update user data using userData1
+
+          try {
+            await updateSignupRecruiter(userData1).then(console.log("User info saved successfully.")).catch(console.log);
+
+          } catch (error) {
+            console.error("Error saving info user:", error);
+          }
           // Redirect to user main page
         break;
         default:
