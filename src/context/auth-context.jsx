@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 // import { createUser, getUser } from "../services/user-service";
 import * as auth from "../services/professional-services";
-import * as AuthRecruiter from "../services/recruiter-session";
+import * as AuthRecruiter from "../services/recruiter-service";
 import { tokenKey } from "../config";
 import { getUser } from "../services/user-service";
 
