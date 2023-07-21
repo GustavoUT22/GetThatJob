@@ -71,10 +71,16 @@ function SearchJob() {
     all: [],
     filtered: [],
   });
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState({
+    category: [],
+    type: [],
+  });
 
-  function handleChange(value) {
-    setSelectedOptions(value);
+  function handleChange(name, value) {
+    setSelectedOptions({
+      ...selectedOptions,
+      [name]: value,
+    });
   }
 
   const options = [
@@ -85,6 +91,12 @@ function SearchJob() {
     { value: "Sales", label: "Sales" },
   ];
 
+  const typeOptions = [
+    { value: "Part Time", label: "Part Time"},
+    { value: "Full Time", label: "Full Time"},
+    { value: "Internship", label: "Internship"},
+  ]
+
   useEffect(() => {
     getJobs().then((data) => {
       setJobsData({
@@ -93,11 +105,13 @@ function SearchJob() {
       })
     }).catch(console.log);
   }, []);
+
+  console.log(jobsData.all)
   
   useEffect(() => {
-    if(selectedOptions.length !== 0) {
+    if(selectedOptions.category.length !== 0) {
       const filterJobs = jobsData.all.filter((job) => (
-        selectedOptions.some((option) => job.category.includes(option)) 
+        selectedOptions.category.some((option) => job.category.includes(option)) 
       ))
       setJobsData({
         ...jobsData,
@@ -109,7 +123,24 @@ function SearchJob() {
         filtered: jobsData.all
       })
     }
-  }, [selectedOptions])
+  }, [selectedOptions.category])
+
+  useEffect(() => {
+    if(selectedOptions.type.length !== 0) {
+      const filterJobs = jobsData.all.filter((job) => (
+        selectedOptions.type.some((option) => job.job_type.includes(option)) 
+      ))
+      setJobsData({
+        ...jobsData,
+        filtered: filterJobs,
+      })
+    } else {
+      setJobsData({
+        ...jobsData,
+        filtered: jobsData.all
+      })
+    }
+  }, [selectedOptions.type])
 
   const countJobs = `${jobsData.filtered.length} Jobs for you`;
 
@@ -127,12 +158,12 @@ function SearchJob() {
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
           <StyledLabel>category</StyledLabel>
-          <CheckSelect options={options} selectedOptions={selectedOptions} onChange={handleChange}/>
+          <CheckSelect type={"category"} options={options} selectedOptions={selectedOptions.category} onChange={handleChange}/>
         </div>
-        {/* <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
           <StyledLabel>type</StyledLabel>
-          <CheckSelect options={options} />
-        </div> */}
+          <CheckSelect type={"type"} options={typeOptions} selectedOptions={selectedOptions.type} onChange={handleChange}/>
+        </div>
         <div>
           <Price />
         </div>
