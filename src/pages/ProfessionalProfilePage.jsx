@@ -150,16 +150,17 @@ function ProfessionalProfile() {
       experience: experience.value,
       education: education.value,
     };
-    console.log("updatedUser")
+    console.log("updatedUser");
     try {
-      await updateUser(updatedUser).then(console.log("User updated successfully.")).catch(console.log);
-       
+      await updateUser(updatedUser)
+        .then(console.log("User updated successfully."))
+        .catch(console.log);
     } catch (error) {
       console.error("Error updating user:", error);
     }
   };
 
-console.log(user)
+  console.log(user);
   return (
     <Container>
       <Profile>Profile</Profile>
@@ -199,7 +200,7 @@ console.log(user)
               label={"LinkedIn URL"}
               type="url"
               name={"linkedin"}
-              value={user.linkedin ? user.linkedin : ""} 
+              value={user.linkedin ? user.linkedin : ""}
               onChange={handleChange}
             />
           </InputContainer>
@@ -239,9 +240,9 @@ console.log(user)
           <Caption>Only PDF. Max size 5MB</Caption>
         </ProfessionalContainer>
 
-      <Button type="primary" size={"sm"}>
-        Save changes
-      </Button>
+        <Button type="primary" size={"sm"}>
+          Save changes
+        </Button>
       </form>
     </Container>
   );

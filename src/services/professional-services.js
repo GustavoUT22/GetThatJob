@@ -6,16 +6,14 @@ export async function login(credentials) {
     method: "POST",
     body: credentials,
   });
-  // console.log(token);
-  // console.log(user);
   sessionStorage.setItem(tokenKey, token);
   return user;
 }
 
 export async function logout() {
   await getJobClient("logout/professionals", { method: "DELETE" });
-  // sessionStorage.removeItem(tokenKey);
 }
+
 
 // export async function login(credentials) {
 //   const { token, ...user } = getJobClient("login/recruiter", {
@@ -41,15 +39,15 @@ export async function logout() {
 
 export async function getUser() {
   const { token, ...user } = await getJobClient("profile/professionals", {
-    method: "GET"
+    method: "GET",
   });
   return user;
 }
 
- export async function updateUser(userData) {
-   const { token, ...user } = await getJobClient("profile/professionals", {
-     method: "PATCH",
-     body: userData,
-   });
-   return user;
- }
+export async function updateUser(userData) {
+  const { token, ...user } = await getJobClient("profile/professionals", {
+    method: "PATCH",
+    body: userData,
+  });
+  return user;
+}
