@@ -1,12 +1,12 @@
-import { tokenKey } from "../config";
+// import { tokenKey } from "../config";
 import getJobClient from "./api-fecth";
 
 export async function createUser(userData) {
-  const { token, ...user } = await getJobClient("/signup", {
+  const { token, ...user } = await getJobClient("/signup/professionals", {
+    method: "POST",
     body: userData,
   });
 
-  sessionStorage.setItem(tokenKey, token);
   return user;
 }
 
