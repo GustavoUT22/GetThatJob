@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   RiSearchLine,
   RiArticleLine,
@@ -87,28 +87,29 @@ const InfoContainer = styled.div`
 `;
 
 const SideBar = () => {
+  const [active, setActive] = useState(0);
   const { logout } = useAuth();
   const navigate = useNavigate();
   const nav = [
     {
       icon: <RiSearchLine />,
       name: "Find that job",
-      onClick: () => navigate("/jobs"),
+      onClick: () => handleClick(0, "/jobs"),
     },
     {
       icon: <RiArticleLine />,
       name: "Your applications",
-      onClick: () => navigate("/applications"),
+      onClick: () => handleClick(1, "/applications"),
     },
     {
       icon: <BiTargetLock />,
       name: "Following",
-      onClick: () => navigate("/following"),
+      onClick: () => handleClick(2, "/following"),
     },
     {
       icon: <RiUserLine />,
       name: "Profile",
-      onClick: () => navigate("/profile"),
+      onClick: () => handleClick(3, "/profile"),
     },
     {
       icon: <RiLogoutCircleLine />,
@@ -120,6 +121,11 @@ const SideBar = () => {
     console.log("logout");
     await logout();
   }
+  const handleClick = (index, path) => {
+    setActive(index);
+    navigate(path);
+  };
+
   return (
     <div>
       <Wrapper>
@@ -127,7 +133,10 @@ const SideBar = () => {
         {/* Navbar */}
         {nav.map((navLink, index) => (
           <NavContainer key={index}>
-            <div onClick={navLink.onClick}>
+            <div
+              onClick={navLink.onClick}
+              style={index === active ? { backgroundColor: "#F5F5F6" } : {}}
+            >
               {navLink.icon}
               <span>{navLink.name}</span>
             </div>
