@@ -6,7 +6,7 @@ import TextArea from "../components/inputs/Input-textarea";
 import { typography } from "../styles/typography";
 import { fonts } from "../styles/typography";
 import { colors } from "../styles/colors";
-import { getRecruiter, updateRecruiter } from "../services/recruiter-session";
+import { getRecruiter, updateRecruiter } from "../services/recruiter-service";
 import { useEffect, useState } from "react";
 import { Form } from "react-router-dom";
 

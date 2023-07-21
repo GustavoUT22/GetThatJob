@@ -30,14 +30,14 @@ export async function logout() {
 //   sessionStorage.removeItem(tokenKey);
 // }
 
-// export async function createUser(userData) {
-//   const { token, ...user } = await getJobClient("signup/professional", {
-//     body: userData,
-//   });
+export async function createUser(userData) {
+  const { token, ...user } = await getJobClient("signup/recruiters", {
+    method: "POST",
+    body: userData,
+  });
 
-//   sessionStorage.setItem(tokenKey, token);
-//   return user;
-// }
+  return user;
+}
 
 export async function getRecruiter() {
   const { token, ...recruiter } = await getJobClient("/profile/recruiters", {
