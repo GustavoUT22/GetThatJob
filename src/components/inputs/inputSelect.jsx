@@ -39,13 +39,11 @@ const StyleSelectInput = styled.select`
   option {
     background-color: beige;
   }
-
 `;
 
 const DefaultOption = styled.option`
   color: ${colors.gray.light};
   ${typography.body.sm};
-
 `;
 
 const OptionSelect = styled.option`
@@ -59,7 +57,6 @@ const optionsDefault = [
   { value: "option3", label: "Opción 3" },
 ];
 
-
 function SelectInput({
   label,
   placeholder,
@@ -69,7 +66,7 @@ function SelectInput({
   return (
     <div>
       {label ? <StyledLabel>{label}</StyledLabel> : ""}
-      <StyleSelectInput  >
+      <StyleSelectInput>
         <DefaultOption style={{ color: "gray" }} selected>
           {placeholder}
           {defaultValue}
