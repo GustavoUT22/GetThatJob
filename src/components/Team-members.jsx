@@ -3,7 +3,9 @@ import { AiFillGithub, AiOutlineLinkedin } from "react-icons/ai";
 import Anonimo from "../assets/user-anonimo.png";
 import Gustavo from "../assets/members/gustavo.jpg";
 import Amanda from "../assets/members/amanda.png";
-import Fernando from "../assets/members/fernando.jpg"
+import Fernando from "../assets/members/fernando.jpg";
+import Kevin from "../assets/members/kevinC.png";
+import Sebastian from "../assets/members/maguiña.jpg";
 import { colors } from "../styles/colors";
 
 const CardWrapper = styled.div`
@@ -27,6 +29,7 @@ const ImgMember = styled.img`
   width: 180px;
   height: 180px;
   margin-bottom: 16px;
+  object-fit: cover;
 `;
 
 const ContainerMembers = styled.div`
@@ -66,7 +69,7 @@ const ContainerTeam = styled.div`
   justify-content: center;
   align-items: center;
   margin: 64px;
-  background-color:${colors.gray.bg_light};
+  background-color: ${colors.gray.bg_light};
 `;
 
 const NameWrapper = styled.div`
@@ -95,13 +98,13 @@ const membersData = [
   },
   {
     name: "Kevin Quispe",
-    photo: Anonimo,
+    photo: Kevin,
     github: "https://github.com/Kevincarlosqa",
     linkedin: "https://www.linkedin.com/in/kevin-quispe-aquise/",
   },
   {
     name: "Sebastian Maguiña",
-    photo: Anonimo,
+    photo: Sebastian,
     github: "https://github.com/Sebas54318",
     linkedin: "https://www.linkedin.com/in/sebastian-magui%C3%B1a/",
   },

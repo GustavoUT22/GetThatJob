@@ -9,6 +9,9 @@ import {
 import { colors } from "../styles/colors";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { showJob } from "../services/jobs-pro-services";
+import { typography } from "../styles";
 
 const CardJobWrapper = styled.div`
   display: flex;
@@ -128,47 +131,77 @@ const ButtonsContainer = styled.div`
   justify-content: space-between;
 `;
 
-function CardJob({ props }) {
-  const navigate = useNavigate();
+const JobsOpen = styled.span`
+  ${typography.caption}
+`;
 
-  function handleSeemore() {}
+function FollowCards({ props }) {
+  const navigate = useNavigate();
+  console.log(props.followable_type);
+  const [followData, setFollowData] = useState([]);
+  const id = props.followable_id;
+  useEffect(() => {
+    if (props.followable_type == "Job") {
+      showJob(id).then(setFollowData).catch(console.log);
+    } else {
+      showJob(id).then(setFollowData);
+    }
+  }, []);
+
   return (
     <CardJobWrapper>
       <CompanyInfo>
         <LogoWrapper>
           <img src={JobImg} />
         </LogoWrapper>
-        <CompanyData>
-          <CategoryJob>
-            <RiBuilding3Line style={{ width: "15px", height: "15px" }} />
-            {props.category}
-          </CategoryJob>
-          <JobTitle>{props.title}</JobTitle>
-          <CompanyName>{props.company_name}</CompanyName>
+        {props.followable_type == "Job" ? (
+          <CompanyData>
+            <CategoryJob>
+              <RiBuilding3Line style={{ width: "15px", height: "15px" }} />
+              {followData.category}
+            </CategoryJob>
+            <JobTitle>{followData.title}</JobTitle>
+            <CompanyName>{followData.company_name}</CompanyName>
 
-          <BenefitsWrapper>
-            <JobTimeSalary>
-              <RiCalendar2Line style={{ width: "15px", height: "15px" }} />
-              {props.job_type}
-            </JobTimeSalary>
-            <JobTimeSalary>
-              <RiMoneyDollarCircleLine
-                style={{ width: "15px", height: "15px" }}
-              />
-              {props.salary}
-            </JobTimeSalary>
-          </BenefitsWrapper>
-        </CompanyData>
+            <BenefitsWrapper>
+              <JobTimeSalary>
+                <RiCalendar2Line style={{ width: "15px", height: "15px" }} />
+                {followData.job_type}
+              </JobTimeSalary>
+              <JobTimeSalary>
+                <RiMoneyDollarCircleLine
+                  style={{ width: "15px", height: "15px" }}
+                />
+                {followData.salary}
+              </JobTimeSalary>
+            </BenefitsWrapper>
+          </CompanyData>
+        ) : (
+          <CompanyData>
+            <CategoryJob>
+              <RiBuilding3Line style={{ width: "15px", height: "15px" }} />
+              {followData.category}
+            </CategoryJob>
+            <JobTitle>{followData.title}</JobTitle>
+            <CompanyName></CompanyName>
+
+            <BenefitsWrapper>
+              <JobTimeSalary>2 jobs openings</JobTimeSalary>
+            </BenefitsWrapper>
+          </CompanyData>
+        )}
       </CompanyInfo>
       <ButtonsContainer>
         <FollowButtonWrapper>
           <RiFocus3Line style={{ width: "24px", height: "24px" }} />
           follow
         </FollowButtonWrapper>
-        <SeeMore to={`/jobs/${props.id}`}>see more</SeeMore>
+        <SeeMore onClick={() => navigate(`/jobs/${followData.id}`)}>
+          see more
+        </SeeMore>
       </ButtonsContainer>
     </CardJobWrapper>
   );
 }
 
-export default CardJob;
+export default FollowCards;
