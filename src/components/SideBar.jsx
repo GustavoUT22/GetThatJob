@@ -12,6 +12,7 @@ import { DiRuby } from "react-icons/di";
 import styled from "@emotion/styled";
 import logo from "./../assets/logo.png";
 import { useAuth } from "../context/auth-context";
+import { useNavigate } from "react-router";
 
 const integrants = [
   { name: "Amanda Trigueros" },
@@ -87,22 +88,27 @@ const InfoContainer = styled.div`
 
 const SideBar = () => {
   const { logout } = useAuth();
+  const navigate = useNavigate();
   const nav = [
     {
       icon: <RiSearchLine />,
       name: "Find that job",
+      onClick: () => navigate("/jobs"),
     },
     {
       icon: <RiArticleLine />,
       name: "Your applications",
+      onClick: () => navigate("/applications"),
     },
     {
       icon: <BiTargetLock />,
       name: "Following",
+      onClick: () => navigate("/following"),
     },
     {
       icon: <RiUserLine />,
       name: "Profile",
+      onClick: () => navigate("/profile"),
     },
     {
       icon: <RiLogoutCircleLine />,
