@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { Title } from "./SearchPage";
 import CardJob from "../components/CardJob";
 import { colors } from "../styles/colors";
+import CheckSelect from "../components/inputs/CheckSelect";
 
 export const ContainerFollowing = styled.div`
   display: "flex";
@@ -46,6 +47,7 @@ function FollowingPage() {
         <Title>Following</Title>
         <FollowsCard>
           <h3>You are following 6 jobs</h3>
+          <CheckSelect />
           <ContainerFollow>
             {/* <CardJob />
             <CardJob />

@@ -9,6 +9,7 @@ import {
 } from "../components/utils";
 import { colors } from "../styles/colors";
 import ApplicationJobCard from "../components/Cards/ApplicationJobCard";
+import { useEffect, useState } from "react";
 
 const FilterName = styled.span`
   font-family: Inter;
@@ -29,6 +30,12 @@ const ApliFound = styled.span`
 `;
 
 function YourApplicationsPage() {
+  const [applyData, setApplyData] = useState([]);
+
+  useEffect(() => {
+    console.log("applications");
+  }, []);
+
   return (
     <ContainerSearch>
       <FlexColumnSm>

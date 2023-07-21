@@ -8,7 +8,7 @@ import Price from "../components/inputs/input-price";
 import SelectInput from "../components/inputs/inputSelect";
 import { useEffect, useState } from "react";
 import { getJobs } from "../services/jobs-pro-services";
-
+import CheckSelect from "../components/inputs/CheckSelect";
 export const ContainerSearch = styled.div`
   display: "flex";
   padding: 32px 120px;
@@ -83,10 +83,17 @@ function SearchJob() {
           display: "flex",
           gap: "16px",
           justifyContent: "flex-start",
+          alignItems: "center",
         }}
       >
-        <SelectInput label={"category"} defaultValue="Select a category" />
-        <SelectInput label={"type"} defaultValue="Select a type" />
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <span>category</span>
+          <CheckSelect />
+        </div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <span>category</span>
+          <CheckSelect />
+        </div>
         <Price />
       </div>
       <ContainerJobCards>

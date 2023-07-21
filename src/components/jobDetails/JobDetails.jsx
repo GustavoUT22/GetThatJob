@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import JobForm from "./JobForm";
 import Button from "../buttons/Button";
 import { LuMousePointer2 } from "react-icons/lu";
 
