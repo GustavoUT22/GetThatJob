@@ -141,14 +141,14 @@ const StyledCheckSelect = styled(Select)`
   background: var(--white, #fff);
 `;
 
-function CheckSelect({ placeholder, options, selectedOptions=[], onChange }) {
+function CheckSelect({ type, placeholder, options, selectedOptions=[], onChange }) {
   const [dirty, setDirty] = useState(false);
 
   const handleChange = (value) => {
-    onChange(value)
+    onChange(type, value)
     setDirty(true);
   };
-  
+
   return (
     <StyledCheckSelect
       placeholder={placeholder}
