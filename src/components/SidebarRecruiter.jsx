@@ -12,6 +12,7 @@ import styled from "@emotion/styled";
 import logo from "./../assets/logo.png";
 import { useAuth } from "../context/auth-context";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 
 const integrants = [
   { name: "Amanda Trigueros" },
@@ -86,23 +87,24 @@ const InfoContainer = styled.div`
 `;
 
 const SideBarRecruiter = () => {
+  const [active, setActive] = useState(0);
   const { logout } = useAuth();
   const navigate = useNavigate();
   const nav = [
     {
       icon: <RiSearchLine />,
       name: "Job Postings",
-      onClick: () => navigate("/jobs"),
+      onClick: () => handleClick(0, "/jobs"),
     },
     {
       icon: <RiArticleLine />,
       name: "Create New Job",
-      onClick: () => navigate("/jobs/create"),
+      onClick: () => handleClick(1, "/jobs/create"),
     },
     {
       icon: <RiUserLine />,
       name: "Profile",
-      onClick: () => navigate("/profile"),
+      onClick: () => handleClick(2, "/profile"),
     },
     {
       icon: <RiLogoutCircleLine />,
@@ -114,6 +116,11 @@ const SideBarRecruiter = () => {
     console.log("logout");
     await logout();
   }
+
+  function handleClick(index, nav) {
+    setActive(index);
+    navigate(nav);
+  }
   return (
     <div>
       <Wrapper>
@@ -121,7 +128,10 @@ const SideBarRecruiter = () => {
         {/* Navbar */}
         {nav.map((navLink, index) => (
           <NavContainer key={index}>
-            <div onClick={navLink.onClick}>
+            <div
+              onClick={navLink.onClick}
+              style={index === active ? { backgroundColor: "#F5F5F6" } : {}}
+            >
               {navLink.icon}
               <span>{navLink.name}</span>
             </div>

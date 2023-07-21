@@ -7,7 +7,7 @@ import Header from "../components/Header";
 import Input from "../components/inputs/Input";
 import Button from "../components/buttons/Button";
 import person from "../assets/images/people/login-person.svg";
-import { loginRecruiter } from "../services/recruiter-session";
+// import { loginRecruiter } from "../services/recruiter-session";
 import { useAuth } from "../context/auth-context";
 const Container = styled.div`
   display: flex;
