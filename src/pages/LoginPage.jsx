@@ -12,10 +12,7 @@ import { useAuth } from "../context/auth-context";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 5px 0;
-  gap: 8px;
   width: auto;
-  heigth: auto;
 `;
 
 const Main = styled.main`
@@ -24,8 +21,6 @@ const Main = styled.main`
   width: auto;
   align-items: flex-start;
   justify-content: center;
-  padding: 3rem 0 0 0;
-  margin: auto;
   background-color: ${colors.gray.bg_light};
 `;
 

@@ -8,6 +8,8 @@ import Price from "../components/inputs/input-price";
 import SelectInput from "../components/inputs/inputSelect";
 import { useEffect, useState } from "react";
 import { getJobs } from "../services/jobs-pro-services";
+import CheckSelect from "../components/inputs/CheckSelect";
+import { StyledLabel } from "../components/inputs/Input";
 
 export const ContainerSearch = styled.div`
   display: "flex";
@@ -67,6 +69,14 @@ export const ContainerCards = styled.div`
 function SearchJob() {
   const [jobsData, setJobsData] = useState([]);
 
+  const options = [
+    { value: "manufacturing", label: "Manufacturing" },
+    { value: "legal", label: "Legal" },
+    { value: "education", label: "Education" },
+    { value: "government", label: "Government" },
+    { value: "sales", label: "Sales" },
+  ];
+
   useEffect(() => {
     getJobs().then(setJobsData).catch(console.log);
   }, []);
@@ -83,11 +93,20 @@ function SearchJob() {
           display: "flex",
           gap: "16px",
           justifyContent: "flex-start",
+          alignItems: "center",
         }}
       >
-        <SelectInput label={"category"} defaultValue="Select a category" />
-        <SelectInput label={"type"} defaultValue="Select a type" />
-        <Price />
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <StyledLabel>category</StyledLabel>
+          <CheckSelect options={options} />
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+          <StyledLabel>type</StyledLabel>
+          <CheckSelect options={options} />
+        </div>
+        <div>
+          <Price />
+        </div>
       </div>
       <ContainerJobCards>
         <CountJobs>Jobs for you</CountJobs>

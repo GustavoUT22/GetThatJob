@@ -1,20 +1,21 @@
-import { InputWrapper, StyledLabel } from "./Input"
-import PropTypes from "prop-types"
-import styled from "@emotion/styled"
-import { typography } from "../../styles"
-import { colors } from "../../styles"
-import { RiUploadLine } from "react-icons/ri"
+import { InputWrapper, StyledLabel } from "./Input";
+import PropTypes from "prop-types";
+import styled from "@emotion/styled";
+import { typography } from "../../styles";
+import { colors } from "../../styles";
+import { RiUploadLine } from "react-icons/ri";
+import { useState } from "react";
 
 const File = styled.input`
   display: none;
-`
+`;
 
 const FileSection = styled.div`
-  display: flex; 
-  flex-direction: row; 
+  display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 8px;
-`
+`;
 
 const Caption = styled.label`
   font-size: 12px;
@@ -23,11 +24,11 @@ const Caption = styled.label`
   line-height: 16px;
   letter-spacing: 0.4px;
   ${colors.gray.light};
-`
+`;
 
 const ChosenFile = styled.label`
   ${typography.body.sm}
-`
+`;
 
 const CustomButton = styled.label`
   display: flex;
@@ -54,7 +55,7 @@ const CustomButton = styled.label`
   }
   &:focus {
     outline: 2px solid ${colors.pink.pink};
-  }   
+  }
   &:disabled {
     opacity: 60%;
     cursor: not-allowed;
@@ -68,13 +69,13 @@ export default function InputFile({
   caption,
   onChange,
   file,
-})  {
+}) {
   return (
     <InputWrapper>
       {label ? <StyledLabel htmlFor={id || name}>{label}</StyledLabel> : ""}
       <FileSection>
         <CustomButton htmlFor={id || name}>
-          {<RiUploadLine/>}
+          {<RiUploadLine />}
           {"Choose a File"}
         </CustomButton>
         <File
@@ -83,11 +84,19 @@ export default function InputFile({
           name={name}
           onChange={onChange}
         ></File>
-        {file ? <ChosenFile style={{color: `${colors.gray.dark}`}}>{file.name}</ChosenFile> : <ChosenFile style={{color: `${colors.gray.gray}`}}>No file chosen</ChosenFile>}
+        {file ? (
+          <ChosenFile style={{ color: `${colors.gray.dark}` }}>
+            {file.name}
+          </ChosenFile>
+        ) : (
+          <ChosenFile style={{ color: `${colors.gray.gray}` }}>
+            No file chosen
+          </ChosenFile>
+        )}
       </FileSection>
       <Caption>{caption}</Caption>
     </InputWrapper>
-  )
+  );
 }
 
 InputFile.propTypes = {
