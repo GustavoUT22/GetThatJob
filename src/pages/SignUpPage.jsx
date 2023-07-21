@@ -26,7 +26,7 @@ const Main = styled.main`
 const Section = styled.section`
   display: flex;
   flex-direction: column;
-  min-width: 360px;
+  width: 380px;
   padding: 5px 0;
   gap: 18px;
 `
