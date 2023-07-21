@@ -11,12 +11,19 @@ import {
   RiBuilding3Line,
   RiCalendar2Line,
   RiMoneyDollarCircleLine,
+  RiMailLine,
 } from "react-icons/ri";
 import jobLogo from "../assets/jobdetail-logo.png";
 import followingIcon from "../assets/FollowButton.png";
 import Button from "../components/buttons/Button";
 import TextArea from "../components/inputs/Input-textarea";
 import { apply } from "../services/jobs-pro-services";
+import { StyledLabel } from "../components/inputs/Input";
+import { colors } from "../styles/colors";
+import { CategoryJob } from "../components/CardJob";
+import InputFile from "../components/inputs/InputFile";
+import CircularCheckbox from "../components/inputs/circularCheckbox";
+import RadioComponent from "../components/inputs/input-radio";
 
 const JobFormContainer = styled.div`
   padding: 0 16px;
@@ -62,6 +69,14 @@ const JobFormContainer = styled.div`
     letter-spacing: 0.4px;
     text-transform: none;
   }
+`;
+
+const CompleteApply = styled.span`
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: ${colors.pink.dark};
 `;
 
 function NewApplicationPage() {
@@ -131,7 +146,6 @@ function NewApplicationPage() {
               icon={<LuMousePointer2 />}
               type={"primary"}
               size={"sm"}
-              onClick={() => navigate(`/jobs/${jobData.id}/apply`)}
             />
           </div>
         </div>
@@ -156,45 +170,54 @@ function NewApplicationPage() {
       </JobHead>
       <JobFormContainer>
         <form onSubmit={handleSubmit}>
-          <div>Complete your application</div>
+          <CompleteApply>Complete your application</CompleteApply>
           <div>
-            <p>Send your cv updated</p>
+            <StyledLabel>Send your cv updated</StyledLabel>
 
             <div>
-              <input type="checkbox" id="current_cv" />
-              <label htmlFor="current_cv">Use current CV</label>
-              <input type="checkbox" id="new_cv" />
-              <label htmlFor="new_cv">Upload new CV</label>
+              {/* <CircularCheckbox children={"Use current CV"} />
+              <CircularCheckbox children={"Upload newCV"} /> */}
+              <RadioComponent />
             </div>
           </div>
           <div>
             <div>
-              <button>Choose a file</button>
-              <span>No file chosen</span>
+              <InputFile />
             </div>
             <p>Only PDF. Max size 5MB</p>
           </div>
-          <div>
-            <TextArea
-              label={"Professional experience (taken from your profile)"}
-              value={applyData.experience ? applyData.experience : ""}
-              name={"experience"}
-              onChange={handleChange}
-              placeholder={"I have experience..."}
+          {/* <div> */}
+          <TextArea
+            label={"Professional experience (taken from your profile)"}
+            value={applyData.experience ? applyData.experience : ""}
+            name={"experience"}
+            onChange={handleChange}
+            placeholder={"I have experience..."}
+          />
+          {/* </div> */}
+          {/* <div> */}
+          <TextArea
+            label={"Why are you interested in working at The company name SA"}
+            name={"why_interested"}
+            value={applyData.why_interested ? applyData.why_interested : ""}
+            onChange={handleChange}
+            placeholder={"I interested..."}
+          />
+          <CategoryJob>Between 50 and 1000 characters</CategoryJob>
+          {/* </div> */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "20px",
+            }}
+          >
+            <Button
+              children={"Send application"}
+              icon={<RiMailLine />}
+              type={"primary"}
+              size={"sm"}
             />
-          </div>
-          <div>
-            <TextArea
-              label={"Why are you interested in working at The company name SA"}
-              name={"why_interested"}
-              value={applyData.why_interested ? applyData.why_interested : ""}
-              onChange={handleChange}
-              placeholder={"I interested..."}
-            />
-            <p>Between 50 and 1000 characters</p>
-          </div>
-          <div>
-            <button type="submit">Send Application</button>
           </div>
         </form>
       </JobFormContainer>

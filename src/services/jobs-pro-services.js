@@ -18,7 +18,7 @@ export async function showJob(id) {
 }
 
 export async function apply(newApply) {
-  const data = await getJobClient("/application", {
+  const data = await getJobClient("/applications", {
     body: newApply,
   });
   return data;

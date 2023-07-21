@@ -8,7 +8,7 @@ const FormContainer = styled.div`
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
   padding: 8px 0px;
 `;
 
@@ -21,7 +21,7 @@ const InputBox = styled.div`
 
 const AmountInput = styled.input`
   width: 102px;
-  height: 36px;
+  height: 32px;
   padding: 8px;
   border-radius: 8px;
   border: 1px solid ${colors.pink.light};
@@ -34,7 +34,7 @@ const AmountInput = styled.input`
     outline: #fa4a0c;
     border: 1px solid ${colors.pink.pink};
   }
-  
+
   ::placeholder {
     color: ${colors.gray.light};
     ${typography.body.sm};
