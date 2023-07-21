@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 import { Title } from "./SearchPage";
 import { colors } from "../styles/colors";
+import { getFollows } from "../services/following-services";
+import { useEffect, useState } from "react";
+import FollowCards from "../components/CardFollow";
 
 export const ContainerFollowing = styled.div`
   display: "flex";
@@ -39,38 +42,33 @@ const FollowsCard = styled.div`
 `;
 
 function FollowingPage() {
+  const [followsData, setFollowsData] = useState([]);
+
+  useEffect(() => {
+    getFollows().then(setFollowsData).catch(console.log);
+  }, []);
+
+  const jobs = followsData.filter((follow) => follow.followable_type == "Job");
+  const companies = followsData.filter(
+    (follow) => follow.followable_type == "Recruiter"
+  );
+  console.log(followsData);
   return (
     <ContainerFollowing>
       <div style={{ maxWidth: "960px" }}>
         <Title>Following</Title>
         <FollowsCard>
-          <h3>You are following 6 jobs</h3>
+          <h3>You are following {jobs.length} jobs</h3>
           <ContainerFollow>
-            {/* <CardJob />
-            <CardJob />
-            <CardJob />
-            <CardJob />
-            <CardJob />
-            <CardJob />
-            <CardJob />
-            <CardJob />
-            <CardJob />
-            <CardJob />
-            <CardJob />
-            <CardJob /> */}
+            {jobs.map((job) => (
+              <FollowCards props={job} />
+            ))}
           </ContainerFollow>
-          <h3>You are following 6 companies</h3>
+          <h3>You are following {companies.length} companies</h3>
           <ContainerFollow>
-            {/* <CardJob />
-            <CardJob />
-            <CardJob />
-            <CardJob />
-            <CardJob />
-            <CardJob />
-            <CardJob />
-            <CardJob />
-            <CardJob />
-            <CardJob /> */}
+            {companies.map((company) => (
+              <FollowCards props={company} />
+            ))}
           </ContainerFollow>
         </FollowsCard>
       </div>

@@ -71,7 +71,7 @@ function YourApplicationsPage() {
             </FlexRowSm>
           </div>
         </FlexColumnXs>
-        <ApliFound>4 applications found</ApliFound>
+        <ApliFound>{applyData.length} applications found</ApliFound>
         <FlexColumnSm>
           {applyData.map((apply) => (
             <ApplicationJobCard
