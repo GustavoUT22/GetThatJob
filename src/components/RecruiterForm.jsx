@@ -5,6 +5,7 @@ import {RiArrowRightSLine} from "react-icons/ri"
 import Input from "./inputs/Input";
 import TextArea from "./inputs/Input-textarea";
 import Button from "../components/buttons/Button";
+import InputFile from "./inputs/InputFile";
 
 const Form = styled.form`
   display: flex;
@@ -39,9 +40,10 @@ export default function RecruiterForm({step, setStatus}) {
     companyName: "",
     companyWebsite: "",
     about: "",
+    file: null,
   })
 
-  const { email, password, passwordConfirmation, companyName, website, about } = formData;
+  const { email, password, passwordConfirmation, companyName, website, about, file } = formData;
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -55,14 +57,43 @@ export default function RecruiterForm({step, setStatus}) {
             1: "In Progress",
             2: "Pending",
           })
+          const userData = {
+            email,
+            password,
+            companyName,
+          }
+          // Add fetch to create new User
+          console.log(userData)
         break;
         case 2:
-          setStatus({
-            step: 3, 
-            0: "Done!",
-            1: "Done!",
-            2: "In Progress",
-          })
+          const data1 = {
+            companyWebsite,
+            about,
+            file,
+          }
+      
+          const userData1 = Object.keys(data1).reduce((acc, key) => {
+            if (formData[key] !== "" && formData[key] !== null) {
+              acc[key] = formData[key];
+            }
+            return acc;
+          }, {});
+          console.log(userData1)
+
+          // file format for  fetch "POST"
+          const formFile = new FormData();
+          formFile.append("file", file)
+          // formFile is for fetch "POST"
+          // example:
+          // fetch(endpoint,{
+          //   method: "POST",
+          //   body: formFile,
+          // })
+
+          userData1.file = formFile
+          console.log(userData1)
+          // Add fetch to update user data using userData1
+          // Redirect to user main page
         break;
         default:
           break;
@@ -72,18 +103,16 @@ export default function RecruiterForm({step, setStatus}) {
     }
   }
 
-  function handleFinish(event) {
-    event.preventDefault()
-
-    Object.entries(formData).map(([key, value]) => {
-      console.log(`${key}: ${value}`);
-    });
-  }
-
   function handleSkip(event) {
     event.preventDefault()
 
-    console.log(companyName, email, password, passwordConfirmation)
+    setFormData({
+      ...formData,
+      companyWebsite: "",
+      about: "",
+      file: null,
+    })
+    // redirect to recruiter user main page
   }
 
   function handleChange(event) {
@@ -93,6 +122,13 @@ export default function RecruiterForm({step, setStatus}) {
       ...formData,
       [name]: name === "companyName" || name ==="about" ? value : value.trim(),
     });
+  }
+
+  function handleFileChange(event) {
+    setFormData({
+      ...formData,
+      file: event.target.files[0],
+    })
   }
   
   let form
@@ -116,10 +152,11 @@ export default function RecruiterForm({step, setStatus}) {
         <InfoSection>
           <Input name="companyWebsite" value={website} onChange={handleChange} placeholder={"https://www.mycompany.sa"} label={"company website"}/>
           <TextArea name="about" value={about} onChange={handleChange} placeholder={"My Company SA has the vision to change the way how..."} label={"About the company"}/>
+          <InputFile id={"logo"} name={"logo"} label={"upload the company logo"} caption={"Max size 5MB"} onChange={handleFileChange} file={file}></InputFile>
         </InfoSection>
         <ButtonSection>
           <Button type={"secondary"} size={"sm"} onClick={handleSkip}>skip this!</Button>
-          <Button style={{flexDirection: "row-reverse"}} type={"primary"} size={"sm"} onClick={handleFinish} icon={<RiArrowRightSLine/>}>Finish</Button>
+          <Button style={{flexDirection: "row-reverse"}} type={"primary"} size={"sm"} onClick={handleSubmit} icon={<RiArrowRightSLine/>}>Finish</Button>
         </ButtonSection>
       </Form>
       break;

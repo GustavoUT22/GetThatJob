@@ -138,6 +138,7 @@ export default function ProfessionalForm({step, setStatus}) {
     //   method: "POST",
     //   body: formFile,
     // })
+    
     userData.file = formFile
     console.log(userData)
     // Add fetch to update user data using userData
