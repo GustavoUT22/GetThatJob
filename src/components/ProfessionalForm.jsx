@@ -41,10 +41,10 @@ export default function ProfessionalForm({ step, setStatus }) {
     passwordConfirmation: "",
     name: "",
     phone: "",
-    birthdate: "",
+    birth_date: "",
     linkedin: "",
     title: "",
-    exp: "",
+    experience: "",
     education: "",
     file: null,
   });

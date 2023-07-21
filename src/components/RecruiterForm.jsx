@@ -6,6 +6,7 @@ import Input from "./inputs/Input";
 import TextArea from "./inputs/Input-textarea";
 import Button from "../components/buttons/Button";
 import InputFile from "./inputs/InputFile";
+import { createUser } from "../services/recruiter-service";
 
 const Form = styled.form`
   display: flex;
@@ -37,15 +38,15 @@ export default function RecruiterForm({step, setStatus}) {
     email: "",
     password: "",
     passwordConfirmation: "",
-    companyName: "",
-    companyWebsite: "",
-    about: "",
+    company_name: "",
+    company_website: "",
+    company_about: "",
     file: null,
   })
 
-  const { email, password, passwordConfirmation, companyName, website, about, file } = formData;
+  const { email, password, passwordConfirmation, company_name, company_website, company_about, file } = formData;
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
     if (password === passwordConfirmation) {
 
@@ -60,15 +61,23 @@ export default function RecruiterForm({step, setStatus}) {
           const userData = {
             email,
             password,
-            companyName,
+            company_name,
           }
           // Add fetch to create new User
           console.log(userData)
+
+          try {
+            await createUser(userData).then(console.log("User created successfully.")).catch(console.log);
+
+          } catch (error) {
+            console.error("Error creating user:", error);
+          }
+
         break;
         case 2:
           const data1 = {
-            companyWebsite,
-            about,
+            company_website,
+            company_about,
             file,
           }
       
@@ -108,8 +117,8 @@ export default function RecruiterForm({step, setStatus}) {
 
     setFormData({
       ...formData,
-      companyWebsite: "",
-      about: "",
+      company_website: "",
+      company_about: "",
       file: null,
     })
     // redirect to recruiter user main page
@@ -120,7 +129,7 @@ export default function RecruiterForm({step, setStatus}) {
 
     setFormData({
       ...formData,
-      [name]: name === "companyName" || name ==="about" ? value : value.trim(),
+      [name]: name === "company_name" || name ==="company_about" ? value : value.trim(),
     });
   }
 
@@ -137,7 +146,7 @@ export default function RecruiterForm({step, setStatus}) {
      form =
      <Form onSubmit={handleSubmit}>
         <InfoSection>
-          <Input name="companyName" value={companyName} onChange={handleChange} placeholder={"some.user@mail.com"} label={"company name"} required/>
+          <Input name="company_name" value={company_name} onChange={handleChange} placeholder={"some.user@mail.com"} label={"company name"} required/>
           <Input name="email" type="email" value={email} onChange={handleChange} placeholder={"some.user@mail.com"} label={"email"} required/>
           <Input type="password" name="password" value={password} onChange={handleChange} placeholder={"******"} label={"password"} required/>
           <Input type="password" name="passwordConfirmation" value={passwordConfirmation} onChange={handleChange} placeholder={"******"} label={"password confirmation"} required/>
@@ -150,8 +159,8 @@ export default function RecruiterForm({step, setStatus}) {
       <Form>
         <Label>You can complete this information later but we recommend you to do it now</Label>
         <InfoSection>
-          <Input name="companyWebsite" value={website} onChange={handleChange} placeholder={"https://www.mycompany.sa"} label={"company website"}/>
-          <TextArea name="about" value={about} onChange={handleChange} placeholder={"My Company SA has the vision to change the way how..."} label={"About the company"}/>
+          <Input name="company_website" value={company_website} onChange={handleChange} placeholder={"https://www.mycompany.sa"} label={"company website"}/>
+          <TextArea name="company_about" value={company_about} onChange={handleChange} placeholder={"My Company SA has the vision to change the way how..."} label={"About the company"}/>
           <InputFile id={"logo"} name={"logo"} label={"upload the company logo"} caption={"Max size 5MB"} onChange={handleFileChange} file={file}></InputFile>
         </InfoSection>
         <ButtonSection>
