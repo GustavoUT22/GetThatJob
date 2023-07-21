@@ -1,4 +1,3 @@
-import React from "react";
 import {
   RiSearchLine,
   RiArticleLine,
@@ -12,6 +11,7 @@ import { DiRuby } from "react-icons/di";
 import styled from "@emotion/styled";
 import logo from "./../assets/logo.png";
 import { useAuth } from "../context/auth-context";
+import { useNavigate } from "react-router";
 
 const integrants = [
   { name: "Amanda Trigueros" },
@@ -87,18 +87,22 @@ const InfoContainer = styled.div`
 
 const SideBarRecruiter = () => {
   const { logout } = useAuth();
+  const navigate = useNavigate();
   const nav = [
     {
       icon: <RiSearchLine />,
       name: "Job Postings",
+      onClick: () => navigate("/jobs"),
     },
     {
       icon: <RiArticleLine />,
       name: "Create New Job",
+      onClick: () => navigate("/jobs/create"),
     },
     {
       icon: <RiUserLine />,
       name: "Profile",
+      onClick: () => navigate("/profile"),
     },
     {
       icon: <RiLogoutCircleLine />,
