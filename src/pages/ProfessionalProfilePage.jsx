@@ -85,7 +85,7 @@ const UploadFileContainer = styled.div`
 `;
 
 const InputLabel = styled.label`
-  ont-family: ${fonts.secondary};
+  font-family: ${fonts.secondary};
   font-size: 0.625rem;
   font-style: normal;
   font-weight: 400;
@@ -93,7 +93,6 @@ const InputLabel = styled.label`
   letter-spacing: 0.09375rem;
   text-transform: uppercase;
 `;
-
 
 const Caption = styled.p`
   ${typography.caption};
@@ -111,11 +110,11 @@ function ProfessionalProfile() {
       <PersonalContainer>
         <Subtitle>Personal Information</Subtitle>
         <InputContainer>
-        <Input label={"Email"} type="email" name={"email"} />
-        <Input label={"Name"} name={"name"} />
-        <Input label={"Phone"} type="phone" name={"phone"} />
-        <Input label={"Birthdate"} type="date" name={"date"} />
-        <Input label={"LinkedIn URL"} type="url" name={"linkedin"} />
+          <Input label={"Email"} type="email" name={"email"} />
+          <Input label={"Name"} name={"name"} />
+          <Input label={"Phone"} type="phone" name={"phone"} />
+          <Input label={"Birthdate"} type="date" name={"date"} />
+          <Input label={"LinkedIn URL"} type="url" name={"linkedin"} />
         </InputContainer>
       </PersonalContainer>
       <ProfessionalContainer>
@@ -124,7 +123,7 @@ function ProfessionalProfile() {
           Changes made here will be reflected in your future applications
         </Note>
         <InputContainer>
-        <Input label={"Title"} name={"title"} />
+          <Input label={"Title"} name={"title"} />
         </InputContainer>
         <TextArea label={"Professional Experience"} />
         <TextArea label={"Education"} />

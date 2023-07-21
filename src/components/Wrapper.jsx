@@ -1,15 +1,16 @@
 import React from "react";
 import styled from "@emotion/styled";
 import SideBar from "./SideBar";
-// import JobDetails from "./JobDetails";
-import SearchJob from "../pages/SearchPage";
-import NewJob from "../pages/NewJobPage";
 import ProfessionalProfile from "../pages/ProfessionalProfilePage";
-import RecruiterProfile from "../pages/RecruiterProfilePage";
+import { Routes, Route, Router, Navigate } from "react-router-dom";
+import SearchJob from "../pages/SearchPage";
+import JobDetails from "./jobDetails/JobDetails";
 import YourApplicationsPage from "../pages/YourApplicationPage";
+import FollowingPage from "../pages/FollowingPage";
+import JobForm from "./jobDetails/JobForm";
+import CompanyFollowed from "./CompanyFollowed";
 
 import { colors } from "../styles/colors";
-import JobPostings from "./jobPosting/JobPostings";
 
 const MainWrap = styled.div`
   display: grid;
@@ -21,8 +22,19 @@ const Wrapper = () => {
   return (
     <MainWrap>
       <SideBar />
-      {/* <SearchJob /> */}
-      <JobPostings />
+      <Routes>
+        <Route path="/">
+          <Route index element={<Navigate to="/jobs" />} />
+          <Route path="jobs" element={<SearchJob />} />
+          <Route path="jobs/:id" element={<JobDetails />} />
+          <Route path="applications" element={<YourApplicationsPage />} />
+          <Route path="jobs/:id/apply" element={<JobForm />} />
+          <Route path="following" element={<FollowingPage />} />
+          <Route path="following/:id" element={<CompanyFollowed />} />
+          <Route path="profile" element={<ProfessionalProfile />} />
+          <Route path="*" element={<Navigate to="/jobs" replace={true} />} />
+        </Route>
+      </Routes>
     </MainWrap>
   );
 };

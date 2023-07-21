@@ -7,6 +7,7 @@ import {
   RiFocus3Line,
 } from "react-icons/ri";
 import { colors } from "../styles/colors";
+import { useNavigate } from "react-router";
 
 const CardJobWrapper = styled.div`
   display: flex;
@@ -24,6 +25,7 @@ const CompanyData = styled.div`
   flex-direction: column;
   align-items: flex-start;
   flex: 1 0 0;
+  width: 175px;
 `;
 
 const LogoWrapper = styled.div`
@@ -39,6 +41,10 @@ export const JobTitle = styled.span`
   line-height: 28px;
   letter-spacing: 0.15px;
   color: ${colors.gray.dark};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
 `;
 
 export const CompanyName = styled.span`
@@ -119,7 +125,10 @@ const ButtonsContainer = styled.div`
   justify-content: space-between;
 `;
 
-function CardJob() {
+function CardJob({ props }) {
+  const navigate = useNavigate();
+
+  function handleSeemore() {}
   return (
     <CardJobWrapper>
       <CompanyInfo>
@@ -129,20 +138,21 @@ function CardJob() {
         <CompanyData>
           <CategoryJob>
             <RiBuilding3Line style={{ width: "15px", height: "15px" }} />
-            Manufactoring
+            {props.category}
           </CategoryJob>
-          <JobTitle>The job title</JobTitle>
-          <CompanyName>The company name</CompanyName>
+          <JobTitle>{props.title}</JobTitle>
+          <CompanyName>{props.company_name}</CompanyName>
+
           <BenefitsWrapper>
             <JobTimeSalary>
               <RiCalendar2Line style={{ width: "15px", height: "15px" }} />
-              Full time
+              {props.job_type}
             </JobTimeSalary>
             <JobTimeSalary>
               <RiMoneyDollarCircleLine
                 style={{ width: "15px", height: "15px" }}
               />
-              2.0k - 2.5k
+              {props.salary}
             </JobTimeSalary>
           </BenefitsWrapper>
         </CompanyData>
