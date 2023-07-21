@@ -16,10 +16,3 @@ export async function showJob(id) {
   // localStorage.setItem(dataJobs, JSON.stringify(data));
   return data;
 }
-
-export async function apply(newApply) {
-  const data = await getJobClient("/applications", {
-    body: newApply,
-  });
-  return data;
-}
