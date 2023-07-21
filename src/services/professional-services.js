@@ -21,14 +21,9 @@ export async function createUser(userData) {
     body: userData,
   });
 
+  sessionStorage.setItem(tokenKey, token);
   return user;
 }
-     body: userData,
-   });
-   sessionStorage.setItem(tokenKey, token);
-   return user;
- }
-
 
 export async function getUser() {
   const { token, ...user } = await getJobClient("profile/professionals", {
@@ -37,15 +32,15 @@ export async function getUser() {
   return user;
 }
 
- export async function updateUser(userData) {
-   const { token, ...user } = await getJobClient("profile/professionals", {
-     method: "PATCH",
-     body: userData,
-   });
-   return user;
- }
+export async function updateUser(userData) {
+  const { token, ...user } = await getJobClient("profile/professionals", {
+    method: "PATCH",
+    body: userData,
+  });
+  return user;
+}
 
- export async function updateSignupUser(userData) {
+export async function updateSignupUser(userData) {
   const { token, ...user } = await getJobClient("signup/professionals", {
     method: "PATCH",
     body: userData,
