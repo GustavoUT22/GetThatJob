@@ -87,7 +87,7 @@ const UploadFileContainer = styled.div`
 `;
 
 const InputLabel = styled.label`
-  ont-family: ${fonts.secondary};
+  font-family: ${fonts.secondary};
   font-size: 0.625rem;
   font-style: normal;
   font-weight: 400;
@@ -163,6 +163,7 @@ console.log(user)
   return (
     <Container>
       <Profile>Profile</Profile>
+
       <form onSubmit={handleSubmit}>
         <PersonalContainer>
           <Subtitle>Personal Information</Subtitle>
@@ -237,6 +238,7 @@ console.log(user)
 
           <Caption>Only PDF. Max size 5MB</Caption>
         </ProfessionalContainer>
+
       <Button type="primary" size={"sm"}>
         Save changes
       </Button>

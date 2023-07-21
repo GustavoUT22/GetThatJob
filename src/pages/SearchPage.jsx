@@ -6,6 +6,9 @@ import { BiCategory } from "react-icons/bi";
 import CardJob from "../components/CardJob";
 import Price from "../components/inputs/input-price";
 import SelectInput from "../components/inputs/inputSelect";
+import { useEffect, useState } from "react";
+import { getJobs } from "../services/jobs-pro-services";
+
 export const ContainerSearch = styled.div`
   display: "flex";
   padding: 32px 120px;
@@ -60,7 +63,17 @@ export const ContainerCards = styled.div`
   height: 59vh;
   margin-top: 16px;
 `;
+
 function SearchJob() {
+  const [jobsData, setJobsData] = useState([]);
+
+  useEffect(() => {
+    getJobs().then(setJobsData).catch(console.log);
+  }, []);
+  console.log(jobsData);
+  const countJobs = `${jobsData.length} jobs for you`;
+  console.log(countJobs);
+
   return (
     <ContainerSearch>
       <Title>Find a job</Title>
@@ -77,22 +90,11 @@ function SearchJob() {
         <Price />
       </div>
       <ContainerJobCards>
-        <CountJobs>12 jobs for you</CountJobs>
+        <CountJobs>Jobs for you</CountJobs>
         <ContainerCards>
-          <CardJob />
-          <CardJob />
-          <CardJob />
-          <CardJob />
-          <CardJob />
-          <CardJob />
-          <CardJob />
-          <CardJob />
-          <CardJob />
-          <CardJob />
-          <CardJob />
-          <CardJob />
-          <CardJob />
-          <CardJob />
+          {jobsData.map((job) => (
+            <CardJob props={job} />
+          ))}
         </ContainerCards>
       </ContainerJobCards>
     </ContainerSearch>
