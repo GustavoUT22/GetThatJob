@@ -8,8 +8,6 @@ import signupPerson from "../assets/images/people/signup-person.svg"
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 5px 0;
-  gap: 8px;
 `
 
 const Main = styled.main`
@@ -26,7 +24,7 @@ const Main = styled.main`
 const Section = styled.section`
   display: flex;
   flex-direction: column;
-  min-width: 360px;
+  width: 380px;
   padding: 5px 0;
   gap: 18px;
 `

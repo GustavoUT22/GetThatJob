@@ -35,7 +35,7 @@ export async function createUser(userData) {
     method: "POST",
     body: userData,
   });
-
+  sessionStorage.setItem(tokenKey, token);
   return user;
 }
 
@@ -49,6 +49,15 @@ export async function getRecruiter() {
 
 export async function updateRecruiter(recruiterData) {
   const { token, ...recruiter } = await getJobClient("/profile/recruiters", {
+    method: "PATCH",
+    body: recruiterData,
+  });
+
+  return recruiter;
+}
+
+export async function updateSignupRecruiter(recruiterData) {
+  const { token, ...recruiter } = await getJobClient("/signup/recruiters", {
     method: "PATCH",
     body: recruiterData,
   });
