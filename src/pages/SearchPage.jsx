@@ -92,55 +92,57 @@ function SearchJob() {
   ];
 
   const typeOptions = [
-    { value: "Part Time", label: "Part Time"},
-    { value: "Full Time", label: "Full Time"},
-    { value: "Internship", label: "Internship"},
-  ]
+    { value: "Part Time", label: "Part Time" },
+    { value: "Full Time", label: "Full Time" },
+    { value: "Internship", label: "Internship" },
+  ];
 
   useEffect(() => {
-    getJobs().then((data) => {
-      setJobsData({
-        all: data,
-        filtered: data,
+    getJobs()
+      .then((data) => {
+        setJobsData({
+          all: data,
+          filtered: data,
+        });
       })
-    }).catch(console.log);
+      .catch(console.log);
   }, []);
 
-  console.log(jobsData.all)
-  
-  useEffect(() => {
-    if(selectedOptions.category.length !== 0) {
-      const filterJobs = jobsData.all.filter((job) => (
-        selectedOptions.category.some((option) => job.category.includes(option)) 
-      ))
-      setJobsData({
-        ...jobsData,
-        filtered: filterJobs,
-      })
-    } else {
-      setJobsData({
-        ...jobsData,
-        filtered: jobsData.all
-      })
-    }
-  }, [selectedOptions.category])
+  console.log(jobsData.all);
 
   useEffect(() => {
-    if(selectedOptions.type.length !== 0) {
-      const filterJobs = jobsData.all.filter((job) => (
-        selectedOptions.type.some((option) => job.job_type.includes(option)) 
-      ))
+    if (selectedOptions.category.length !== 0) {
+      const filterJobs = jobsData.all.filter((job) =>
+        selectedOptions.category.some((option) => job.category.includes(option))
+      );
       setJobsData({
         ...jobsData,
         filtered: filterJobs,
-      })
+      });
     } else {
       setJobsData({
         ...jobsData,
-        filtered: jobsData.all
-      })
+        filtered: jobsData.all,
+      });
     }
-  }, [selectedOptions.type])
+  }, [selectedOptions.category]);
+
+  useEffect(() => {
+    if (selectedOptions.type.length !== 0) {
+      const filterJobs = jobsData.all.filter((job) =>
+        selectedOptions.type.some((option) => job.job_type.includes(option))
+      );
+      setJobsData({
+        ...jobsData,
+        filtered: filterJobs,
+      });
+    } else {
+      setJobsData({
+        ...jobsData,
+        filtered: jobsData.all,
+      });
+    }
+  }, [selectedOptions.type]);
 
   const countJobs = `${jobsData.filtered.length} Jobs for you`;
 
@@ -158,11 +160,21 @@ function SearchJob() {
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
           <StyledLabel>category</StyledLabel>
-          <CheckSelect type={"category"} options={options} selectedOptions={selectedOptions.category} onChange={handleChange}/>
+          <CheckSelect
+            type={"category"}
+            options={options}
+            selectedOptions={selectedOptions.category}
+            onChange={handleChange}
+          />
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
           <StyledLabel>type</StyledLabel>
-          <CheckSelect type={"type"} options={typeOptions} selectedOptions={selectedOptions.type} onChange={handleChange}/>
+          <CheckSelect
+            type={"type"}
+            options={typeOptions}
+            selectedOptions={selectedOptions.type}
+            onChange={handleChange}
+          />
         </div>
         <div>
           <Price />

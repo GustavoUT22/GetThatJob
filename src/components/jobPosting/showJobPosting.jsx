@@ -65,7 +65,7 @@ function ShowJobPosted() {
           <label htmlFor="closed">Closed</label>
         </div>
       </div>
-      <h3>5 candidates found</h3>
+      <h3>candidates found</h3>
       {jobsData.length === 0
         ? ""
         : jobsData.applications.map((job, index) => (

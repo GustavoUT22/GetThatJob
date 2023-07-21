@@ -9,19 +9,19 @@ export async function getJobs() {
   return data;
 }
 
-
 export async function getJobRecruiter(id) {
-   const data = await getJobClient(`/jobs/${id}`, {
+  const data = await getJobClient(`/jobs/${id}`, {
     method: "GET",
   });
   // localStorage.setItem(dataJobs, JSON.stringify(data));
-  return data}
+  return data;
+}
 
 export async function showJob(id) {
   const data = await getJobClient(`/jobs/${id}`, {
     method: "GET",
   });
-  // localStorage.setItem(dataJobs, JSON.stringify(data));
+  localStorage.setItem(dataJobs, JSON.stringify(data));
   return data;
 }
 
@@ -56,4 +56,3 @@ export async function showJob(id) {
 //     method: "GET"
 //    });
 // }
-
