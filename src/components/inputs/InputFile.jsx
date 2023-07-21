@@ -26,6 +26,10 @@ const Caption = styled.label`
   text-transform: capitalize;
 `
 
+const ChosenFile = styled.label`
+  ${typography.body.sm}
+`
+
 const CustomButton = styled.label`
   display: flex;
   justify-content: center;
@@ -64,6 +68,7 @@ export default function InputFile({
   label,
   caption,
   onChange,
+  file,
 })  {
   return (
     <InputWrapper>
@@ -79,7 +84,7 @@ export default function InputFile({
           name={name}
           onChange={onChange}
         ></File>
-        <label>No file chosen</label>
+        {file ? <ChosenFile style={{color: `${colors.gray.dark}`}}>{file.name}</ChosenFile> : <ChosenFile style={{color: `${colors.gray.gray}`}}>No file chosen</ChosenFile>}
       </FileSection>
       <Caption>{caption}</Caption>
     </InputWrapper>
