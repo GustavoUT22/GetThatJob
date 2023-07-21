@@ -8,6 +8,14 @@ export async function getJobs() {
   return data;
 }
 
+export async function getJobRecruiter(id) {
+  const data = await getJobClient(`/jobs/${id}`, {
+    method: "GET",
+  });
+  // localStorage.setItem(dataJobs, JSON.stringify(data));
+  return data;
+}
+
 // export async function createContact(
 //   newContact = { name, email, number, relation }
 // ) {
