@@ -5,11 +5,12 @@ import { typography } from "../../styles/typography";
 
 const StyledTextArea = styled.textarea`
   display: flex;
-  width: auto;
+  width: 760px;
+  align-self: stretch;
   align-items: center;
   gap: 8px;
   border-radius: 8px;
-  height: 56px;
+  height: 76px;
   outline: none;
   resize: none;
   border: 1px solid ${colors.pink.light};
@@ -31,7 +32,9 @@ export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+  height: 100%;
   width: auto;
+  margin-top: 16px;
 `;
 
 export const StyledLabel = styled.label`
@@ -75,5 +78,3 @@ TextArea.propTypes = {
 };
 
 export default TextArea;
-
-

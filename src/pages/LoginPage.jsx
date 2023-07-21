@@ -2,35 +2,32 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 
 import { colors } from "../styles";
+import { typography } from "../styles";
 import Header from "../components/Header";
 import Input from "../components/inputs/Input";
 import Button from "../components/buttons/Button";
 import person from "../assets/images/people/login-person.svg";
-import { loginRecruiter } from "../services/recruiter-session";
+// import { loginRecruiter } from "../services/recruiter-session";
 import { useAuth } from "../context/auth-context";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 5px 0;
-  gap: 8px;
+  width: auto;
 `;
 
 const Main = styled.main`
   display: flex;
   flex-direction: row;
   width: auto;
-  height: 92vh;
   align-items: flex-start;
   justify-content: center;
-  padding: 200px 0;
-  background-color: ${colors.gray.bg_dark};
+  background-color: ${colors.gray.bg_light};
 `;
 
 const Section = styled.section`
   display: flex;
   flex-direction: column;
-  width: 360px;
-  padding: 5px 0;
+  padding: 50.25px 47.69px 40.31px 19.87px;
   gap: 18px;
 `;
 
@@ -53,10 +50,8 @@ const InfoSection = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 48px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  ${typography.head.lg};
+  width: 22.4375rem;
 `;
 
 const Paragraph = styled.p`
@@ -83,6 +78,11 @@ const InputContainer = styled.div`
   gap: 6px;
   flex-direction: column;
   align-items: center;
+`;
+
+const Man = styled.img`
+  height: 35.19181rem;
+  max-width: 80%;
 `;
 
 const Rectangle = styled.div`
@@ -203,7 +203,7 @@ export default function LoginPage() {
             </Form>
           </Section>
           <section>
-            <img src={person} alt="icon" />
+            <Man src={person} alt="icon" />
           </section>
         </Main>
       </Container>

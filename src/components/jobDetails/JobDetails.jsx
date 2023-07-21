@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import JobForm from "./JobForm";
+import Button from "../buttons/Button";
+import { LuMousePointer2 } from "react-icons/lu";
 
 import {
   RiArrowLeftSLine,
@@ -11,25 +12,18 @@ import {
 
 import jobLogo from "../../assets/jobdetail-logo.png";
 import followingIcon from "../../assets/FollowButton.png";
+import { showJob } from "../../services/jobs-pro-services";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 
-const jobCardInfo = [
-  { title: "Category", icon: <RiBuilding3Line />, value: "Manufacturing" },
-  { title: "Category", icon: <RiCalendar2Line />, value: "Full Time" },
-  {
-    title: "Category",
-    icon: <RiMoneyDollarCircleLine />,
-    value: "2,000 - 2,500",
-  },
-];
-
-const Container = styled.div`
+export const Container = styled.div`
   display: block;
   width: 960px;
   margin: auto;
   margin-top: 32px;
 `;
 
-const JobHead = styled.div`
+export const JobHead = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -170,36 +164,65 @@ const JobDescription = styled.div`
 `;
 
 const JobDetails = () => {
+  const [jobData, setJobData] = useState({});
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("here");
+    showJob(id).then(setJobData).catch(console.log);
+  }, []);
+
+  const jobCardInfo = [
+    {
+      title: "Category",
+      icon: <RiBuilding3Line />,
+      value: `${jobData.category}`,
+    },
+    { title: "type", icon: <RiCalendar2Line />, value: `${jobData.job_type}` },
+    {
+      title: "Category",
+      icon: <RiMoneyDollarCircleLine />,
+      value: `${jobData.salary - 1000}- ${jobData.salary + 1000}`,
+    },
+  ];
+
+  console.log(jobData);
+
   return (
     <Container>
       <JobHead>
-        <div>
+        <div onClick={() => navigate("/jobs")}>
           <RiArrowLeftSLine style={{ height: "24px", width: "24px" }} />
           <span>BACK</span>
         </div>
         <div>
           <div>
-            {/* <div> */}
             <div>
               <img src={jobLogo} />
             </div>
             <div>
-              <h3>The company name SA</h3>
+              <h3>{jobData.company_name}</h3>
               <div>
                 <img src={followingIcon} />
               </div>
             </div>
-            {/* </div> */}
           </div>
           <div>
-            <button>Apply now</button>
+            <Button
+              children={"apply now"}
+              icon={<LuMousePointer2 />}
+              type={"primary"}
+              size={"sm"}
+              onClick={() => navigate(`/jobs/${jobData.id}/apply`)}
+            />
           </div>
         </div>
         <div>
-          <h1>The job title</h1>
+          <h1>{jobData.title}</h1>
           <div>
             <RiTimeLine style={{ height: "15px", width: "15px" }} />
-            <span>Posted 2 days ago</span>
+            <span>{jobData.created_at}</span>
           </div>
         </div>
         <div>
@@ -214,9 +237,9 @@ const JobDetails = () => {
           ))}
         </div>
       </JobHead>
-      {/* <JobDescription>
+      <JobDescription>
         <div>
-          <h3>About The company name SA</h3>
+          <h3>About {jobData.company_name}</h3>
           <div>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Pellentesque porta nunc viverra velit tincidunt, non vehicula augue
@@ -232,44 +255,26 @@ const JobDetails = () => {
         </div>
         <div>
           <h3>About the job position</h3>
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis
-            diam fringilla, luctus lectus dictum, volutpat lacus. Vivamus
-            lacinia felis ut mauris lacinia elementum. Sed faucibus dapibus
-            egestas. Etiam dolor neque, posuere at purus cursus, molestie
-            eleifend lacus. Aenean eu diam eu enim commodo accumsan ut sit amet
-            odio. Nam maximus varius leo, et porttitor ante sodales ut.
-            Pellentesque euismod commodo nunc ut tincidunt. Sed fringilla nunc
-            leo, a euismod ipsum aliquet placerat. Integer suscipit semper mi,
-            sit amet mollis augue mollis in. Proin vestibulum accumsan elit, id
-            pellentesque diam fermentum eget. Aliquam mattis quis quam ut
-            faucibus. Duis finibus nulla nec enim eleifend dapibus.
-          </div>
+          <div>{jobData.about}</div>
         </div>
         <div>
           <h3>Mandatory Requirements</h3>
-          <div>
-            - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            <br />- Aenean aliquam turpis eget egestas porta. <br />- Quisque
-            tristique nunc ut sem pretium bibendum.
-            <br /> - Phasellus sit amet turpis laoreet, mattis elit ut, luctus
-            ligula.
-            <br /> - Nullam blandit arcu eget justo hendrerit finibus.
-          </div>
+          <div>{jobData.mandatory}</div>
         </div>
         <div>
           <h3>Optional Requirements</h3>
-          <div>
-            - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            <br /> - Maecenas vel metus imperdiet, malesuada dolor a, pulvinar
-            tellus.
-          </div>
+          <div>{jobData.optional_req}</div>
         </div>
-        <div>
-          <button>Apply now</button>
+        <div style={{ display: "grid", placeItems: "center" }}>
+          <Button
+            children={"apply now"}
+            icon={<LuMousePointer2 />}
+            type={"primary"}
+            size={"sm"}
+            onClick={() => navigate(`/jobs/${jobData.id}/apply`)}
+          />
         </div>
-      </JobDescription> */}
-      <JobForm />
+      </JobDescription>
     </Container>
   );
 };

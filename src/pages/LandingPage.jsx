@@ -6,16 +6,17 @@ import Button from "../components/buttons/Button";
 import TeamMembers from "../components/Team-members";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import P1 from "../assets/images/people/scratching-head.png";
-import P2 from "../assets/images/people/confident.png";
-import P3 from "../assets/images/people/holding-tablet.png";
-import P4 from "../assets/images/people/hands-on-hips.png";
-import P5 from "../assets/images/people/yellow-bag.png";
-import P6 from "../assets/images/people/pink-suit.png";
-import P7 from "../assets/images/people/calling.png";
-import P8 from "../assets/images/people/glasses.png";
-import Magnascope from "../assets/images/Magnascope.png";
-import File from "../assets/images/File.png";
+import P1 from "../assets/images/people/scratching-head.svg";
+import P2 from "../assets/images/people/confident.svg";
+import P3 from "../assets/images/people/holding-tablet.svg";
+import P4 from "../assets/images/people/hands-on-hips.svg";
+import P5 from "../assets/images/people/yellowbag.svg";
+import P6 from "../assets/images/people/pinksuit.svg";
+import P7 from "../assets/images/people/phone.svg";
+import P8 from "../assets/images/people/glasses.svg";
+import Magnascope from "../assets/images/Magnascope.svg";
+import File from "../assets/images/File.svg";
+import { useNavigate } from "react-router";
 
 const FirstWrapper = styled.div`
   display: flex;
@@ -34,9 +35,9 @@ const SecondWrapper = styled.div`
 const FindContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 65%;
   height: 29.5rem;
-  padding: 4rem 7.5rem 4rem 7.5rem;
+  padding: 4rem 7.5rem 4rem 5.5rem;
 
   background-color: ${colors.pink.dark};
 `;
@@ -64,6 +65,7 @@ const MagnascopeContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin: auto;
+  background-color: ${colors.white};
 `;
 
 const MagnascopeImg = styled.img`
@@ -105,9 +107,11 @@ const PeopleContainer = styled.div`
   justify-content: center;
   gap: 1.31rem;
   margin: auto;
+  margin-top: 2rem;
 `;
 
 const LandingPage = () => {
+  const navigate = useNavigate()
   return (
     <>
       <Header />
@@ -120,7 +124,7 @@ const LandingPage = () => {
           With our Machine Learning algorithm you will get that job in no time.
           We promise you! Just give us the money and we will take care of it.
         </Intro>
-        <Button type={"primary"} size={"lg"}>
+        <Button type={"primary"} size={"lg"} onClick={() => navigate("/signup")}>
           Create an account now
         </Button>
         <PeopleContainer>

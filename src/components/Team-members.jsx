@@ -66,6 +66,7 @@ const ContainerTeam = styled.div`
   justify-content: center;
   align-items: center;
   margin: 64px;
+  background-color:${colors.gray.bg_light};
 `;
 
 const NameWrapper = styled.div`

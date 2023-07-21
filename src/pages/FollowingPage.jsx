@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { Title } from "./SearchPage";
-import CardJob from "../components/CardJob";
 import { colors } from "../styles/colors";
 
 export const ContainerFollowing = styled.div`
