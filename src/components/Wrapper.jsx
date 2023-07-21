@@ -7,7 +7,7 @@ import SearchJob from "../pages/SearchPage";
 import JobDetails from "./jobDetails/JobDetails";
 import YourApplicationsPage from "../pages/YourApplicationPage";
 import FollowingPage from "../pages/FollowingPage";
-import JobForm from "./jobDetails/JobForm";
+import NewApplicationPage from "../pages/NewApplication";
 import CompanyFollowed from "./CompanyFollowed";
 
 import { colors } from "../styles/colors";
@@ -28,7 +28,7 @@ const Wrapper = () => {
           <Route path="jobs" element={<SearchJob />} />
           <Route path="jobs/:id" element={<JobDetails />} />
           <Route path="applications" element={<YourApplicationsPage />} />
-          <Route path="jobs/:id/apply" element={<JobForm />} />
+          <Route path="jobs/:id/apply" element={<NewApplicationPage />} />
           <Route path="following" element={<FollowingPage />} />
           <Route path="following/:id" element={<CompanyFollowed />} />
           <Route path="profile" element={<ProfessionalProfile />} />

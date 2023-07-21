@@ -8,6 +8,7 @@ import {
 } from "react-icons/ri";
 import { colors } from "../styles/colors";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const CardJobWrapper = styled.div`
   display: flex;
@@ -93,7 +94,9 @@ const BenefitsWrapper = styled.div`
   color: ${colors.gray.light};
 `;
 
-const SeeMore = styled.div`
+const SeeMore = styled(Link)`
+  text-decoration: none;
+  color: ${colors.gray.gray};
   display: flex;
   padding: 8px 16px;
   height: 40px;
@@ -101,7 +104,7 @@ const SeeMore = styled.div`
   border-radius: 16px;
   border: 1px solid ${colors.pink.pink};
   :hover {
-    background-color: ${colors.gray.bg_light};
+    background-color: ${colors.gray.bg_dark};
   }
 `;
 
@@ -162,7 +165,7 @@ function CardJob({ props }) {
           <RiFocus3Line style={{ width: "24px", height: "24px" }} />
           follow
         </FollowButtonWrapper>
-        <SeeMore>see more</SeeMore>
+        <SeeMore to={`/jobs/${props.id}`}>see more</SeeMore>
       </ButtonsContainer>
     </CardJobWrapper>
   );
