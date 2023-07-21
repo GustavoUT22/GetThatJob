@@ -77,7 +77,7 @@ const TextInfo = styled.p`
   letter-spacing: 0.25px;
 `;
 
-function ApplicationJobCard() {
+function ApplicationJobCard({ props, onDelete }) {
   const [showDetail, setShowDetail] = useState(true);
   function handleShowDetail() {
     if (showDetail) {
@@ -86,6 +86,10 @@ function ApplicationJobCard() {
     if (!showDetail) {
       setShowDetail(true);
     }
+  }
+
+  function handleDeclineClick() {
+    onDelete();
   }
 
   return (
@@ -97,8 +101,8 @@ function ApplicationJobCard() {
               <img src={ImgJob} />
             </div>
             <FlexColumn>
-              <JobTitle>The Job title</JobTitle>
-              <CompanyName>The Company name SA</CompanyName>
+              <JobTitle>{props.job.title}</JobTitle>
+              <CompanyName>{props.company_name}</CompanyName>
             </FlexColumn>
           </FlexRowSm>
           <FlexColumnXs
@@ -110,7 +114,7 @@ function ApplicationJobCard() {
           >
             <FlexRowXs>
               <RiBuilding3Line style={{ width: "15px", height: "15px" }} />
-              <CategoryJob>Manufactoring</CategoryJob>
+              <CategoryJob>{props.job.category}</CategoryJob>
               <RiCalendar2Line style={{ width: "15px", height: "15px" }} />
               <JobTimeSalary>Full time</JobTimeSalary>
             </FlexRowXs>
@@ -118,9 +122,9 @@ function ApplicationJobCard() {
               <RiMoneyDollarCircleLine
                 style={{ width: "15px", height: "15px" }}
               />
-              <CategoryJob>2.0k - 2.5k</CategoryJob>
+              <CategoryJob>{props.job.salary}</CategoryJob>
               <RiTimeLine style={{ width: "15px", height: "15px" }} />
-              <JobTimeSalary>Posted 2 days ago</JobTimeSalary>
+              <JobTimeSalary>{props.job.created_at}</JobTimeSalary>
             </FlexRowXs>
           </FlexColumnXs>
           <FlexRow style={{ display: "flex", alignContent: "center" }}>
@@ -158,41 +162,13 @@ function ApplicationJobCard() {
           <StyledLabel>Last updated on 12/12/12</StyledLabel>
           <ExperienceTitle>Professional Experience</ExperienceTitle>
           <br></br>
-          <TextInfo>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In feugiat
-            quam ut tempor maximus. Sed neque arcu, rhoncus elementum sodales a,
-            tristique sed quam. Aliquam nibh velit, pharetra ac faucibus in,
-            ornare eu tortor. Vestibulum lacus ligula, elementum sit amet purus
-            ut, sagittis molestie ex. In hendrerit orci tellus. Integer pharetra
-            porttitor nulla, nec fringilla dolor ultricies et. Integer accumsan
-            feugiat urna, eu hendrerit dui varius sit amet. Mauris eget
-            tristique turpis. Curabitur eget hendrerit turpis. <br />
-            Etiam rutrum dolor eu posuere vehicula. Pellentesque ut mauris
-            neque. Maecenas posuere sit amet erat at placerat. Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit. Suspendisse potenti. Donec
-            tempor lobortis nisl. Maecenas sit amet massa in tortor pulvinar
-            sollicitudin. Fusce vitae feugiat felis, ut malesuada purus.
-            Curabitur felis velit, interdum vitae viverra quis, sagittis ac
-            nulla. Quisque tempus pharetra ornare. In sed nulla eget risus
-            cursus facilisis vel quis nibh. Praesent euismod lectus a.
-          </TextInfo>
+          <TextInfo>{props.experience}</TextInfo>
           <br />
           <ExperienceTitle>
-            Why are you interested in working at The company name SA
+            Why are you interested in working at {props.company_name}
           </ExperienceTitle>
           <br />
-          <TextInfo>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-            egestas ex at libero feugiat volutpat. Praesent fringilla
-            scelerisque felis, ac elementum metus fringilla in. Maecenas et nibh
-            fringilla, egestas arcu vel, tristique dui. Nulla quis suscipit
-            erat, nec pretium arcu. Aenean blandit lacinia mauris, quis bibendum
-            ante sagittis cursus. Pellentesque mattis ipsum et lorem euismod
-            rutrum. Duis ullamcorper venenatis nisi, nec malesuada tellus
-            tincidunt a. Maecenas suscipit odio sed justo accumsan iaculis.
-            Quisque vitae erat ac felis tincidunt auctor vitae non est. Praesent
-            vehicula feugiat faucibus.
-          </TextInfo>
+          <TextInfo>{props.why_interested}</TextInfo>
           <br />
           <div
             style={{
@@ -212,6 +188,7 @@ function ApplicationJobCard() {
               icon={<RiCloseCircleLine />}
               type={"primary"}
               size={"sm"}
+              onClick={handleDeclineClick}
             />
           </div>
         </div>

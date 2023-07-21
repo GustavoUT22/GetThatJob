@@ -10,6 +10,12 @@ import {
 import { colors } from "../styles/colors";
 import ApplicationJobCard from "../components/Cards/ApplicationJobCard";
 import { useEffect, useState } from "react";
+import {
+  getApplications,
+  deleteApplications,
+} from "../services/application-services";
+import { useNavigate } from "react-router";
+import { useCallback } from "react";
 
 const FilterName = styled.span`
   font-family: Inter;
@@ -31,10 +37,18 @@ const ApliFound = styled.span`
 
 function YourApplicationsPage() {
   const [applyData, setApplyData] = useState([]);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log("applications");
-  }, []);
+  useCallback(
+    useEffect(() => {
+      getApplications().then(setApplyData).catch(console.log);
+    }, [])
+  );
+
+  async function handleDecline(id) {
+    deleteApplications(id);
+    await getApplications().then(setApplyData).catch(console.log);
+  }
 
   return (
     <ContainerSearch>
@@ -59,10 +73,13 @@ function YourApplicationsPage() {
         </FlexColumnXs>
         <ApliFound>4 applications found</ApliFound>
         <FlexColumnSm>
-          <ApplicationJobCard />
-          <ApplicationJobCard />
-          <ApplicationJobCard />
-          <ApplicationJobCard />
+          {applyData.map((apply) => (
+            <ApplicationJobCard
+              key={apply.id}
+              props={apply}
+              onDelete={() => handleDecline(apply.id)}
+            />
+          ))}
         </FlexColumnSm>
       </FlexColumnSm>
     </ContainerSearch>

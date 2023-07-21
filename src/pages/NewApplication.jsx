@@ -17,7 +17,7 @@ import jobLogo from "../assets/jobdetail-logo.png";
 import followingIcon from "../assets/FollowButton.png";
 import Button from "../components/buttons/Button";
 import TextArea from "../components/inputs/Input-textarea";
-import { apply } from "../services/jobs-pro-services";
+import { apply } from "../services/application-services";
 import { StyledLabel } from "../components/inputs/Input";
 import { colors } from "../styles/colors";
 import { CategoryJob } from "../components/CardJob";
@@ -102,10 +102,11 @@ function NewApplicationPage() {
     setApplyData({ ...applyData, [event.target.name]: event.target.value });
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     console.log(applyData);
-    apply(applyData).then(console.log).catch(console.log);
+    await apply(applyData).then(console.log).catch(console.log);
+    navigate("/applications");
   }
 
   const jobCardInfo = [
