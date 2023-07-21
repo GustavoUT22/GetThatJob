@@ -67,22 +67,82 @@ export const ContainerCards = styled.div`
 `;
 
 function SearchJob() {
-  const [jobsData, setJobsData] = useState([]);
+  const [jobsData, setJobsData] = useState({
+    all: [],
+    filtered: [],
+  });
+  const [selectedOptions, setSelectedOptions] = useState({
+    category: [],
+    type: [],
+  });
+
+  function handleChange(name, value) {
+    setSelectedOptions({
+      ...selectedOptions,
+      [name]: value,
+    });
+  }
 
   const options = [
-    { value: "manufacturing", label: "Manufacturing" },
-    { value: "legal", label: "Legal" },
-    { value: "education", label: "Education" },
-    { value: "government", label: "Government" },
-    { value: "sales", label: "Sales" },
+    { value: "Manufacturing", label: "Manufacturing" },
+    { value: "Legal", label: "Legal" },
+    { value: "Education", label: "Education" },
+    { value: "Government", label: "Government" },
+    { value: "Sales", label: "Sales" },
   ];
 
+  const typeOptions = [
+    { value: "Part Time", label: "Part Time"},
+    { value: "Full Time", label: "Full Time"},
+    { value: "Internship", label: "Internship"},
+  ]
+
   useEffect(() => {
-    getJobs().then(setJobsData).catch(console.log);
+    getJobs().then((data) => {
+      setJobsData({
+        all: data,
+        filtered: data,
+      })
+    }).catch(console.log);
   }, []);
-  console.log(jobsData);
-  const countJobs = `${jobsData.length} jobs for you`;
-  console.log(countJobs);
+
+  console.log(jobsData.all)
+  
+  useEffect(() => {
+    if(selectedOptions.category.length !== 0) {
+      const filterJobs = jobsData.all.filter((job) => (
+        selectedOptions.category.some((option) => job.category.includes(option)) 
+      ))
+      setJobsData({
+        ...jobsData,
+        filtered: filterJobs,
+      })
+    } else {
+      setJobsData({
+        ...jobsData,
+        filtered: jobsData.all
+      })
+    }
+  }, [selectedOptions.category])
+
+  useEffect(() => {
+    if(selectedOptions.type.length !== 0) {
+      const filterJobs = jobsData.all.filter((job) => (
+        selectedOptions.type.some((option) => job.job_type.includes(option)) 
+      ))
+      setJobsData({
+        ...jobsData,
+        filtered: filterJobs,
+      })
+    } else {
+      setJobsData({
+        ...jobsData,
+        filtered: jobsData.all
+      })
+    }
+  }, [selectedOptions.type])
+
+  const countJobs = `${jobsData.filtered.length} Jobs for you`;
 
   return (
     <ContainerSearch>
@@ -98,21 +158,21 @@ function SearchJob() {
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
           <StyledLabel>category</StyledLabel>
-          <CheckSelect options={options} />
+          <CheckSelect type={"category"} options={options} selectedOptions={selectedOptions.category} onChange={handleChange}/>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
           <StyledLabel>type</StyledLabel>
-          <CheckSelect options={options} />
+          <CheckSelect type={"type"} options={typeOptions} selectedOptions={selectedOptions.type} onChange={handleChange}/>
         </div>
         <div>
           <Price />
         </div>
       </div>
       <ContainerJobCards>
-        <CountJobs>Jobs for you</CountJobs>
+        <CountJobs>{countJobs}</CountJobs>
         <ContainerCards>
-          {jobsData.map((job) => (
-            <CardJob props={job} />
+          {jobsData.filtered.map((job, index) => (
+            <CardJob key={index} props={job} />
           ))}
         </ContainerCards>
       </ContainerJobCards>
