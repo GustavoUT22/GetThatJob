@@ -6,6 +6,7 @@ import {RiArrowLeftSLine} from "react-icons/ri"
 import Input from "./inputs/Input";
 import TextArea from "./inputs/Input-textarea";
 import Button from "../components/buttons/Button";
+import InputFile from "./inputs/InputFile"
 
 const Form = styled.form`
   display: flex;
@@ -44,9 +45,10 @@ export default function ProfessionalForm({step, setStatus}) {
     title: "",
     exp: "",
     education: "",
+    file: null,
   })
 
-  const { email, password, passwordConfirmation, name, phone, birthdate, linkedin, title, exp, education } = formData;
+  const { email, password, passwordConfirmation, name, phone, birthdate, linkedin, title, exp, education, file } = formData;
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -60,6 +62,12 @@ export default function ProfessionalForm({step, setStatus}) {
             1: "In Progress",
             2: "Pending",
           })
+          const userData = {
+            email,
+            password,
+          }
+          // Add fetch to create new User
+          console.log(userData)
         break;
         case 2:
           setStatus({
@@ -68,6 +76,21 @@ export default function ProfessionalForm({step, setStatus}) {
             1: "Done!",
             2: "In Progress",
           })
+          const data = {
+            name,
+            phone,
+            birthdate,
+            linkedin,
+          }
+
+          const userData1 = Object.keys(data).reduce((acc, key) => {
+            if (formData[key] !== "") {
+              acc[key] = formData[key];
+            }
+            return acc;
+          }, {});
+          // Add fetch to update user data using userData1
+          console.log(userData1)
         break;
         default:
           break;
@@ -91,15 +114,69 @@ export default function ProfessionalForm({step, setStatus}) {
   function handleFinish(event) {
     event.preventDefault()
 
-    Object.entries(formData).map(([key, value]) => {
-      console.log(`${key}: ${value}`);
-    });
-  }
+    const data = {
+      title,
+      exp,
+      education,
+      file,
+    }
+
+    const userData = Object.keys(data).reduce((acc, key) => {
+      if (formData[key] !== "" && formData[key] !== null) {
+        acc[key] = formData[key];
+      }
+      return acc;
+    }, {});
+    console.log(userData)
+    
+    // file format for  fetch "POST"
+    const formFile = new FormData();
+    formFile.append("file", file)
+    // formFile is for fetch "POST"
+    // example:
+    // fetch(endpoint,{
+    //   method: "POST",
+    //   body: formFile,
+    // })
+    
+    userData.file = formFile
+    console.log(userData)
+    // Add fetch to update user data using userData
+    // Redirect to user main page
+    }
 
   function handleSkip(event) {
     event.preventDefault()
 
-    console.log(email, password, passwordConfirmation)
+    switch (step) {
+      case 2:
+        setStatus({
+          step: 3,
+          0: "Done!",
+          1: "Done!",
+          2: "In Progress",
+        })
+        setFormData({
+          ...formData,
+          name: "",
+          phone: "",
+          birthdate: "",
+          linkedin: "",
+        })
+        break;
+        case 3:
+          setFormData({
+            ...formData,
+            title: "",
+            exp: "",
+            education: "",
+            file: null,
+          })
+          // redirect to user main page
+      break;
+      default:
+        break;
+    }
   }
 
   function handleChange(event) {
@@ -109,6 +186,13 @@ export default function ProfessionalForm({step, setStatus}) {
       ...formData,
       [name]: name === "name" || name === "title" || name === "exp" || name === "education"  ? value : value.trim(),
     });
+  }
+
+  function handleFileChange(event) {
+    setFormData({
+      ...formData,
+      file: event.target.files[0],
+    })
   }
   
   let form
@@ -148,6 +232,7 @@ export default function ProfessionalForm({step, setStatus}) {
           <Input name="title" value={title} onChange={handleChange} placeholder={"Mechanical administrator..."} label={"title"}/>
           <TextArea name="exp" value={exp} onChange={handleChange} placeholder={"Worked 6 years in a bitcoin farm until I decided to change my life...."} label={"professional experience"}/>
           <TextArea name="education" value={education} onChange={handleChange} placeholder={"Major in life experiences with a PHD in procrastination..."} label={"education"}/>
+          <InputFile id={"cv"} name={"cv"} label={"Upload/Update your CV"} caption={"Only PDF. Max size 5MB"} onChange={handleFileChange} file={file}></InputFile>
         </InfoSection>
         <ButtonSection>
           <Button type={"primary"} size={"sm"} onClick={handlePrevious} icon={<RiArrowLeftSLine/>}>previous</Button>

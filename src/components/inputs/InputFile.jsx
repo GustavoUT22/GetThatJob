@@ -23,7 +23,6 @@ const Caption = styled.label`
   line-height: 16px;
   letter-spacing: 0.4px;
   ${colors.gray.light};
-  text-transform: capitalize;
 `
 
 const ChosenFile = styled.label`
