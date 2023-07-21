@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import { useEffect, useState } from "react";
+import { getUser, updateUser } from "../services/professional-services";
 
 import Button from "../components/buttons/Button";
 import Input from "../components/inputs/Input";
@@ -104,41 +106,143 @@ const InputContainer = styled.div`
 `;
 
 function ProfessionalProfile() {
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await getUser();
+        setUser(response);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  const handleChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const {
+      email,
+      name,
+      phone,
+      birth_date,
+      linkedin,
+      professional_title,
+      experience,
+      education,
+    } = e.target.elements;
+    const updatedUser = {
+      email: email.value,
+      name: name.value,
+      phone: phone.value,
+      birth_date: birth_date.value,
+      linkedin: linkedin.value,
+      professional_title: professional_title.value,
+      experience: experience.value,
+      education: education.value,
+    };
+    console.log("updatedUser")
+    try {
+      await updateUser(updatedUser).then(console.log("User updated successfully.")).catch(console.log);
+       
+    } catch (error) {
+      console.error("Error updating user:", error);
+    }
+  };
+
+console.log(user)
   return (
     <Container>
       <Profile>Profile</Profile>
-      <PersonalContainer>
-        <Subtitle>Personal Information</Subtitle>
-        <InputContainer>
-          <Input label={"Email"} type="email" name={"email"} />
-          <Input label={"Name"} name={"name"} />
-          <Input label={"Phone"} type="phone" name={"phone"} />
-          <Input label={"Birthdate"} type="date" name={"date"} />
-          <Input label={"LinkedIn URL"} type="url" name={"linkedin"} />
-        </InputContainer>
-      </PersonalContainer>
-      <ProfessionalContainer>
-        <Subtitle>Professional Information</Subtitle>
-        <Note>
-          Changes made here will be reflected in your future applications
-        </Note>
-        <InputContainer>
-          <Input label={"Title"} name={"title"} />
-        </InputContainer>
-        <TextArea label={"Professional Experience"} />
-        <TextArea label={"Education"} />
 
-        <InputLabel>Upload/Update Your CV</InputLabel>
+      <form onSubmit={handleSubmit}>
+        <PersonalContainer>
+          <Subtitle>Personal Information</Subtitle>
+          <InputContainer>
+            <Input
+              label={"Email"}
+              type="email"
+              name={"email"}
+              value={user.email ? user.email : ""}
+              onChange={handleChange}
+            />
+            <Input
+              label={"Name"}
+              name={"name"}
+              value={user.name}
+              onChange={handleChange}
+            />
+            <Input
+              label={"Phone"}
+              type="phone"
+              name={"phone"}
+              value={user.phone ? user.phone : ""}
+              onChange={handleChange}
+            />
+            <Input
+              label={"Birthdate"}
+              type="date"
+              name={"birth_date"}
+              value={user.birth_date ? user.birth_date : ""}
+              onChange={handleChange}
+            />
+            <Input
+              label={"LinkedIn URL"}
+              type="url"
+              name={"linkedin"}
+              value={user.linkedin ? user.linkedin : ""} 
+              onChange={handleChange}
+            />
+          </InputContainer>
+        </PersonalContainer>
+        <ProfessionalContainer>
+          <Subtitle>Professional Information</Subtitle>
+          <Note>
+            Changes made here will be reflected in your future applications
+          </Note>
+          <InputContainer>
+            <Input
+              label={"Title"}
+              name={"professional_title"}
+              value={user.professional_title ? user.professional_title : ""}
+              onChange={handleChange}
+            />
+          </InputContainer>
+          <TextArea
+            label={"Professional Experience"}
+            value={user.experience ? user.experience : ""}
+            name="experience"
+            onChange={handleChange}
+          />
+          <TextArea
+            label={"Education"}
+            name="education"
+            value={user.education ? user.education : ""}
+            onChange={handleChange}
+          />
 
-        <UploadFileContainer>
-          <InputFile type="file" />
-        </UploadFileContainer>
+          <InputLabel>Upload/Update Your CV</InputLabel>
 
-        <Caption>Only PDF. Max size 5MB</Caption>
-      </ProfessionalContainer>
+          <UploadFileContainer>
+            <InputFile type="file" />
+          </UploadFileContainer>
+
+          <Caption>Only PDF. Max size 5MB</Caption>
+        </ProfessionalContainer>
+
       <Button type="primary" size={"sm"}>
         Save changes
       </Button>
+      </form>
     </Container>
   );
 }
