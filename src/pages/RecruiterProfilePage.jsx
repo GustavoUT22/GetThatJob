@@ -6,6 +6,9 @@ import TextArea from "../components/inputs/Input-textarea";
 import { typography } from "../styles/typography";
 import { fonts } from "../styles/typography";
 import { colors } from "../styles/colors";
+import { getRecruiter, updateRecruiter } from "../services/recruiter-session";
+import { useEffect, useState } from "react";
+import { Form } from "react-router-dom";
 
 const Container = styled.div`
   display: block;
@@ -75,23 +78,90 @@ const Caption = styled.p`
 `;
 
 function RecruiterProfile() {
+  const [recruiter, setRecruiter] = useState({});
+
+  useEffect(() => {
+    const fetchRecruiter = async () => {
+      try {
+        const response = await getRecruiter();
+        setRecruiter(response);
+      } catch (error) {
+        console.error("Error fetching recruiter:", error);
+      }
+    };
+
+    fetchRecruiter();
+  }, []);
+
+  const handleChange = (e) => {
+    setRecruiter({
+      ...recruiter,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { email, company_name, company_website, company_about } =
+      e.target.elements;
+    const updatedRecruiter = {
+      email: email.value,
+      company_name: company_name.value,
+      company_website: company_website.value,
+      company_about: company_about.value,
+    };
+    try {
+      await updateRecruiter(updatedRecruiter)
+        .then(console.log("Recruiter updated successfully."))
+        .catch(console.log);
+    } catch (error) {
+      console.error("Error updating recruiter:", error);
+    }
+  };
+
+  console.log(recruiter);
+
   return (
     <Container>
       <Profile>Profile</Profile>
-      <UploadFileContainer>
-        <InputLabel>Company Logo</InputLabel>
-        <InputFile type="file" />
-        <Caption>PNG, JPG, IMG</Caption>
-      </UploadFileContainer>
-      <InputContainer>
-        <Input label={"Company Email"} type="email" name={"companyemail"} />
-        <Input label={"Company Name"} name={"companyname"} />
-        <Input label={"Company Website"} type="url" name={"website"} />
-        <TextArea label={"About The Company"} />
-      </InputContainer>
-      <Button type="primary" size={"sm"}>
-        Update Profile
-      </Button>
+      <form onSubmit={handleSubmit}>
+        <UploadFileContainer>
+          <InputLabel>Company Logo</InputLabel>
+          <InputFile type="file" />
+          <Caption>PNG, JPG, IMG</Caption>
+        </UploadFileContainer>
+        <InputContainer>
+          <Input
+            label={"Company Email"}
+            type="email"
+            name={"email"}
+            value={recruiter.email ? recruiter.email : ""}
+            onChange={handleChange}
+          />
+          <Input
+            label={"Company Name"}
+            name={"company_name"}
+            value={recruiter.company_name ? recruiter.company_name : ""}
+            onChange={handleChange}
+          />
+          <Input
+            label={"Company Website"}
+            type="url"
+            name={"company_website"}
+            value={recruiter.company_website ? recruiter.company_website : ""}
+            onChange={handleChange}
+          />
+          <TextArea
+            label={"About The Company"}
+            name={"company_about"}
+            value={recruiter.company_about ? recruiter.company_about : ""}
+            onChange={handleChange}
+          />
+        </InputContainer>
+        <Button type="primary" size={"sm"}>
+          Update Profile
+        </Button>
+      </form>
     </Container>
   );
 }
