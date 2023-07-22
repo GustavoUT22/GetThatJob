@@ -93,3 +93,28 @@ export function Filter(jobs, categoryOptions, typeOptions) {
 
   return jobs;
 }
+
+export function priceFilter(jobs, min, max) {
+  if (min !== null && max !== null) {
+    const minMaxfilter = jobs.filter(
+      (job) =>
+        min <= job.salary + 1000 &&
+        (job.salary + 1000 <= max || job.salary - 1000 <= max)
+    );
+    return minMaxfilter;
+  }
+
+  if (min !== null) {
+    const minFilter = jobs.filter((job) => min <= job.salary + 1000);
+    return minFilter;
+  }
+
+  if (max !== null) {
+    const maxFilter = jobs.filter(
+      (job) => job.salary - 1000 <= max && job.salary + 1000 >= max
+    );
+    return maxFilter;
+  }
+
+  return jobs;
+}

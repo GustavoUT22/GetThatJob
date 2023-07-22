@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { getJobs } from "../services/jobs-pro-services";
 import CheckSelect from "../components/inputs/CheckSelect";
 import { StyledLabel } from "../components/inputs/Input";
-import { Filter } from "../components/utils";
+import { Filter, priceFilter } from "../components/utils";
 
 export const ContainerSearch = styled.div`
   display: "flex";
@@ -76,11 +76,47 @@ function SearchJob() {
     category: [],
     type: [],
   });
+  const [price, setPrice] = useState({
+    min: null,
+    max: null,
+  })
 
   function handleChange(name, value) {
     setSelectedOptions({
       ...selectedOptions,
       [name]: value,
+    });
+  }
+
+  function handlePriceChange() {
+    const { name, value } = event.target;
+    let min = price.min;
+    let max = price.max;
+
+    if (name === "min") {
+      min = +value < 0 ? 0 : +value;
+      if (max <= min && max !== null) {
+        max = min + 1;
+      }
+    } else if (name === "max") {
+      if (max === null && min !== null) {
+        max = min + 1;
+      } else {
+        max = +value < 0 ? 0 : +value;
+      }
+
+      if (max <= min) {
+        min = (max - 1) < 0 ? 0 : (max - 1);
+      }
+
+      if(min === 0 && max === 0) {
+        max = 1;
+      }
+    }
+
+    setPrice({
+      min: min,
+      max: max,
     });
   }
 
@@ -111,14 +147,13 @@ function SearchJob() {
 
   useEffect(() => {
     const filterJobs = Filter(jobsData.all, selectedOptions.category, selectedOptions.type)
-    console.log(filterJobs)
+    const priceFilterJobs = priceFilter(filterJobs, price.min, price.max)
     setJobsData({
       ...jobsData,
-      filtered: filterJobs,
+      filtered: priceFilterJobs,
     })
-  }, [selectedOptions])
+  }, [selectedOptions, price])
   
-
   const countJobs = `${jobsData.filtered.length} Jobs for you`;
 
   return (
@@ -152,7 +187,7 @@ function SearchJob() {
           />
         </div>
         <div>
-          <Price />
+          <Price price={price} onChange={handlePriceChange}/>
         </div>
       </div>
       <ContainerJobCards>

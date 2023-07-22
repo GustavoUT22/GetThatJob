@@ -2,6 +2,8 @@ import styled from "@emotion/styled";
 import { StyledLabel } from "./Input";
 import { colors } from "../../styles/colors";
 import { typography } from "../../styles/typography";
+import { useEffect, useState } from "react";
+import { RiEyeCloseFill } from "react-icons/ri";
 
 const FormContainer = styled.div`
   display: flex;
@@ -41,15 +43,19 @@ const AmountInput = styled.input`
   }
 `;
 
-function Price() {
+function Price({ price, onChange }) {
+  function handleChange(event) {
+    onChange(event)
+  }
+  
   return (
     <div>
       <FormContainer>
         <StyledLabel>Salary Range</StyledLabel>
         <InputBox>
-          <AmountInput type="number" placeholder="min"></AmountInput>
+          <AmountInput name="min" type="number" value={price.min} placeholder="min" onChange={handleChange}></AmountInput>
           <div>-</div>
-          <AmountInput type="number" placeholder="max"></AmountInput>
+          <AmountInput name="max" type="number" value={price.max} placeholder="max" onChange={handleChange}></AmountInput>
         </InputBox>
       </FormContainer>
     </div>
