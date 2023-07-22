@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { getJobs } from "../services/jobs-pro-services";
 import CheckSelect from "../components/inputs/CheckSelect";
 import { StyledLabel } from "../components/inputs/Input";
+import { Filter } from "../components/utils";
 
 export const ContainerSearch = styled.div`
   display: "flex";
@@ -87,7 +88,7 @@ function SearchJob() {
     { value: "Manufacturing", label: "Manufacturing" },
     { value: "Legal", label: "Legal" },
     { value: "Education", label: "Education" },
-    { value: "Government", label: "Government" },
+    { value: "Goverment", label: "Goverment" },
     { value: "Sales", label: "Sales" },
   ];
 
@@ -108,41 +109,15 @@ function SearchJob() {
       .catch(console.log);
   }, []);
 
-  console.log(jobsData.all);
-
   useEffect(() => {
-    if (selectedOptions.category.length !== 0) {
-      const filterJobs = jobsData.all.filter((job) =>
-        selectedOptions.category.some((option) => job.category.includes(option))
-      );
-      setJobsData({
-        ...jobsData,
-        filtered: filterJobs,
-      });
-    } else {
-      setJobsData({
-        ...jobsData,
-        filtered: jobsData.all,
-      });
-    }
-  }, [selectedOptions.category]);
-
-  useEffect(() => {
-    if (selectedOptions.type.length !== 0) {
-      const filterJobs = jobsData.all.filter((job) =>
-        selectedOptions.type.some((option) => job.job_type.includes(option))
-      );
-      setJobsData({
-        ...jobsData,
-        filtered: filterJobs,
-      });
-    } else {
-      setJobsData({
-        ...jobsData,
-        filtered: jobsData.all,
-      });
-    }
-  }, [selectedOptions.type]);
+    const filterJobs = Filter(jobsData.all, selectedOptions.category, selectedOptions.type)
+    console.log(filterJobs)
+    setJobsData({
+      ...jobsData,
+      filtered: filterJobs,
+    })
+  }, [selectedOptions])
+  
 
   const countJobs = `${jobsData.filtered.length} Jobs for you`;
 
