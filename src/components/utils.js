@@ -85,7 +85,7 @@ export function Filter(jobs, categoryOptions, typeOptions) {
   }
 
   if (typeOptions.length !== 0) {
-    const typeFilter = categoryFilter.filter((job) =>
+    const typeFilter = jobs.filter((job) =>
       typeOptions.some((option) => job.job_type.includes(option))
     );
     return typeFilter;
