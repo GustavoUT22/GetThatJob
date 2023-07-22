@@ -65,3 +65,56 @@ export const FlexRow = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
+export function Filter(jobs, categoryOptions, typeOptions) {
+  if (categoryOptions.length !== 0 && typeOptions.length !== 0) {
+    const categoryFilter = jobs.filter((job) =>
+      categoryOptions.some((option) => job.category.includes(option))
+    );
+    const typeFilter = categoryFilter.filter((job) =>
+      typeOptions.some((option) => job.job_type.includes(option))
+    );
+    return typeFilter;
+  }
+
+  if (categoryOptions.length !== 0) {
+    const categoryFilter = jobs.filter((job) =>
+      categoryOptions.some((option) => job.category.includes(option))
+    );
+    return categoryFilter;
+  }
+
+  if (typeOptions.length !== 0) {
+    const typeFilter = jobs.filter((job) =>
+      typeOptions.some((option) => job.job_type.includes(option))
+    );
+    return typeFilter;
+  }
+
+  return jobs;
+}
+
+export function priceFilter(jobs, min, max) {
+  if (min !== null && max !== null) {
+    const minMaxfilter = jobs.filter(
+      (job) =>
+        min <= job.salary + 1000 &&
+        (job.salary + 1000 <= max || job.salary - 1000 <= max)
+    );
+    return minMaxfilter;
+  }
+
+  if (min !== null) {
+    const minFilter = jobs.filter((job) => min <= job.salary + 1000);
+    return minFilter;
+  }
+
+  if (max !== null) {
+    const maxFilter = jobs.filter(
+      (job) => job.salary - 1000 <= max && job.salary + 1000 >= max
+    );
+    return maxFilter;
+  }
+
+  return jobs;
+}

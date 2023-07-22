@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { getJobs } from "../services/jobs-pro-services";
 import CheckSelect from "../components/inputs/CheckSelect";
 import { StyledLabel } from "../components/inputs/Input";
+import { Filter, priceFilter } from "../components/utils";
 
 export const ContainerSearch = styled.div`
   display: "flex";
@@ -75,6 +76,10 @@ function SearchJob() {
     category: [],
     type: [],
   });
+  const [price, setPrice] = useState({
+    min: null,
+    max: null,
+  })
 
   function handleChange(name, value) {
     setSelectedOptions({
@@ -83,11 +88,43 @@ function SearchJob() {
     });
   }
 
+  function handlePriceChange() {
+    const { name, value } = event.target;
+    let min = price.min;
+    let max = price.max;
+
+    if (name === "min") {
+      min = +value < 0 ? 0 : +value;
+      if (max <= min && max !== null) {
+        max = min + 1;
+      }
+    } else if (name === "max") {
+      if (max === null && min !== null) {
+        max = min + 1;
+      } else {
+        max = +value < 0 ? 0 : +value;
+      }
+
+      if (max <= min) {
+        min = (max - 1) < 0 ? 0 : (max - 1);
+      }
+
+      if(min === 0 && max === 0) {
+        max = 1;
+      }
+    }
+
+    setPrice({
+      min: min,
+      max: max,
+    });
+  }
+
   const options = [
     { value: "Manufacturing", label: "Manufacturing" },
     { value: "Legal", label: "Legal" },
     { value: "Education", label: "Education" },
-    { value: "Government", label: "Government" },
+    { value: "Goverment", label: "Goverment" },
     { value: "Sales", label: "Sales" },
   ];
 
@@ -108,42 +145,15 @@ function SearchJob() {
       .catch(console.log);
   }, []);
 
-  console.log(jobsData.all);
-
   useEffect(() => {
-    if (selectedOptions.category.length !== 0) {
-      const filterJobs = jobsData.all.filter((job) =>
-        selectedOptions.category.some((option) => job.category.includes(option))
-      );
-      setJobsData({
-        ...jobsData,
-        filtered: filterJobs,
-      });
-    } else {
-      setJobsData({
-        ...jobsData,
-        filtered: jobsData.all,
-      });
-    }
-  }, [selectedOptions.category]);
-
-  useEffect(() => {
-    if (selectedOptions.type.length !== 0) {
-      const filterJobs = jobsData.all.filter((job) =>
-        selectedOptions.type.some((option) => job.job_type.includes(option))
-      );
-      setJobsData({
-        ...jobsData,
-        filtered: filterJobs,
-      });
-    } else {
-      setJobsData({
-        ...jobsData,
-        filtered: jobsData.all,
-      });
-    }
-  }, [selectedOptions.type]);
-
+    const filterJobs = Filter(jobsData.all, selectedOptions.category, selectedOptions.type)
+    const priceFilterJobs = priceFilter(filterJobs, price.min, price.max)
+    setJobsData({
+      ...jobsData,
+      filtered: priceFilterJobs,
+    })
+  }, [selectedOptions, price])
+  
   const countJobs = `${jobsData.filtered.length} Jobs for you`;
 
   return (
@@ -177,7 +187,7 @@ function SearchJob() {
           />
         </div>
         <div>
-          <Price />
+          <Price price={price} onChange={handlePriceChange}/>
         </div>
       </div>
       <ContainerJobCards>
