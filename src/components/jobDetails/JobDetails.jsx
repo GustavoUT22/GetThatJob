@@ -183,7 +183,7 @@ const JobDetails = () => {
     {
       title: "Category",
       icon: <RiMoneyDollarCircleLine />,
-      value: `${jobData.salary - 1000}- ${jobData.salary + 1000}`,
+      value: `${jobData.salary - 1000} - ${jobData.salary + 1000}`,
     },
   ];
 

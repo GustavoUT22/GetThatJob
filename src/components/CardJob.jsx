@@ -155,7 +155,7 @@ function CardJob({ props }) {
               <RiMoneyDollarCircleLine
                 style={{ width: "15px", height: "15px" }}
               />
-              {props.salary}
+              {`${props.salary - 1000} - ${props.salary + 1000}`}
             </JobTimeSalary>
           </BenefitsWrapper>
         </CompanyData>
