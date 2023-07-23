@@ -8,6 +8,7 @@ import TextArea from "../components/inputs/Input-textarea";
 import { typography } from "../styles/typography";
 import { fonts } from "../styles/typography";
 import { colors } from "../styles/colors";
+import InputFile from "../components/inputs/InputFile"
 
 const Container = styled.div`
   display: block;
@@ -76,37 +77,13 @@ const ProfessionalContainer = styled.div`
   margin-bottom: 1.5rem;
 `;
 
-const InputFile = styled.input`
-  color: ${colors.gray.dark};
-  padding-top: 0;
-  ${typography.body.sm};
-`;
-
-const UploadFileContainer = styled.div`
-  display: flex;
-`;
-
-const InputLabel = styled.label`
-  font-family: ${fonts.secondary};
-  font-size: 0.625rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: 0.09375rem;
-  text-transform: uppercase;
-`;
-
-const Caption = styled.p`
-  ${typography.caption};
-  color: ${colors.gray.light};
-`;
-
 const InputContainer = styled.div`
   width: 18.75rem;
 `;
 
 function ProfessionalProfile() {
   const [user, setUser] = useState({});
+  const [file, setFile] = useState(null)
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -128,6 +105,10 @@ function ProfessionalProfile() {
     });
   };
 
+  function handleFileChange(event) {
+    setFile(event.target.files[0]);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const {
@@ -139,7 +120,12 @@ function ProfessionalProfile() {
       professional_title,
       experience,
       education,
+      file,
     } = e.target.elements;
+
+    const formFile = new FormData();
+    formFile.append("file", file);
+
     const updatedUser = {
       email: email.value,
       name: name.value,
@@ -149,8 +135,11 @@ function ProfessionalProfile() {
       professional_title: professional_title.value,
       experience: experience.value,
       education: education.value,
+      file: formFile,
     };
+
     console.log("updatedUser");
+
     try {
       await updateUser(updatedUser)
         .then(console.log("User updated successfully."))
@@ -231,13 +220,15 @@ function ProfessionalProfile() {
             onChange={handleChange}
           />
 
-          <InputLabel>Upload/Update Your CV</InputLabel>
+          <InputFile 
+            id={"updCV"} 
+            name={"updCV"} 
+            label={"Upload/Update Your CV"} 
+            caption={"Only PDF. Max size 5MB"}
+            onChange={handleFileChange}
+            file={file}
+          ></InputFile>
 
-          <UploadFileContainer>
-            <InputFile type="file" />
-          </UploadFileContainer>
-
-          <Caption>Only PDF. Max size 5MB</Caption>
         </ProfessionalContainer>
 
         <Button type="primary" size={"sm"}>
