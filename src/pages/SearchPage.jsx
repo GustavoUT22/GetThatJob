@@ -11,6 +11,7 @@ import { getJobs } from "../services/jobs-pro-services";
 import CheckSelect from "../components/inputs/CheckSelect";
 import { StyledLabel } from "../components/inputs/Input";
 import { Filter, priceFilter, searchBarFilter } from "../components/utils";
+import Button from "../components/buttons/Button";
 
 export const ContainerSearch = styled.div`
   display: "flex";
@@ -77,8 +78,8 @@ function SearchJob() {
     type: [],
   });
   const [price, setPrice] = useState({
-    min: null,
-    max: null,
+    min: "",
+    max: "",
   })
   const [search, setSearch] = useState("")
 
@@ -89,18 +90,18 @@ function SearchJob() {
     });
   }
 
-  function handlePriceChange() {
+  function handlePriceChange(event) {
     const { name, value } = event.target;
     let min = price.min;
     let max = price.max;
 
     if (name === "min") {
       min = +value < 0 ? 0 : +value;
-      if (max <= min && max !== null) {
+      if (max <= min && max !== "") {
         max = min + 1;
       }
     } else if (name === "max") {
-      if (max === null && min !== null) {
+      if (max === "" && min !== "") {
         max = min + 1;
       } else {
         max = +value < 0 ? 0 : +value;
@@ -124,6 +125,18 @@ function SearchJob() {
   function handleSearchChange(event) {
     const { value } = event.target
     setSearch(value.toLowerCase())
+  }
+
+  function handleReset() {
+    setSearch("")
+    setPrice({
+      min: "",
+      max: "",
+    })
+    setSelectedOptions({
+      category: [],
+      type: [],
+    })
   }
 
   const options = [
@@ -168,34 +181,41 @@ function SearchJob() {
     <ContainerSearch>
       <Title>Find a job</Title>
       <InputSearch onChange={handleSearchChange} value={search}/>
-      <div
-        style={{
-          display: "flex",
-          gap: "16px",
-          justifyContent: "flex-start",
-          alignItems: "center",
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <StyledLabel>category</StyledLabel>
-          <CheckSelect
-            type={"category"}
-            options={options}
-            selectedOptions={selectedOptions.category}
-            onChange={handleChange}
-          />
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-          <StyledLabel>type</StyledLabel>
-          <CheckSelect
-            type={"type"}
-            options={typeOptions}
-            selectedOptions={selectedOptions.type}
-            onChange={handleChange}
-          />
+      <div style={{display: "flex", alignItems: "flex-end", justifyContent: "space-between", width: "85%"}}>
+        <div>
+          <div
+            style={{
+              display: "flex",
+              gap: "16px",
+              justifyContent: "flex-start",
+              alignItems: "center",
+            }}
+          >
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <StyledLabel>category</StyledLabel>
+              <CheckSelect
+                type={"category"}
+                options={options}
+                selectedOptions={selectedOptions.category}
+                onChange={handleChange}
+              />
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+              <StyledLabel>type</StyledLabel>
+              <CheckSelect
+                type={"type"}
+                options={typeOptions}
+                selectedOptions={selectedOptions.type}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <Price price={price} onChange={handlePriceChange}/>
+            </div>
+      </div>
         </div>
         <div>
-          <Price price={price} onChange={handlePriceChange}/>
+          <Button style={{marginBottom: "5px"}} type={"primary"} size={"sm"} onClick={handleReset}>Reset Filters</Button>
         </div>
       </div>
       <ContainerJobCards>

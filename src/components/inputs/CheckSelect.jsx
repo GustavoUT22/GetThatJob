@@ -153,6 +153,7 @@ function CheckSelect({ type, placeholder, options, selectedOptions=[], onChange 
     <StyledCheckSelect
       placeholder={placeholder}
       mode="multiple"
+      value={selectedOptions}
       onChange={handleChange}
       onMouseDown={(e) => {
         setDirty(false);

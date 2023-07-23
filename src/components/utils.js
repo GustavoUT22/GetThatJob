@@ -95,7 +95,7 @@ export function Filter(jobs, categoryOptions, typeOptions) {
 }
 
 export function priceFilter(jobs, min, max) {
-  if (min !== null && max !== null) {
+  if (min !== "" && max !== "") {
     const minMaxfilter = jobs.filter(
       (job) =>
         min <= job.salary + 1000 &&
@@ -104,12 +104,12 @@ export function priceFilter(jobs, min, max) {
     return minMaxfilter;
   }
 
-  if (min !== null) {
+  if (min !== "") {
     const minFilter = jobs.filter((job) => min <= job.salary + 1000);
     return minFilter;
   }
 
-  if (max !== null) {
+  if (max !== "") {
     const maxFilter = jobs.filter(
       (job) => job.salary - 1000 <= max && job.salary + 1000 >= max
     );
