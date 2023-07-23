@@ -58,16 +58,16 @@ function YourApplicationsPage() {
           <div>
             <FilterName>Filter your applications</FilterName>
             <FlexRowSm>
-              <label htmlFor="radio">option 1</label>
-              <input type="radio" id="radio" />
-              <label htmlFor="radio">option 2</label>
-              <input type="radio" id="radio" />
-              <label htmlFor="radio">option 3</label>
-              <input type="radio" id="radio" />
-              <label htmlFor="radio">option 4</label>
-              <input type="radio" id="radio" />
-              <label htmlFor="radio">option 5</label>
-              <input type="radio" id="radio" />
+              <label htmlFor="radio1">option 1</label>
+              <input type="radio" id="radio1" name="radio"/>
+              <label htmlFor="radio2">option 2</label>
+              <input type="radio" id="radio2" name="radio"/>
+              <label htmlFor="radio3">option 3</label>
+              <input type="radio" id="radio3" name="radio"/>
+              <label htmlFor="radio4">option 4</label>
+              <input type="radio" id="radio4" name="radio"/>
+              <label htmlFor="radio5">option 5</label>
+              <input type="radio" id="radio5" name="radio"/>
             </FlexRowSm>
           </div>
         </FlexColumnXs>

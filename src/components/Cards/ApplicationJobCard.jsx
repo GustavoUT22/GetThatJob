@@ -178,7 +178,7 @@ function ApplicationJobCard({ props, onDelete }) {
             }}
           >
             <Button
-              children={"downland"}
+              children={"download"}
               icon={<RiDownloadLine />}
               type={"secondary"}
               size={"sm"}
