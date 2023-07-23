@@ -47,7 +47,7 @@ const SearchWrapper = styled.div`
   margin-bottom: 8px;
 `;
 
-function InputSearch() {
+function InputSearch({onChange, value}) {
   return (
     <SearchWrapper>
       <StyledLabel>search by job title or company name</StyledLabel>
@@ -59,7 +59,7 @@ function InputSearch() {
             color: `${colors.gray.light}`,
           }}
         />
-        <SearchInput placeholder="manufacturing, sales, swim" />
+        <SearchInput onChange={onChange} value={value} placeholder="manufacturing, sales, swim" />
       </InputSearchWrapper>
     </SearchWrapper>
   );

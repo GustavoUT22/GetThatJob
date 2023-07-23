@@ -118,3 +118,15 @@ export function priceFilter(jobs, min, max) {
 
   return jobs;
 }
+
+export function searchBarFilter(jobs, searchTerm) {
+  if (searchTerm !== "") {
+    const filteredData = jobs.filter(
+      (job) =>
+        job.title.toLowerCase().includes(searchTerm) ||
+        job.company_name.toLowerCase().includes(searchTerm)
+    );
+    return filteredData;
+  }
+  return jobs;
+}
