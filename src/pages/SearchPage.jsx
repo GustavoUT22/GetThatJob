@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { getJobs } from "../services/jobs-pro-services";
 import CheckSelect from "../components/inputs/CheckSelect";
 import { StyledLabel } from "../components/inputs/Input";
-import { Filter, priceFilter } from "../components/utils";
+import { Filter, priceFilter, searchBarFilter } from "../components/utils";
 
 export const ContainerSearch = styled.div`
   display: "flex";
@@ -80,6 +80,7 @@ function SearchJob() {
     min: null,
     max: null,
   })
+  const [search, setSearch] = useState("")
 
   function handleChange(name, value) {
     setSelectedOptions({
@@ -120,6 +121,11 @@ function SearchJob() {
     });
   }
 
+  function handleSearchChange(event) {
+    const { value } = event.target
+    setSearch(value.toLowerCase())
+  }
+
   const options = [
     { value: "Manufacturing", label: "Manufacturing" },
     { value: "Legal", label: "Legal" },
@@ -145,21 +151,23 @@ function SearchJob() {
       .catch(console.log);
   }, []);
 
+
   useEffect(() => {
     const filterJobs = Filter(jobsData.all, selectedOptions.category, selectedOptions.type)
     const priceFilterJobs = priceFilter(filterJobs, price.min, price.max)
+    const searchFilter = searchBarFilter(priceFilterJobs, search)
     setJobsData({
       ...jobsData,
-      filtered: priceFilterJobs,
+      filtered: searchFilter,
     })
-  }, [selectedOptions, price])
-  
+  }, [selectedOptions, price, search])
+
   const countJobs = `${jobsData.filtered.length} Jobs for you`;
 
   return (
     <ContainerSearch>
       <Title>Find a job</Title>
-      <InputSearch />
+      <InputSearch onChange={handleSearchChange} value={search}/>
       <div
         style={{
           display: "flex",
