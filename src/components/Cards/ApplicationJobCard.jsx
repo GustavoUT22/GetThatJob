@@ -24,6 +24,9 @@ import {
   FlexColumnXs,
   FlexRow,
   FlexRowXs,
+  getSentTime,
+  getFormattedDate,
+  getFixedSalary,
 } from "../utils";
 import { useState } from "react";
 import Button from "../buttons/Button";
@@ -93,14 +96,17 @@ function ApplicationJobCard({ props, onDelete }) {
   }
 
   const salaryRange = {
-    min: props.job.salary >= 1000 ? `${((props.job.salary - 1000) / 1000).toFixed(1)}k` : `${props.job.salary}`,
-    max: props.job.salary >= 1000 ? `${((props.job.salary + 1000) / 1000).toFixed(1)}k` : `${props.job.salary}`,
+    min: getFixedSalary(props.job.salary, "min"),
+    max: getFixedSalary(props.job.salary, "max"),
   }
 
-  const [year, month, day] = props.job.created_at.slice(2,10).split("-")
-  const formattedDate = `${month}/${day}/${year}`
+  const formattedDate = getFormattedDate(props.job.created_at)
   
-  console.log(props.job)
+  const sentAgoMsg = getSentTime(props.created_at);
+
+  const lastUpdDate = getFormattedDate(props.updated_at)
+  
+  console.log(props)
   
   return (
     <ApplicationBox>
@@ -147,7 +153,7 @@ function ApplicationJobCard({ props, onDelete }) {
               <RiMailLine
                 style={{ width: "15px", height: "15px", alignSelf: "center" }}
               />
-              <MessageSmall>Sent 1 min. ago</MessageSmall>
+              <MessageSmall>{sentAgoMsg}</MessageSmall>
             </FlexColumn>
             <FlexColumn
               style={{ width: "80px", height: "47px", color: "pink" }}
@@ -169,7 +175,7 @@ function ApplicationJobCard({ props, onDelete }) {
       </div>
       {showDetail && (
         <div>
-          <StyledLabel>Last updated on 12/12/12</StyledLabel>
+          <StyledLabel>{`Last updated on ${lastUpdDate}`}</StyledLabel>
           <ExperienceTitle>Professional Experience</ExperienceTitle>
           <br></br>
           <TextInfo>{props.experience}</TextInfo>
