@@ -78,7 +78,7 @@ const TextInfo = styled.p`
 `;
 
 function ApplicationJobCard({ props, onDelete }) {
-  const [showDetail, setShowDetail] = useState(true);
+  const [showDetail, setShowDetail] = useState(false);
   function handleShowDetail() {
     if (showDetail) {
       setShowDetail(false);

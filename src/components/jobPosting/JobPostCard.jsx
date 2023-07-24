@@ -80,6 +80,25 @@ const CardContainer = styled.div`
   & > div:nth-of-type(3) {
     display: flex;
   }
+  & > div:nth-of-type(3) > div:first-child {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+
+    & > div:first-child {
+      cursor: pointer;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 24px; /* 171.429% */
+      letter-spacing: 1.25px;
+      text-transform: uppercase;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+  }
   & > div:nth-of-type(3) > div {
     padding-right: 16px;
   }
@@ -186,7 +205,10 @@ function JobPostCard({
         </div>
         <div>
           <div>
-            <button onClick={handleShow}>Show</button>
+            <div>
+              <RiSearchLine style={{ width: "24px", height: "24px" }} />
+              <span onClick={handleShow}>Show</span>
+            </div>
             <button>Close</button>
           </div>
           <div onClick={handleShowDetail}>
