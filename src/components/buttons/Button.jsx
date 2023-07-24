@@ -8,10 +8,10 @@ function typeStyles(type) {
   switch (type) {
     case "primary":
       return `
-        background-color: ${colors.pink.pink};
+        background-color: ${colors.pink.dark};
         color: ${colors.white};
         &:hover {
-          background-color: ${colors.pink.dark};
+          background-color: ${colors.pink.pink};
         }
         &:active {
           background-color: ${colors.pink.pink};

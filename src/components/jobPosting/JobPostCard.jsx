@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 
 import PropTypes from "prop-types";
+import Button from "../buttons/Button";
 
 import {
   RiAccountCircleLine,
@@ -12,6 +13,7 @@ import {
   RiSearchLine,
   RiArrowDownSLine,
   RiArrowUpSLine,
+  RiCloseCircleLine,
 } from "react-icons/ri";
 import { useNavigate } from "react-router";
 
@@ -205,11 +207,20 @@ function JobPostCard({
         </div>
         <div>
           <div>
-            <div>
+            <div onClick={handleShow}>
               <RiSearchLine style={{ width: "24px", height: "24px" }} />
-              <span onClick={handleShow}>Show</span>
+              <span>Show</span>
             </div>
-            <button>Close</button>
+            {/* <button>Close</button> */}
+            <Button
+              children={"close"}
+              icon={
+                <RiCloseCircleLine style={{ width: "24px", height: "24px" }} />
+              }
+              type={"primary"}
+              size={"sm"}
+              // onClick={handleDeclineClick}
+            />
           </div>
           <div onClick={handleShowDetail}>
             <RiArrowDownSLine />
