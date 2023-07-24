@@ -135,7 +135,7 @@ function ProfessionalProfile() {
       professional_title: professional_title.value,
       experience: experience.value,
       education: education.value,
-      file: formFile,
+      // file: formFile,
     };
 
     console.log("updatedUser");

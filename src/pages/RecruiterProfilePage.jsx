@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 import Button from "../components/buttons/Button";
+import InputFile from "../components/inputs/InputFile";
 import Input from "../components/inputs/Input";
 import TextArea from "../components/inputs/Input-textarea";
 import { typography } from "../styles/typography";
@@ -48,37 +49,9 @@ const InputContainer = styled.div`
   margin-bottom: 1.5rem;
 `;
 
-const InputFile = styled.input`
-  color: ${colors.gray.dark};
-  padding-top: 0;
-  ${typography.body.sm};
-`;
-
-const UploadFileContainer = styled.div`
-  display: flex;
-
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.25rem;
-`;
-
-const InputLabel = styled.label`
-  ont-family: ${fonts.secondary};
-  font-size: 0.625rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: 0.09375rem;
-  text-transform: uppercase;
-`;
-
-const Caption = styled.p`
-  ${typography.caption};
-  color: ${colors.gray.light};
-`;
-
 function RecruiterProfile() {
   const [recruiter, setRecruiter] = useState({});
+  const [file, setFile] = useState(null)
 
   useEffect(() => {
     const fetchRecruiter = async () => {
@@ -100,15 +73,24 @@ function RecruiterProfile() {
     });
   };
 
+  function handleFileChange(event) {
+    setFile(event.target.files[0]);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { email, company_name, company_website, company_about } =
+    const { email, company_name, company_website, company_about, file } =
       e.target.elements;
+
+    const formFile = new FormData();
+    formFile.append("file", file);
+
     const updatedRecruiter = {
       email: email.value,
       company_name: company_name.value,
       company_website: company_website.value,
       company_about: company_about.value,
+      // file: formFile,
     };
     try {
       await updateRecruiter(updatedRecruiter)
@@ -125,12 +107,15 @@ function RecruiterProfile() {
     <Container>
       <Profile>Profile</Profile>
       <form onSubmit={handleSubmit}>
-        <UploadFileContainer>
-          <InputLabel>Company Logo</InputLabel>
-          <InputFile type="file" />
-          <Caption>PNG, JPG, IMG</Caption>
-        </UploadFileContainer>
         <InputContainer>
+          <InputFile 
+            id={"updLogo"} 
+            name={"updLogo"} 
+            label={"Company Logo"} 
+            caption={"PNG, JPG, IMG"}
+            onChange={handleFileChange}
+            file={file}
+          ></InputFile>
           <Input
             label={"Company Email"}
             type="email"
