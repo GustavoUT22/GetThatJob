@@ -92,6 +92,16 @@ function ApplicationJobCard({ props, onDelete }) {
     onDelete();
   }
 
+  const salaryRange = {
+    min: props.job.salary >= 1000 ? `${((props.job.salary - 1000) / 1000).toFixed(1)}k` : `${props.job.salary}`,
+    max: props.job.salary >= 1000 ? `${((props.job.salary + 1000) / 1000).toFixed(1)}k` : `${props.job.salary}`,
+  }
+
+  const [year, month, day] = props.job.created_at.slice(2,10).split("-")
+  const formattedDate = `${month}/${day}/${year}`
+  
+  console.log(props.job)
+  
   return (
     <ApplicationBox>
       <div>
@@ -116,15 +126,15 @@ function ApplicationJobCard({ props, onDelete }) {
               <RiBuilding3Line style={{ width: "15px", height: "15px" }} />
               <CategoryJob>{props.job.category}</CategoryJob>
               <RiCalendar2Line style={{ width: "15px", height: "15px" }} />
-              <JobTimeSalary>Full time</JobTimeSalary>
+              <JobTimeSalary>{props.job.job_type}</JobTimeSalary>
             </FlexRowXs>
             <FlexRowXs>
               <RiMoneyDollarCircleLine
                 style={{ width: "15px", height: "15px" }}
               />
-              <CategoryJob>{props.job.salary}</CategoryJob>
+              <CategoryJob>{salaryRange.min} - {salaryRange.max}</CategoryJob>
               <RiTimeLine style={{ width: "15px", height: "15px" }} />
-              <JobTimeSalary>{props.job.created_at}</JobTimeSalary>
+              <JobTimeSalary>{`Posted ${formattedDate}`}</JobTimeSalary>
             </FlexRowXs>
           </FlexColumnXs>
           <FlexRow style={{ display: "flex", alignContent: "center" }}>
@@ -165,7 +175,7 @@ function ApplicationJobCard({ props, onDelete }) {
           <TextInfo>{props.experience}</TextInfo>
           <br />
           <ExperienceTitle>
-            Why are you interested in working at {props.company_name}
+            {`Why are you interested in working at ${props.company_name}`}
           </ExperienceTitle>
           <br />
           <TextInfo>{props.why_interested}</TextInfo>
