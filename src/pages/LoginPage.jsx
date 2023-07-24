@@ -62,6 +62,7 @@ const Paragraph = styled.p`
   letter-spacing: 0.15px;
 `;
 const Label = styled.label`
+  cursor: pointer;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

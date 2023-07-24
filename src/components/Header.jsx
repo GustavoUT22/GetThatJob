@@ -32,7 +32,7 @@ const ButtonContainer = styled.div`
 
 const Button = styled.div`
   width: auto;
-  height: 25px;
+  height: 40px;
   padding: 8px 16px;
   border-radius: 16px;
   border: 1px solid #cf4f8fb1;
