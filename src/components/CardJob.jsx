@@ -134,12 +134,10 @@ const ButtonsContainer = styled.div`
 `;
 
 function CardJob({ props }) {
-
   const [followStatus, setFollowStatus] = useState(props.follow)
 
   function handleFollow() {
     setFollowStatus(!followStatus)
-
   }
 
   return (

@@ -37,6 +37,7 @@ const ApliFound = styled.span`
 
 function YourApplicationsPage() {
   const [applyData, setApplyData] = useState([]);
+  const [selectedValue, setSelectedValue] = useState("");
   const navigate = useNavigate();
 
   useCallback(
@@ -45,10 +46,16 @@ function YourApplicationsPage() {
     }, [])
   );
 
+  function handleChange(event) {
+    setSelectedValue(event.target.value)
+  }
+
   async function handleDecline(id) {
     deleteApplications(id);
     await getApplications().then(setApplyData).catch(console.log);
   }
+
+  console.log(selectedValue)
 
   return (
     <ContainerSearch>
@@ -57,17 +64,57 @@ function YourApplicationsPage() {
           <Title>Your applications</Title>
           <div>
             <FilterName>Filter your applications</FilterName>
-            <FlexRowSm>
-              <label htmlFor="radio1">All</label>
-              <input type="radio" id="radio1" name="filter"/>
-              <label htmlFor="radio2">Waiting</label>
-              <input type="radio" id="radio2" name="filter"/>
-              <label htmlFor="radio3">In progress</label>
-              <input type="radio" id="radio3" name="filter"/>
-              <label htmlFor="radio4">Finished</label>
-              <input type="radio" id="radio4" name="filter"/>
-              <label htmlFor="radio5">Declined</label>
-              <input type="radio" id="radio5" name="filter"/>
+            <FlexRowSm style={{alignItems: "baseline"}}>
+              <label htmlFor="radio1">
+                <input type="radio" 
+                  id="radio1" 
+                  name="filter" 
+                  value="all" 
+                  checked={selectedValue === "all"}
+                  onChange={handleChange}
+                  />
+                All
+              </label>
+              <label htmlFor="radio2">
+                <input type="radio" 
+                  id="radio2" 
+                  name="filter" 
+                  value="waiting" 
+                  checked={selectedValue === "waiting"}
+                  onChange={handleChange}
+                  />
+                Waiting
+              </label>
+              <label htmlFor="radio3">
+                <input type="radio" 
+                  id="radio3" 
+                  name="filter" 
+                  value="inProgress" 
+                  checked={selectedValue === "inProgress"}
+                  onChange={handleChange}
+                  />
+                In progress
+              </label>
+              <label htmlFor="radio4">
+                <input type="radio" 
+                  id="radio4" 
+                  name="filter" 
+                  value="finished" 
+                  checked={selectedValue === "finished"}
+                  onChange={handleChange}
+                  />
+                Finished
+              </label>
+              <label htmlFor="radio5">
+                <input type="radio" 
+                  id="radio5" 
+                  name="filter" 
+                  value="declined" 
+                  checked={selectedValue === "declined"}
+                  onChange={handleChange}
+                  />
+                Declined
+              </label>
             </FlexRowSm>
           </div>
         </FlexColumnXs>

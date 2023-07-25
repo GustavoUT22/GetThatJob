@@ -111,7 +111,7 @@ const PeopleContainer = styled.div`
 `;
 
 const LandingPage = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <>
       <Header />
@@ -124,7 +124,11 @@ const LandingPage = () => {
           With our Machine Learning algorithm you will get that job in no time.
           We promise you! Just give us the money and we will take care of it.
         </Intro>
-        <Button type={"primary"} size={"lg"} onClick={() => navigate("/signup")}>
+        <Button
+          type={"primary"}
+          size={"lg"}
+          onClick={() => navigate("/signup")}
+        >
           Create an account now
         </Button>
         <PeopleContainer>
