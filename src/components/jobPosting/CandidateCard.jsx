@@ -127,6 +127,21 @@ const JobDetailCard = styled.div`
   }
 `;
 
+const Button = styled.div`
+  width: auto;
+
+  padding: 8px 16px;
+  border-radius: 16px;
+  border: 1px solid #cf4f8fb1;
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: gray;
+  background-color: transparent;
+`;
+
 const CandidateCard = ({ job }) => {
   console.log(job);
   const { user } = useAuth();
@@ -182,7 +197,7 @@ const CandidateCard = ({ job }) => {
         </div>
         <div>
           <div>
-            <button onClick={handleShow}>MARK AS STARTED</button>
+            <Button onClick={handleShow}>MARK AS STARTED</Button>
           </div>
           <div onClick={handleShowDetail}>
             <RiArrowDownSLine />

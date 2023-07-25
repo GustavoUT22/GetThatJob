@@ -130,13 +130,13 @@ const ButtonsContainer = styled.div`
 
 function CardJob({ props }) {
   const navigate = useNavigate();
-
+  console.log(props);
   function handleSeemore() {}
   return (
     <CardJobWrapper>
       <CompanyInfo>
         <LogoWrapper>
-          <img src={JobImg} />
+          <img src={props.company_logo} />
         </LogoWrapper>
         <CompanyData>
           <CategoryJob>
