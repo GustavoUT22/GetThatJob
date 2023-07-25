@@ -19,7 +19,7 @@ const Main = styled.main`
   align-items: flex-start;
   justify-content: space-around;
   padding: 17px 50px 0 50px;
-  background-color: #f5f5f6;
+  background-color: ${colors.gray.bg_light};
 `;
 
 const Section = styled.section`
