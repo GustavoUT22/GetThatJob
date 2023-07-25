@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import JobImg from "../assets/job-card.png";
 import {
   RiBuilding3Line,
   RiCalendar2Line,
@@ -9,10 +8,11 @@ import {
 import { colors } from "../styles/colors";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const CardJobWrapper = styled.div`
   display: flex;
-  width: 290px;
+  width: 300px;
   height: 170px;
   padding: 16px;
   flex-direction: column;
@@ -108,19 +108,24 @@ const SeeMore = styled(Link)`
   }
 `;
 
-const FollowButton = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-`;
-
 const FollowButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 8px;
   padding: 8px;
+  cursor: pointer;
 `;
+
+const FollowIconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px; 
+  height: 32px;
+  border-radius: 50%;
+  background-color: ${({followStatus}) => followStatus ? colors.pink.pink : ""};
+`
 
 const ButtonsContainer = styled.div`
   display: flex;
@@ -129,9 +134,12 @@ const ButtonsContainer = styled.div`
 `;
 
 function CardJob({ props }) {
-  const navigate = useNavigate();
-  console.log(props);
-  function handleSeemore() {}
+  const [followStatus, setFollowStatus] = useState(props.follow)
+
+  function handleFollow() {
+    setFollowStatus(!followStatus)
+  }
+
   return (
     <CardJobWrapper>
       <CompanyInfo>
@@ -161,9 +169,11 @@ function CardJob({ props }) {
         </CompanyData>
       </CompanyInfo>
       <ButtonsContainer>
-        <FollowButtonWrapper>
-          <RiFocus3Line style={{ width: "24px", height: "24px" }} />
-          follow
+        <FollowButtonWrapper onClick={handleFollow}>
+          <FollowIconWrapper followStatus={followStatus}>
+            {followStatus ? <RiFocus3Line style={{ width: "22px", height: "22px", color: `${colors.white}` }} /> : <RiFocus3Line style={{ width: "22px", height: "22px" }} /> }
+          </FollowIconWrapper>
+          {followStatus ? "FOLLOWING" : "FOLLOW"}
         </FollowButtonWrapper>
         <SeeMore to={`/jobs/${props.id}`}>see more</SeeMore>
       </ButtonsContainer>

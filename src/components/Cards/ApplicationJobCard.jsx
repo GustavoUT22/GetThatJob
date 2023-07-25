@@ -105,7 +105,7 @@ function ApplicationJobCard({ props, onDelete }) {
   const sentAgoMsg = getSentTime(props.created_at);
 
   const lastUpdDate = getFormattedDate(props.updated_at)
-  
+
   console.log(props)
   
   return (
@@ -114,7 +114,7 @@ function ApplicationJobCard({ props, onDelete }) {
         <FlexBetweenRow>
           <FlexRowSm style={{ display: "flex", alignContent: "center" }}>
             <div style={{ width: "60px", height: "60px" }}>
-              <img src={ImgJob} />
+              <img src={props.company_logo} />
             </div>
             <FlexColumn>
               <JobTitle>{props.job.title}</JobTitle>
