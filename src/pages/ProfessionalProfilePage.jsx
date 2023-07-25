@@ -8,7 +8,7 @@ import TextArea from "../components/inputs/Input-textarea";
 import { typography } from "../styles/typography";
 import { fonts } from "../styles/typography";
 import { colors } from "../styles/colors";
-import InputFile from "../components/inputs/InputFile"
+import InputFile from "../components/inputs/InputFile";
 
 const Container = styled.div`
   display: block;
@@ -32,7 +32,7 @@ const Container = styled.div`
   }
 
   ::-webkit-scrollbar-track {
-    background-color: white;
+    background-color: none;
   }
 `;
 
@@ -83,7 +83,7 @@ const InputContainer = styled.div`
 
 function ProfessionalProfile() {
   const [user, setUser] = useState({});
-  const [file, setFile] = useState(null)
+  const [file, setFile] = useState(null);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -220,15 +220,14 @@ function ProfessionalProfile() {
             onChange={handleChange}
           />
 
-          <InputFile 
-            id={"updCV"} 
-            name={"updCV"} 
-            label={"Upload/Update Your CV"} 
+          <InputFile
+            id={"updCV"}
+            name={"updCV"}
+            label={"Upload/Update Your CV"}
             caption={"Only PDF. Max size 5MB"}
             onChange={handleFileChange}
             file={file}
           ></InputFile>
-
         </ProfessionalContainer>
 
         <Button type="primary" size={"sm"}>

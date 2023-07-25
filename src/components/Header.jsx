@@ -1,4 +1,4 @@
-import getThatJobLogo from "../assets/header/gtj-logo.png";
+import getThatJobLogo from "../assets/header/logo-landing.svg";
 import signupLogo from "../assets/header/signup-logo.svg";
 import loginLogo from "../assets/header/login-logo.svg";
 import styled from "@emotion/styled";

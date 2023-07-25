@@ -98,25 +98,25 @@ function ApplicationJobCard({ props, onDelete }) {
   const salaryRange = {
     min: getFixedSalary(props.job.salary, "min"),
     max: getFixedSalary(props.job.salary, "max"),
-  }
+  };
 
-  const formattedDate = getFormattedDate(props.job.created_at)
-  
+  const formattedDate = getFormattedDate(props.job.created_at);
+
   const sentAgoMsg = getSentTime(props.created_at);
 
-  const lastUpdDate = getFormattedDate(props.updated_at)
-  
-  console.log(props)
-  
+  const lastUpdDate = getFormattedDate(props.updated_at);
+
+  console.log(props);
+
   return (
     <ApplicationBox>
       <div>
-        <FlexBetweenRow>
+        <FlexBetweenRow style={{ display: "flex", alignItems: "center" }}>
           <FlexRowSm style={{ display: "flex", alignContent: "center" }}>
             <div style={{ width: "60px", height: "60px" }}>
               <img src={ImgJob} />
             </div>
-            <FlexColumn>
+            <FlexColumn style={{ display: "flex", alignSelf: "center" }}>
               <JobTitle>{props.job.title}</JobTitle>
               <CompanyName>{props.company_name}</CompanyName>
             </FlexColumn>
@@ -138,7 +138,9 @@ function ApplicationJobCard({ props, onDelete }) {
               <RiMoneyDollarCircleLine
                 style={{ width: "15px", height: "15px" }}
               />
-              <CategoryJob>{salaryRange.min} - {salaryRange.max}</CategoryJob>
+              <CategoryJob>
+                {salaryRange.min} - {salaryRange.max}
+              </CategoryJob>
               <RiTimeLine style={{ width: "15px", height: "15px" }} />
               <JobTimeSalary>{`Posted ${formattedDate}`}</JobTimeSalary>
             </FlexRowXs>

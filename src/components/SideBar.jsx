@@ -13,6 +13,7 @@ import styled from "@emotion/styled";
 import logo from "./../assets/logo.png";
 import { useAuth } from "../context/auth-context";
 import { useNavigate } from "react-router";
+import { colors } from "../styles";
 
 const integrants = [
   { name: "Amanda Trigueros" },
@@ -47,6 +48,9 @@ const NavContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 8px;
+    :hover {
+      background-color: #d4d0d0;
+    }
   }
   & > div > :nth-child(1) {
     width: 24px;
