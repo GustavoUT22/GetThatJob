@@ -11,6 +11,7 @@ const Container = styled.div`
 `;
 
 const Main = styled.main`
+  margin-top: 1rem;
   display: flex;
   flex-direction: row;
   width: auto;

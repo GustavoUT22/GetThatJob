@@ -8,6 +8,8 @@ const HeaderWrapper = styled.div`
   width: auto;
   height: 8vh;
   padding: 0 32px;
+  z-index: 10;
+  position: relative;
   background-color: white;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
   display: flex;
