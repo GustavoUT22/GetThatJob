@@ -13,7 +13,7 @@ import { useAuth } from "../../context/auth-context";
 import ApplicationStatus from "../ApplicationStatus";
 
 const Container = styled.div`
-  diplay: flex;
+  display: flex;
   flex-direction: column;
   background-color: blue;
   margin-top: 8px;
@@ -87,7 +87,7 @@ const CardContainer = styled.div`
     line-height: 16px; /* 133.333% */
     letter-spacing: 0.4px;
     color: #616161;
-    
+
     height: 48px;
   }
   & > div:nth-of-type(3) > div:last-child {
@@ -128,10 +128,8 @@ const JobDetailCard = styled.div`
   }
 `;
 
-
 // const AplicationContainer = styled.div``;
 
-  
 const Button = styled.div`
   width: auto;
 
@@ -163,10 +161,10 @@ const CandidateCard = ({ job, status, setStatus }) => {
     }
   }
 
-
   function handleShow() {
     navigate(`/jobs`);
   }
+
   return (
     <Container>
       <CardContainer>
@@ -188,10 +186,12 @@ const CandidateCard = ({ job, status, setStatus }) => {
           </div>
         </div>
         <div>
-          
-          <ApplicationStatus props={job} status={status} setStatus={setStatus}/>
+          <ApplicationStatus
+            props={job}
+            status={status}
+            setStatus={setStatus}
+          />
 
-        
           <div onClick={handleShowDetail}>
             <RiArrowDownSLine />
           </div>

@@ -9,7 +9,6 @@ import {
 } from "react-icons/ri";
 import { useNavigate, useParams } from "react-router";
 
-
 import { typography } from "../styles";
 import Button from "./buttons/Button";
 import { colors } from "../styles";
@@ -45,29 +44,25 @@ const SendOn = styled.p`
 
 const ApplicationStatus = ({ props, status, setStatus }) => {
   // const [status, setStatus] = useState(false);
-  const navigate = useNavigate()
-  const { id } = useParams()
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   console.log(props.status);
 
-    
-
   const handleStart = async () => {
-    console.log("handling")
+    console.log("handling");
     try {
       await updateStatus(props.id, { status: "Review in progress" });
-      setStatus(!status)
-      
+      setStatus(!status);
     } catch (error) {
       console.error("Error updating status:", error);
     }
-
   };
 
   const handleFinish = async () => {
     try {
       await updateStatus(props.id, { status: "Review finished" });
-      setStatus(!status)
+      setStatus(!status);
     } catch (error) {
       console.error("Error updating status:", error);
     }
@@ -76,7 +71,6 @@ const ApplicationStatus = ({ props, status, setStatus }) => {
   // const handleUpdate = () => {
   //   setStatus(status + 1)
   // }
-
 
   const sendDate = props.created_at;
 
