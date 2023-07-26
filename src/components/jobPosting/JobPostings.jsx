@@ -93,13 +93,9 @@ const JobPostings = () => {
   async function handleDelete(id) {
     try {
       const response = await deleteJob(id);
-      if (response.success) {
         // If the deletion was successful, update the state to remove the deleted job
+        console.log(response.message)
         setJobsData((prevJobsData) => prevJobsData.filter((job) => job.id !== id));
-        console.log("Trabajo eliminado exitosamente");
-      } else {
-        console.error("Error al eliminar el trabajo");
-      }
     } catch (error) {
       console.error("Error:", error);
     }
