@@ -2,12 +2,7 @@ import styled from "@emotion/styled";
 import JobPostCard from "./JobPostCard";
 import { useState, useEffect } from "react";
 import { getJobs } from "../../services/jobs-pro-services";
-
-import CircularCheckbox from "../inputs/circularCheckbox";
-import { FlexRowSm } from "../utils";
-
 import { deleteJob } from "../../services/jobs-pro-services";
-
 import CircularCheckbox from "../inputs/circularCheckbox";
 import { FlexRowSm } from "../utils";
 
