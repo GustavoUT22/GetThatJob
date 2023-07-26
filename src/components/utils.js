@@ -13,7 +13,7 @@ export const FlexColumnXs = styled.div`
 export const FlexRowSm = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 8px;
+  gap: 12px;
 `;
 export const FlexColumnSm = styled.div`
   display: flex;

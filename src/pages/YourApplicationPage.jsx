@@ -17,6 +17,8 @@ import {
 import { useNavigate } from "react-router";
 import { useCallback } from "react";
 
+import CircularCheckbox from "../components/inputs/circularCheckbox";
+
 const FilterName = styled.span`
   font-family: Inter;
   font-size: 10px;
@@ -33,6 +35,13 @@ const ApliFound = styled.span`
   font-weight: 500;
   line-height: 28px; /* 140% */
   letter-spacing: 0.15px;
+`;
+
+const OptionContainer = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
 `;
 
 function YourApplicationsPage() {
@@ -64,57 +73,32 @@ function YourApplicationsPage() {
           <Title>Your applications</Title>
           <div>
             <FilterName>Filter your applications</FilterName>
-            <FlexRowSm style={{alignItems: "baseline"}}>
-              <label htmlFor="radio1">
-                <input type="radio" 
-                  id="radio1" 
-                  name="filter" 
-                  value="all" 
-                  checked={selectedValue === "all"}
-                  onChange={handleChange}
-                  />
-                All
-              </label>
-              <label htmlFor="radio2">
-                <input type="radio" 
-                  id="radio2" 
-                  name="filter" 
-                  value="waiting" 
-                  checked={selectedValue === "waiting"}
-                  onChange={handleChange}
-                  />
-                Waiting
-              </label>
-              <label htmlFor="radio3">
-                <input type="radio" 
-                  id="radio3" 
-                  name="filter" 
-                  value="inProgress" 
-                  checked={selectedValue === "inProgress"}
-                  onChange={handleChange}
-                  />
-                In progress
-              </label>
-              <label htmlFor="radio4">
-                <input type="radio" 
-                  id="radio4" 
-                  name="filter" 
-                  value="finished" 
-                  checked={selectedValue === "finished"}
-                  onChange={handleChange}
-                  />
-                Finished
-              </label>
-              <label htmlFor="radio5">
-                <input type="radio" 
-                  id="radio5" 
-                  name="filter" 
-                  value="declined" 
-                  checked={selectedValue === "declined"}
-                  onChange={handleChange}
-                  />
-                Declined
-              </label>
+            <FlexRowSm>
+              <OptionContainer>
+                <CircularCheckbox />
+                <label htmlFor="radio1">All</label>
+                {/* <input type="radio" id="radio1" name="radio" /> */}
+              </OptionContainer>
+              <OptionContainer>
+                <CircularCheckbox />
+                <label htmlFor="radio2">Waiting</label>
+                {/* <input type="radio" id="radio2" name="radio" /> */}
+              </OptionContainer>
+              <OptionContainer>
+                <CircularCheckbox />
+                <label htmlFor="radio3">In progress</label>
+                {/* <input type="radio" id="radio3" name="radio" /> */}
+              </OptionContainer>
+              <OptionContainer>
+                <CircularCheckbox />
+                <label htmlFor="radio4">Finished</label>
+                {/* <input type="radio" id="radio4" name="radio" /> */}
+              </OptionContainer>
+              <OptionContainer>
+                <CircularCheckbox />
+                <label htmlFor="radio5">Declined</label>
+                {/* <input type="radio" id="radio5" name="radio" /> */}
+              </OptionContainer>
             </FlexRowSm>
           </div>
         </FlexColumnXs>

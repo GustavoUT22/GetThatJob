@@ -105,6 +105,7 @@ const PeopleImg = styled.img`
 const PeopleContainer = styled.div`
   display: flex;
   justify-content: center;
+  align-items: flex-end;
   gap: 1.31rem;
   margin: auto;
   margin-top: 2rem;

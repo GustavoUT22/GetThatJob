@@ -12,12 +12,12 @@ import InputFile from "../components/inputs/InputFile";
 
 const Container = styled.div`
   display: block;
-  width: 960px;
+  width: auto;
   height: 95.5vh;
   margin-top: 2rem;
   margin-left: 7.5rem;
   margin-right: 7.5rem;
-  overflow-y: auto;
+  overflow-y: scroll;
   ::-webkit-scrollbar {
     width: 5px;
   }
