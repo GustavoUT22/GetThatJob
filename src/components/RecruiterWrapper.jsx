@@ -4,6 +4,7 @@ import JobPostings from "./jobPosting/JobPostings";
 import SideBarRecruiter from "./SidebarRecruiter";
 import RecruiterProfile from "../pages/RecruiterProfilePage";
 import ShowJobPosted from "./jobPosting/showJobPosting";
+import ApplicationStatus from "./ApplicationStatus";
 
 import { Routes, Route, Router, Navigate } from "react-router-dom";
 
@@ -27,6 +28,7 @@ const RecruiterWrapper = () => {
           <Route path="jobs/create" element={<NewJob />} />
           <Route path="profile" element={<RecruiterProfile />} />
           <Route path="*" element={<Navigate to="/jobs" replace={true} />} />
+         
         </Route>
       </Routes>
     </MainWrap>

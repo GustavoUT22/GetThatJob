@@ -88,6 +88,7 @@ function NewApplicationPage() {
     why_interested: "",
     job_id: +id,
     professional_id: user.id,
+    status: "Waiting for review"
   });
   const navigate = useNavigate();
 
