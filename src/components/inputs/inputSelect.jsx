@@ -51,11 +51,16 @@ const OptionSelect = styled.option`
   padding: 8px;
 `;
 
-function SelectInput({ label, placeholder, options, defaultValue }) {
+function SelectInput({ label, placeholder, options, defaultValue, onChange, name }) {
+
+  function handleChange(event) {
+    onChange(event)
+  }
+  
   return (
     <div>
       {label ? <StyledLabel>{label}</StyledLabel> : ""}
-      <StyleSelectInput>
+      <StyleSelectInput onChange={handleChange} name={name}>
         <DefaultOption style={{ color: "gray" }} selected>
           {placeholder}
           {defaultValue}
