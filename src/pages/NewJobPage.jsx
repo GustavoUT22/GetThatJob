@@ -96,8 +96,8 @@ function NewJob() {
 
     const updatedJob = {
       title: title.value,
-      category: "Legal",
-      job_type: "Full Time",
+      category: job.category ? job.category : "",
+      job_type: job.type ? job.type : "",
       salary: 2000,
       mandatory: mandatory.value,
       optional_req: optional_req.value,
@@ -105,7 +105,7 @@ function NewJob() {
       recruiter_id: user.id,
     };
 
-    createJobs(updatedJob).then(console.log);
+    createJobs(updatedJob).then(console.log).catch(console.log);
 
     console.log(updatedJob);
     // try {
@@ -119,17 +119,17 @@ function NewJob() {
 
   // console.log(recruiter);
   const optionsDefault = [
-    { value: "Manufacturing ", label: "Manufacturing" },
-    { value: "Legal", label: "Legal" },
-    { value: "Goverment", label: "Goverment" },
-    { value: "Sales", label: "Sales" },
-    { value: "Education", label: "Education" },
+    { value: "Manufacturing ", label: "Manufacturing"},
+    { value: "Legal", label: "Legal"},
+    { value: "Goverment", label: "Goverment"},
+    { value: "Sales", label: "Sales"},
+    { value: "Education", label: "Education"},
   ];
 
   const optionsDefault2 = [
-    { value: "Full Time", label: "Full Time" },
-    { value: "Part Time", label: "Part Time" },
-    { value: "Internship", label: "Internship" },
+    { value: "Full Time", label: "Full Time"},
+    { value: "Part Time", label: "Part Time"},
+    { value: "Internship", label: "Internship"},
   ];
   return (
     <Container>
@@ -150,7 +150,7 @@ function NewJob() {
               placeholder={"Select or create a category"}
               name={"category"}
               value={job.category ? job.category : ""}
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={handleChange}
               options={optionsDefault}
             />
             <SelectInput
