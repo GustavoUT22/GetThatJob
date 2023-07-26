@@ -77,11 +77,40 @@ const OptionContainer = styled.span`
 
 const JobPostings = () => {
   const [jobsData, setJobsData] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState([])
+  const [filter, setFilter] = useState("all")
 
   useEffect(() => {
     getJobs().then(setJobsData).catch(console.log);
   }, []);
-  console.log(jobsData);
+
+  function handleFilterChange(event) {
+    setFilter(event.target.value)
+  }
+
+  useEffect(() => {
+    if(filter !== "all") {
+      switch (filter) {
+        case "onTrack":
+          const filtered1 = jobsData.filter((job) => job.applications.some((application) => application.status !== "Review finished") )
+          // this filter is test only
+          setFilteredJobs(filtered1)
+          break;
+        case "closed":
+          const filtered2 = jobsData.filter((job) => job.category === "Legal" )
+          // this filter is test only
+          setFilteredJobs(filtered2)
+        default:
+          break;
+      }
+    } else {
+      setFilteredJobs(jobsData)
+    }
+  }, [filter])
+
+  console.log(jobsData)
+  // I need jobsData.status and close button change status for job posted
+
   return (
     <Container>
       <h1>Job Postings</h1>
@@ -91,27 +120,27 @@ const JobPostings = () => {
           <div>
             <FlexRowSm>
               <OptionContainer>
-                <CircularCheckbox />
-                {/* <input type="checkbox" id="all" /> */}
+                {/* <CircularCheckbox /> */}
+                <input type="radio" id="all" name="filter" value={"all"} onChange={handleFilterChange}/>
                 <label htmlFor="all">All</label>
               </OptionContainer>
               <OptionContainer>
-                <CircularCheckbox />
-                {/* <input type="checkbox" id="onTrack" /> */}
+                {/* <CircularCheckbox /> */}
+                <input type="radio" id="onTrack" name="filter" value={"onTrack"} onChange={handleFilterChange}/>
                 <label htmlFor="onTrack">With candidates on track</label>
               </OptionContainer>
               <OptionContainer>
-                <CircularCheckbox />
-                {/* <input type="checkbox" id="closed" /> */}
+                {/* <CircularCheckbox /> */}
+                <input type="radio" id="closed" name="filter" value={"closed"} onChange={handleFilterChange}/>
                 <label htmlFor="closed">Closed</label>
               </OptionContainer>
             </FlexRowSm>
           </div>
         </div>
         <div>
-          <h3>{jobsData.length} jobs postings found</h3>
+          <h3>{filteredJobs.length} jobs postings found</h3>
           <div>
-            {jobsData.map((job, index) => (
+            {filteredJobs.map((job, index) => (
               <JobPostCard
                 id={job.id}
                 title={job.title}
@@ -122,6 +151,9 @@ const JobPostings = () => {
                 mandatory={job.mandatory}
                 optional_req={job.optional_req}
                 key={index}
+                applications={job.applications}
+                created_at={job.created_at}
+                applications_count={job.applications_count}
               />
             ))}
           </div>

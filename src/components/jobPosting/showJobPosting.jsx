@@ -35,9 +35,12 @@ function ShowJobPosted() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [jobsData, setJobsData] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState([])
+  const [filter, setFilter] = useState("all")
 
   useEffect(() => {
     getJobRecruiter(id).then(setJobsData).catch(console.log);
+    // update information of created_at from getJobRecruiter
   }, [status]);
 
   useEffect(() => {
@@ -46,15 +49,26 @@ function ShowJobPosted() {
     }
   }, [status]);
 
-  console.log(jobsData);
-
+  useEffect(() => {
+    if(filter !== "all") {
+      const filtered = jobsData.applications.filter((job) => job.status === filter)
+      setFilteredJobs(filtered)
+    } else {
+      setFilteredJobs(jobsData.applications)
+    }
+  },[filter])
+  
   function handleBack() {
     navigate("/jobs");
   }
 
+  function handleFilterChange(event) {
+    setFilter(event.target.value)
+  }
+  
   return (
     <Container>
-      <div onClick={handleBack}>
+      <div style={{display: "flex", alignContent: "center", cursor: "pointer"}} onClick={handleBack}>
         <RiArrowLeftSLine style={{ height: "24px", width: "24px" }} />
         <span>BACK</span>
       </div>
@@ -68,25 +82,30 @@ function ShowJobPosted() {
         about={jobsData.about}
         mandatory={jobsData.mandatory}
         optional_req={jobsData.optional_req}
+        applications={jobsData.applications}
+        created_at={jobsData.created_at}
+        applications_count={jobsData.applications_count}
       />
       <div style={{ marginTop: "1rem", marginBottom: "1rem" }}>
         <p>Filter your Job Postings</p>
         <div>
-          <input type="checkbox" id="all" />
+          <input type="radio" id="all" value={"all"} name="filter" onChange={handleFilterChange} checked={filter === "all"} />
           <label htmlFor="all">All</label>
-          <input type="checkbox" id="onTrack" />
-          <label htmlFor="onTrack">With candidates on track</label>
-          <input type="checkbox" id="closed" />
-          <label htmlFor="closed">Closed</label>
+          <input type="radio" id="waiting" value={"Waiting for review"} name="filter" onChange={handleFilterChange} checked={filter === "Waiting for review"} />
+          <label htmlFor="waiting">Waiting</label>
+          <input type="radio" id="inProgress" value={"Review in progress"} name="filter" onChange={handleFilterChange} checked={filter === "Review in progress"} />
+          <label htmlFor="inProgress">In progress</label>
+          <input type="radio" id="finished" value={"Review finished"} name="filter" onChange={handleFilterChange} checked={filter === "Review finished"} />
+          <label htmlFor="finished">Finished</label>
         </div>
       </div>
       <CandidatesCount>
         {" "}
-        {jobsData.applications?.length ?? 0} candidates found
+        {filteredJobs.length ?? 0} candidates found
       </CandidatesCount>
-      {jobsData.length === 0
+      {filteredJobs.length === 0
         ? ""
-        : jobsData.applications.map((job, index) => (
+        : filteredJobs.map((job, index) => (
             <CandidateCard
               key={index}
               job={job}

@@ -153,11 +153,8 @@ const ButtonS = styled.div`
 `;
 
 const CandidateCard = ({ job, status, setStatus }) => {
-  console.log(job);
-
   const { user } = useAuth();
   const navigate = useNavigate();
-  console.log(job.id);
   const [showDetail, setShowDetail] = useState(false);
   function handleShowDetail() {
     if (showDetail) {
