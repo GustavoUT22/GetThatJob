@@ -137,9 +137,10 @@ const JobsOpen = styled.span`
 
 function FollowCards({ props }) {
   const navigate = useNavigate();
-  console.log(props.followable_type);
+  
   const [followData, setFollowData] = useState([]);
   const id = props.followable_id;
+  console.log(followData.id)
   useEffect(() => {
     if (props.followable_type == "Job") {
       showJob(id).then(setFollowData).catch(console.log);
@@ -147,6 +148,8 @@ function FollowCards({ props }) {
       showJob(id).then(setFollowData);
     }
   }, []);
+  
+ 
 
   return (
     <CardJobWrapper>
@@ -194,10 +197,10 @@ function FollowCards({ props }) {
       <ButtonsContainer>
         <FollowButtonWrapper>
           <RiFocus3Line style={{ width: "24px", height: "24px" }} />
-          follow
+          FOLLOW
         </FollowButtonWrapper>
-        <SeeMore onClick={() => navigate(`/jobs/${followData.id}`)}>
-          see more
+        <SeeMore to= {`/jobs/${id}`}>
+          SEE MORE
         </SeeMore>
       </ButtonsContainer>
     </CardJobWrapper>

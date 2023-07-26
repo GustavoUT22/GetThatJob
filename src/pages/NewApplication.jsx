@@ -136,7 +136,7 @@ function NewApplicationPage() {
               <img src={jobLogo} />
             </div>
             <div>
-              {/* <h3>{jobData.company_name}</h3> */}
+               <h3>{jobData.company_name}</h3> 
               <div>
                 <img src={followingIcon} />
               </div>
