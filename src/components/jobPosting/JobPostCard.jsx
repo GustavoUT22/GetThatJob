@@ -18,6 +18,7 @@ import {
 } from "react-icons/ri";
 import { useNavigate } from "react-router";
 import { getFormattedDate } from "../utils";
+import { deleteJob, getJobs } from "../../services/jobs-pro-services";
 
 const Container = styled.div`
   display: flex;
@@ -168,11 +169,28 @@ function JobPostCard({
     navigate(`/jobs/${id}`);
   }
 
-  console.log(created_at)
-  
-  const formattedDate = created_at ? getFormattedDate(created_at) : ""
-  const { length } = applications ? applications.filter((application) => application.status !== "Review finished") : ""
+  async function handleDelete(id) {
+    try {
+      const response = await deleteJob(id);
+       if (response.success) {
+         console.log("Trabajo eliminado exitosamente");
+       } else {
+         console.error("Error al eliminar el trabajo");
+       }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
 
+  console.log(id);
+  
+  const formattedDate = created_at ? getFormattedDate(created_at) : "";
+  const { length } = applications
+    ? applications.filter(
+        (application) => application.status !== "Review finished"
+      )
+    : "";
+  console.log(id);
   return (
     <Container>
       <CardContainer>
@@ -224,7 +242,7 @@ function JobPostCard({
               }
               type={"primary"}
               size={"sm"}
-              // onClick={handleDeclineClick}
+              onClick={async () => handleDelete(id)}
             />
           </div>
           <div onClick={handleShowDetail}>
