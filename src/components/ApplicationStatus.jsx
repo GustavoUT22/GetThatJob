@@ -47,8 +47,6 @@ const ApplicationStatus = ({ props, status, setStatus }) => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  console.log(props.status);
-
   const handleStart = async () => {
     console.log("handling");
     try {
@@ -96,7 +94,6 @@ const ApplicationStatus = ({ props, status, setStatus }) => {
 
   const originalDate = sendDate;
   const result = formatFecha(originalDate);
-  console.log(result);
 
   return (
     <Container>

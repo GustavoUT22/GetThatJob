@@ -16,6 +16,7 @@ import {
   RiCloseCircleLine,
 } from "react-icons/ri";
 import { useNavigate } from "react-router";
+import { getFormattedDate } from "../utils";
 
 const Container = styled.div`
   display: flex;
@@ -142,6 +143,9 @@ function JobPostCard({
   about,
   mandatory,
   optional_req,
+  created_at,
+  applications,
+  applications_count,
 }) {
   const navigate = useNavigate();
   const [showDetail, setShowDetail] = useState(false);
@@ -154,20 +158,20 @@ function JobPostCard({
       value: salary,
     },
   ];
-  console.log(title);
 
   function handleShowDetail() {
-    if (showDetail) {
-      setShowDetail(false);
-    }
-    if (!showDetail) {
-      setShowDetail(true);
-    }
+    setShowDetail(!showDetail)
   }
 
   function handleShow() {
     navigate(`/jobs/${id}`);
   }
+
+  console.log(created_at)
+  
+  const formattedDate = created_at ? getFormattedDate(created_at) : ""
+  const { length } = applications ? applications.filter((application) => application.status !== "Review finished") : ""
+
   return (
     <Container>
       <CardContainer>
@@ -186,12 +190,12 @@ function JobPostCard({
           <div>
             <RiMailOpenLine />
             <p>Open on</p>
-            <p>07/11/20</p>
+            <p>{formattedDate}</p>
           </div>
           <div>
             <div>
               <RiAccountCircleLine />
-              <span>5</span>
+              <span>{applications_count}</span>
             </div>
             <p>Total</p>
             <p>Candidates</p>
@@ -199,7 +203,7 @@ function JobPostCard({
           <div>
             <div>
               <RiAccountCircleLine />
-              <span>3</span>
+              <span>{length}</span>
             </div>
             <p>Candidates</p>
             <p>on Track</p>
