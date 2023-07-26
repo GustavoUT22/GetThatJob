@@ -120,12 +120,13 @@ function ProfessionalProfile() {
       professional_title,
       experience,
       education,
-      file,
+      // file,
     } = e.target.elements;
 
     const formFile = new FormData();
-    formFile.append("file", file);
 
+    console.log(file);
+    console.log();
     const updatedUser = {
       email: email.value,
       name: name.value,
@@ -137,11 +138,14 @@ function ProfessionalProfile() {
       education: education.value,
       resume: formFile,
     };
-
-    console.log("updatedUser");
+    for (const [key, value] of Object.entries(updatedUser)) {
+      formFile.append(key, value);
+    }
+    console.log("updatedUser", formFile);
+    formFile.append("resume", file);
 
     try {
-      await updateUser(updatedUser)
+      await updateUser(formFile)
         .then(console.log("User updated successfully."))
         .catch(console.log);
     } catch (error) {
@@ -221,13 +225,13 @@ function ProfessionalProfile() {
           />
 
           <InputFile
-            id={"updCV"}
-            name={"updCV"}
+            id={"professional[resume]"}
+            name={"professional[resume]"}
             label={"Upload/Update Your CV"}
             caption={"Only PDF. Max size 5MB"}
             onChange={handleFileChange}
             file={file}
-          ></InputFile>
+          />
         </ProfessionalContainer>
 
         <Button type="primary" size={"sm"}>

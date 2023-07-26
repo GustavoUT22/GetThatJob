@@ -1,5 +1,6 @@
 import getJobClient from "./api-fecth";
 import { tokenKey } from "../config";
+import getCvClient from "./cv-fecth";
 
 export async function login(credentials) {
   const { token, ...user } = await getJobClient("login/professionals", {
@@ -33,7 +34,7 @@ export async function getUser() {
 }
 
 export async function updateUser(userData) {
-  const { token, ...user } = await getJobClient("profile/professionals", {
+  const { token, ...user } = await getCvClient("profile/professionals", {
     method: "PATCH",
     body: userData,
   });
