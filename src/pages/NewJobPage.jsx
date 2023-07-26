@@ -8,6 +8,8 @@ import Price from "../components/inputs/input-price";
 import { typography } from "../styles/typography";
 import { colors } from "../styles/colors";
 import { useState, useCallback } from "react";
+import { createJobs } from "../services/jobs-pro-services";
+import { useAuth } from "../context/auth-context";
 
 const Container = styled.div`
   display: block;
@@ -71,6 +73,7 @@ const InputContainer = styled.div`
 function NewJob() {
   const [job, setJobs] = useState({});
   const [category, setCategory] = useState("");
+  const { user } = useAuth();
 
   const handleChange = (e) => {
     setJobs({
@@ -93,13 +96,16 @@ function NewJob() {
 
     const updatedJob = {
       title: title.value,
-      // category: category.value,
-      // job_type: job_type.value,
-      // salary: salary.value,
+      category: "Legal",
+      job_type: "Full Time",
+      salary: 2000,
       mandatory: mandatory.value,
       optional_req: optional_req.value,
       about: about.value,
+      recruiter_id: user.id,
     };
+
+    createJobs(updatedJob).then(console.log);
 
     console.log(updatedJob);
     // try {
@@ -112,7 +118,19 @@ function NewJob() {
   }, []);
 
   // console.log(recruiter);
+  const optionsDefault = [
+    { value: "Manufacturing ", label: "Manufacturing" },
+    { value: "Legal", label: "Legal" },
+    { value: "Goverment", label: "Goverment" },
+    { value: "Sales", label: "Sales" },
+    { value: "Education", label: "Education" },
+  ];
 
+  const optionsDefault2 = [
+    { value: "Full Time", label: "Full Time" },
+    { value: "Part Time", label: "Part Time" },
+    { value: "Internship", label: "Internship" },
+  ];
   return (
     <Container>
       <Profile>Create new job posting</Profile>
@@ -133,6 +151,7 @@ function NewJob() {
               name={"category"}
               value={job.category ? job.category : ""}
               onChange={(e) => setCategory(e.target.value)}
+              options={optionsDefault}
             />
             <SelectInput
               label={"Type"}
@@ -140,6 +159,7 @@ function NewJob() {
               name={"type"}
               value={job.type ? job.type : ""}
               onChange={handleChange}
+              options={optionsDefault2}
             />
             <Price
               label={"Salary Range"}

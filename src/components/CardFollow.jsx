@@ -102,7 +102,7 @@ const SeeMore = styled(Link)`
   text-decoration: none;
   color: ${colors.gray.gray};
   display: flex;
-  padding: 8px 16px;
+  padding: 8px 8px;
   height: 40px;
   align-items: center;
   border-radius: 16px;
@@ -195,8 +195,17 @@ function FollowCards({ props }) {
       </CompanyInfo>
       <ButtonsContainer>
         <FollowButtonWrapper>
-          <RiFocus3Line style={{ width: "24px", height: "24px" }} />
-          FOLLOW
+          <RiFocus3Line
+            style={{
+              width: "24px",
+              height: "24px",
+              backgroundColor: `${colors.pink.pink}`,
+              borderRadius: "50%",
+              padding: "4px",
+              color: "white",
+            }}
+          />
+          FOLLOWING
         </FollowButtonWrapper>
         {props.followable_type == "Job" ? (
           <SeeMore to={`/jobs/${id}`}>SEE MORE</SeeMore>

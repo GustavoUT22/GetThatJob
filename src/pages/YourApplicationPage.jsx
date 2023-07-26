@@ -49,14 +49,14 @@ function YourApplicationsPage() {
   const [selectedValue, setSelectedValue] = useState("");
   const navigate = useNavigate();
 
-  useCallback(
-    useEffect(() => {
-      getApplications().then(setApplyData).catch(console.log);
-    }, [])
-  );
+  // useCallback(
+  useEffect(() => {
+    getApplications().then(setApplyData).catch(console.log);
+  }, []);
+  // );
 
   function handleChange(event) {
-    setSelectedValue(event.target.value)
+    setSelectedValue(event.target.value);
   }
 
   async function handleDecline(id) {
@@ -64,43 +64,43 @@ function YourApplicationsPage() {
     await getApplications().then(setApplyData).catch(console.log);
   }
 
-  console.log(selectedValue)
+  console.log(selectedValue);
 
   return (
     <ContainerSearch>
       <FlexColumnSm>
         <FlexColumnXs>
           <Title>Your applications</Title>
-          <div>
+          {/* <div>
             <FilterName>Filter your applications</FilterName>
             <FlexRowSm>
               <OptionContainer>
                 <CircularCheckbox />
                 <label htmlFor="radio1">All</label>
-                {/* <input type="radio" id="radio1" name="radio" /> */}
+        
               </OptionContainer>
               <OptionContainer>
                 <CircularCheckbox />
                 <label htmlFor="radio2">Waiting</label>
-                {/* <input type="radio" id="radio2" name="radio" /> */}
+          
               </OptionContainer>
               <OptionContainer>
                 <CircularCheckbox />
                 <label htmlFor="radio3">In progress</label>
-                {/* <input type="radio" id="radio3" name="radio" /> */}
+      
               </OptionContainer>
               <OptionContainer>
                 <CircularCheckbox />
                 <label htmlFor="radio4">Finished</label>
-                {/* <input type="radio" id="radio4" name="radio" /> */}
+ 
               </OptionContainer>
               <OptionContainer>
                 <CircularCheckbox />
                 <label htmlFor="radio5">Declined</label>
-                {/* <input type="radio" id="radio5" name="radio" /> */}
+        
               </OptionContainer>
             </FlexRowSm>
-          </div>
+          </div> */}
         </FlexColumnXs>
         <ApliFound>{applyData.length} applications found</ApliFound>
         <FlexColumnSm>

@@ -47,23 +47,23 @@ export const ContainerCards = styled.div`
   flex-wrap: wrap;
   padding: 4px 10px;
   gap: 16px 32px;
-  overflow-y: auto;
-  ::-webkit-scrollbar {
-    width: 5px;
-  }
+  // overflow-y: auto;
+  // ::-webkit-scrollbar {
+  //   width: 5px;
+  // }
 
-  ::-webkit-scrollbar-thumb {
-    background-color: ${colors.pink.light};
-    border-radius: 5px;
-  }
+  // ::-webkit-scrollbar-thumb {
+  //   background-color: ${colors.pink.light};
+  //   border-radius: 5px;
+  // }
 
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: ${colors.pink.pink};
-  }
+  // ::-webkit-scrollbar-thumb:hover {
+  //   background-color: ${colors.pink.pink};
+  // }
 
-  ::-webkit-scrollbar-track {
-    background-color: white;
-  }
+  // ::-webkit-scrollbar-track {
+  //   background-color: white;
+  // }
   height: 59vh;
   margin-top: 16px;
 `;
@@ -80,8 +80,8 @@ function SearchJob() {
   const [price, setPrice] = useState({
     min: "",
     max: "",
-  })
-  const [search, setSearch] = useState("")
+  });
+  const [search, setSearch] = useState("");
 
   function handleChange(name, value) {
     setSelectedOptions({
@@ -108,10 +108,10 @@ function SearchJob() {
       }
 
       if (max <= min) {
-        min = (max - 1) < 0 ? 0 : (max - 1);
+        min = max - 1 < 0 ? 0 : max - 1;
       }
 
-      if(min === 0 && max === 0) {
+      if (min === 0 && max === 0) {
         max = 1;
       }
     }
@@ -123,20 +123,20 @@ function SearchJob() {
   }
 
   function handleSearchChange(event) {
-    const { value } = event.target
-    setSearch(value.toLowerCase())
+    const { value } = event.target;
+    setSearch(value.toLowerCase());
   }
 
   function handleReset() {
-    setSearch("")
+    setSearch("");
     setPrice({
       min: "",
       max: "",
-    })
+    });
     setSelectedOptions({
       category: [],
       type: [],
-    })
+    });
   }
 
   const options = [
@@ -164,24 +164,34 @@ function SearchJob() {
       .catch(console.log);
   }, []);
 
-
   useEffect(() => {
-    const filterJobs = Filter(jobsData.all, selectedOptions.category, selectedOptions.type)
-    const priceFilterJobs = priceFilter(filterJobs, price.min, price.max)
-    const searchFilter = searchBarFilter(priceFilterJobs, search)
+    const filterJobs = Filter(
+      jobsData.all,
+      selectedOptions.category,
+      selectedOptions.type
+    );
+    const priceFilterJobs = priceFilter(filterJobs, price.min, price.max);
+    const searchFilter = searchBarFilter(priceFilterJobs, search);
     setJobsData({
       ...jobsData,
       filtered: searchFilter,
-    })
-  }, [selectedOptions, price, search])
+    });
+  }, [selectedOptions, price, search]);
 
   const countJobs = `${jobsData.filtered.length} Jobs for you`;
 
   return (
     <ContainerSearch>
       <Title>Find a job</Title>
-      <InputSearch onChange={handleSearchChange} value={search}/>
-      <div style={{display: "flex", alignItems: "flex-end", justifyContent: "space-between", width: "85%"}}>
+      <InputSearch onChange={handleSearchChange} value={search} />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "flex-end",
+          justifyContent: "space-between",
+          width: "85%",
+        }}
+      >
         <div>
           <div
             style={{
@@ -200,7 +210,9 @@ function SearchJob() {
                 onChange={handleChange}
               />
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "2px" }}
+            >
               <StyledLabel>type</StyledLabel>
               <CheckSelect
                 type={"type"}
@@ -210,12 +222,19 @@ function SearchJob() {
               />
             </div>
             <div>
-              <Price price={price} onChange={handlePriceChange}/>
+              <Price price={price} onChange={handlePriceChange} />
             </div>
-      </div>
+          </div>
         </div>
         <div>
-          <Button style={{marginBottom: "5px"}} type={"primary"} size={"sm"} onClick={handleReset}>Reset Filters</Button>
+          <Button
+            style={{ marginBottom: "5px" }}
+            type={"primary"}
+            size={"sm"}
+            onClick={handleReset}
+          >
+            Reset Filters
+          </Button>
         </div>
       </div>
       <ContainerJobCards>

@@ -51,7 +51,7 @@ const InputContainer = styled.div`
 
 function RecruiterProfile() {
   const [recruiter, setRecruiter] = useState({});
-  const [file, setFile] = useState(null)
+  const [file, setFile] = useState(null);
 
   useEffect(() => {
     const fetchRecruiter = async () => {
@@ -108,14 +108,14 @@ function RecruiterProfile() {
       <Profile>Profile</Profile>
       <form onSubmit={handleSubmit}>
         <InputContainer>
-          <InputFile 
+          {/* <InputFile 
             id={"updLogo"} 
             name={"updLogo"} 
             label={"Company Logo"} 
             caption={"PNG, JPG, IMG"}
             onChange={handleFileChange}
             file={file}
-          ></InputFile>
+          ></InputFile> */}
           <Input
             label={"Company Email"}
             type="email"

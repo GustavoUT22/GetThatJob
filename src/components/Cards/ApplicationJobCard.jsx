@@ -107,7 +107,6 @@ function ApplicationJobCard({ props, onDelete }) {
 
   console.log(props);
 
-
   return (
     <ApplicationBox>
       <div>
@@ -195,12 +194,12 @@ function ApplicationJobCard({ props, onDelete }) {
               justifyContent: "space-evenly",
             }}
           >
-            <Button
+            {/* <Button
               children={"download"}
               icon={<RiDownloadLine />}
               type={"secondary"}
               size={"sm"}
-            />
+            /> */}
             <Button
               children={"decline application"}
               icon={<RiCloseCircleLine />}

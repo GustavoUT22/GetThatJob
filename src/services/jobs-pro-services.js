@@ -9,6 +9,15 @@ export async function getJobs() {
   return data;
 }
 
+export async function createJobs(info) {
+  const data = await getJobClient("/jobs", {
+    method: "POST",
+    body: info,
+  });
+  // localStorage.setItem(dataJobs, JSON.stringify(data));
+  return data;
+}
+
 export async function getJobRecruiter(id) {
   const data = await getJobClient(`/jobs/${id}`, {
     method: "GET",

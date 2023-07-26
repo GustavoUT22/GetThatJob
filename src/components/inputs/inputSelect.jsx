@@ -51,18 +51,7 @@ const OptionSelect = styled.option`
   padding: 8px;
 `;
 
-const optionsDefault = [
-  { value: "option1", label: "Opción 1" },
-  { value: "option2", label: "Opción 2" },
-  { value: "option3", label: "Opción 3" },
-];
-
-function SelectInput({
-  label,
-  placeholder,
-  options = optionsDefault,
-  defaultValue,
-}) {
+function SelectInput({ label, placeholder, options, defaultValue }) {
   return (
     <div>
       {label ? <StyledLabel>{label}</StyledLabel> : ""}

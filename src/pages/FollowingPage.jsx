@@ -64,12 +64,12 @@ function FollowingPage() {
               <FollowCards props={job} />
             ))}
           </ContainerFollow>
-          <h3>You are following {companies.length} companies</h3>
+          {/* <h3>You are following {companies.length} companies</h3>
           <ContainerFollow>
             {companies.map((company) => (
               <FollowCards props={company} />
             ))}
-          </ContainerFollow>
+          </ContainerFollow> */}
         </FollowsCard>
       </div>
     </ContainerFollowing>

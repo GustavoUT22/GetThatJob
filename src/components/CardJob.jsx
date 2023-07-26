@@ -9,6 +9,9 @@ import { colors } from "../styles/colors";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../context/auth-context";
+import { postFollows } from "../services/following-services";
+import { deleteFollows } from "../services/following-services";
 
 const CardJobWrapper = styled.div`
   display: flex;
@@ -98,7 +101,7 @@ const SeeMore = styled(Link)`
   text-decoration: none;
   color: ${colors.gray.gray};
   display: flex;
-  padding: 8px 16px;
+  padding: 8px 10px;
   height: 40px;
   align-items: center;
   border-radius: 16px;
@@ -121,11 +124,12 @@ const FollowIconWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 32px; 
+  width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: ${({followStatus}) => followStatus ? colors.pink.pink : ""};
-`
+  background-color: ${({ followStatus }) =>
+    followStatus ? colors.pink.pink : ""};
+`;
 
 const ButtonsContainer = styled.div`
   display: flex;
@@ -134,10 +138,18 @@ const ButtonsContainer = styled.div`
 `;
 
 function CardJob({ props }) {
-  const [followStatus, setFollowStatus] = useState(props.follow)
-
+  const [followStatus, setFollowStatus] = useState(props.follow);
+  const { user } = useAuth();
   function handleFollow() {
-    setFollowStatus(!followStatus)
+    const followData = {
+      followable_type: "Job",
+      followable_id: props.id,
+      professional_id: user.id,
+    };
+    console.log(props);
+    followStatus ? deleteFollows(props.follow.id) : postFollows(followData);
+
+    setFollowStatus(!followStatus);
   }
 
   return (
@@ -171,7 +183,17 @@ function CardJob({ props }) {
       <ButtonsContainer>
         <FollowButtonWrapper onClick={handleFollow}>
           <FollowIconWrapper followStatus={followStatus}>
-            {followStatus ? <RiFocus3Line style={{ width: "22px", height: "22px", color: `${colors.white}` }} /> : <RiFocus3Line style={{ width: "22px", height: "22px" }} /> }
+            {followStatus ? (
+              <RiFocus3Line
+                style={{
+                  width: "22px",
+                  height: "22px",
+                  color: `${colors.white}`,
+                }}
+              />
+            ) : (
+              <RiFocus3Line style={{ width: "22px", height: "22px" }} />
+            )}
           </FollowIconWrapper>
           {followStatus ? "FOLLOWING" : "FOLLOW"}
         </FollowButtonWrapper>

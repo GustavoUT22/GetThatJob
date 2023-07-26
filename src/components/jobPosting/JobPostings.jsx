@@ -6,7 +6,6 @@ import { deleteJob } from "../../services/jobs-pro-services";
 import CircularCheckbox from "../inputs/circularCheckbox";
 import { FlexRowSm } from "../utils";
 
-
 const Container = styled.div`
   display: block;
   width: 960px;
@@ -78,53 +77,57 @@ const OptionContainer = styled.span`
 
 const JobPostings = () => {
   const [jobsData, setJobsData] = useState([]);
-  const [filteredJobs, setFilteredJobs] = useState([])
-  const [filter, setFilter] = useState("all")
+  const [filteredJobs, setFilteredJobs] = useState([]);
+  const [filter, setFilter] = useState("all");
 
   useEffect(() => {
     getJobs().then(setJobsData).catch(console.log);
   }, []);
 
-
   function handleFilterChange(event) {
-    setFilter(event.target.value)
+    setFilter(event.target.value);
   }
 
   async function handleDelete(id) {
     try {
       const response = await deleteJob(id);
-        // If the deletion was successful, update the state to remove the deleted job
-        console.log(response.message)
-        setJobsData((prevJobsData) => prevJobsData.filter((job) => job.id !== id));
+      // If the deletion was successful, update the state to remove the deleted job
+      console.log(response.message);
+      setJobsData((prevJobsData) =>
+        prevJobsData.filter((job) => job.id !== id)
+      );
     } catch (error) {
       console.error("Error:", error);
     }
   }
 
   useEffect(() => {
-    if(filter !== "all") {
+    if (filter !== "all") {
       switch (filter) {
         case "onTrack":
-          const filtered1 = jobsData.filter((job) => job.applications.some((application) => application.status !== "Review finished") )
+          const filtered1 = jobsData.filter((job) =>
+            job.applications.some(
+              (application) => application.status !== "Review finished"
+            )
+          );
           // this filter is test only
-          setFilteredJobs(filtered1)
+          setFilteredJobs(filtered1);
           break;
         case "closed":
-          const filtered2 = jobsData.filter((job) => job.category === "Legal" )
+          const filtered2 = jobsData.filter((job) => job.category === "Legal");
           // this filter is test only
-          setFilteredJobs(filtered2)
+          setFilteredJobs(filtered2);
           break;
         default:
           break;
       }
     } else {
-      setFilteredJobs(jobsData)
+      setFilteredJobs(jobsData);
     }
-  }, [filter, jobsData])
+  }, [filter, jobsData]);
 
-  console.log(jobsData)
+  console.log(jobsData);
   // I need jobsData.status and close button change status for job posted
-
 
   return (
     <Container>
@@ -136,19 +139,33 @@ const JobPostings = () => {
             <FlexRowSm>
               <OptionContainer>
                 {/* <CircularCheckbox /> */}
-                <input type="radio" id="all" name="filter" value={"all"} onChange={handleFilterChange} checked={filter === "all"}/>
+                <input
+                  type="radio"
+                  id="all"
+                  name="filter"
+                  value={"all"}
+                  onChange={handleFilterChange}
+                  checked={filter === "all"}
+                />
                 <label htmlFor="all">All</label>
               </OptionContainer>
               <OptionContainer>
                 {/* <CircularCheckbox /> */}
-                <input type="radio" id="onTrack" name="filter" value={"onTrack"} onChange={handleFilterChange} checked={filter === "onTrack"}/>
+                <input
+                  type="radio"
+                  id="onTrack"
+                  name="filter"
+                  value={"onTrack"}
+                  onChange={handleFilterChange}
+                  checked={filter === "onTrack"}
+                />
                 <label htmlFor="onTrack">With candidates on track</label>
               </OptionContainer>
-              <OptionContainer>
-                {/* <CircularCheckbox /> */}
+              {/* <OptionContainer>
+          
                 <input type="radio" id="closed" name="filter" value={"closed"} onChange={handleFilterChange} checked={filter === "closed"}/>
                 <label htmlFor="closed">Closed</label>
-              </OptionContainer>
+              </OptionContainer> */}
             </FlexRowSm>
           </div>
         </div>
@@ -157,9 +174,9 @@ const JobPostings = () => {
           <div>
             {filteredJobs.map((job, index) => (
               <JobPostCard
-              handleDelete={handleDelete}
-              jobsData={jobsData}
-              setJobsData={setJobsData}
+                handleDelete={handleDelete}
+                jobsData={jobsData}
+                setJobsData={setJobsData}
                 id={job.id}
                 title={job.title}
                 category={job.category}
