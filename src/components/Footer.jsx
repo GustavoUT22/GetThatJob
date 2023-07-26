@@ -20,7 +20,7 @@ const FooterContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 16px 31px;
+  padding: 8px 31px 16px 31px;
   box-sizing: border-box;
   font-family: "Montserrat";
 `;

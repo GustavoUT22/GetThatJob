@@ -15,6 +15,7 @@ import followingIcon from "../../assets/FollowButton.png";
 import { showJob } from "../../services/jobs-pro-services";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import { colors } from "../../styles";
 
 export const Container = styled.div`
   display: block;
@@ -188,6 +189,35 @@ const JobDetails = () => {
   ];
 
   console.log(jobData);
+  function FormatDateAgo(isoDate) {
+    const date = new Date(isoDate);
+    const currentDate = new Date();
+    const differenceInTime = currentDate - date;
+    const differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
+    const differenceInWeeks = Math.floor(differenceInDays / 7);
+
+    if (differenceInDays === 0) {
+      return "Today";
+    } else if (differenceInWeeks >= 1) {
+      if (differenceInDays >= 365) {
+        return date.toLocaleDateString("en-US", {
+          year: "2-digit",
+          month: "2-digit",
+          day: "2-digit",
+        });
+      } else {
+        return `${differenceInWeeks} ${
+          differenceInWeeks === 1 ? "week" : "weeks"
+        } ago`;
+      }
+    } else {
+      return `${differenceInDays} ${
+        differenceInDays === 1 ? "day" : "days"
+      } ago`;
+    }
+  }
+  // Uso de la función formatDateAgo
+  const formattedDate = formatDateAgo(jobData.created_at);
 
   return (
     <Container>
@@ -213,7 +243,7 @@ const JobDetails = () => {
               children={"apply now"}
               icon={<LuMousePointer2 />}
               type={"primary"}
-              size={"sm"}
+              size={"lg"}
               onClick={() => navigate(`/jobs/${jobData.id}/apply`)}
             />
           </div>
@@ -221,8 +251,14 @@ const JobDetails = () => {
         <div>
           <h1>{jobData.title}</h1>
           <div>
-            <RiTimeLine style={{ height: "15px", width: "15px" }} />
-            <span>{jobData.created_at}</span>
+            <RiTimeLine
+              style={{
+                height: "15px",
+                width: "15px",
+                color: `${colors.gray.gray}`,
+              }}
+            />
+            <span>{formattedDate}</span>
           </div>
         </div>
         <div>
@@ -270,7 +306,7 @@ const JobDetails = () => {
             children={"apply now"}
             icon={<LuMousePointer2 />}
             type={"primary"}
-            size={"sm"}
+            size={"lg"}
             onClick={() => navigate(`/jobs/${jobData.id}/apply`)}
           />
         </div>

@@ -13,7 +13,7 @@ export const FlexColumnXs = styled.div`
 export const FlexRowSm = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 8px;
+  gap: 12px;
 `;
 export const FlexColumnSm = styled.div`
   display: flex;
@@ -129,4 +129,51 @@ export function searchBarFilter(jobs, searchTerm) {
     return filteredData;
   }
   return jobs;
+}
+
+export function getSentTime(date) {
+  const sentDate = new Date(date);
+  const currentDate = new Date();
+
+  const timeDifferenceInMilliseconds = currentDate - sentDate;
+  const timeDifferenceInMinutes = Math.floor(
+    timeDifferenceInMilliseconds / (1000 * 60)
+  );
+  const timeDifferenceInHours = Math.floor(
+    timeDifferenceInMilliseconds / (1000 * 60 * 60)
+  );
+  const timeDifferenceInDays = Math.floor(
+    timeDifferenceInMilliseconds / (1000 * 60 * 60 * 24)
+  );
+
+  let formattedTimeDifference;
+
+  if (timeDifferenceInMinutes < 1) {
+    formattedTimeDifference = "sent just now";
+  } else if (timeDifferenceInMinutes < 60) {
+    formattedTimeDifference = `sent ${timeDifferenceInMinutes} min. ago`;
+  } else if (timeDifferenceInHours < 24) {
+    formattedTimeDifference = `sent ${timeDifferenceInHours} hour(s) ago`;
+  } else {
+    formattedTimeDifference = `sent ${timeDifferenceInDays} day(s) ago`;
+  }
+
+  return formattedTimeDifference;
+}
+
+export function getFormattedDate(date) {
+  const [year, month, day] = date.slice(2, 10).split("-");
+  return `${month}/${day}/${year}`;
+}
+
+export function getFixedSalary(salary, range) {
+  if (range === "min") {
+    return salary >= 1000
+      ? `${((salary - 1000) / 1000).toFixed(1)}k`
+      : `${salary}`;
+  } else {
+    return salary >= 1000
+      ? `${((salary + 1000) / 1000).toFixed(1)}k`
+      : `${salary}`;
+  }
 }

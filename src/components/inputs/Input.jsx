@@ -17,7 +17,8 @@ const StyledInput = styled.input`
   border: 1px solid ${colors.pink.light};
   color: ${colors.gray.dark};
   :hover {
-    background-color: ${colors.gray.bg_light};
+    /* background-color: ${colors.gray.bg_light}; */
+    box-shadow: 0 0 5px rgba(255, 111, 128, 0.5);
   }
   :focus {
     border: 2px solid ${colors.pink.pink};
@@ -33,6 +34,7 @@ export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+  margin-top: 10px;
 `;
 
 export const StyledLabel = styled.label`

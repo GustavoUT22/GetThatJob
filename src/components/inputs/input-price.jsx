@@ -36,6 +36,9 @@ const AmountInput = styled.input`
     outline: #fa4a0c;
     border: 1px solid ${colors.pink.pink};
   }
+  :hover {
+    box-shadow: 0 0 5px rgba(255, 111, 128, 0.5);
+  }
 
   ::placeholder {
     color: ${colors.gray.light};
@@ -45,17 +48,29 @@ const AmountInput = styled.input`
 
 function Price({ price, onChange }) {
   function handleChange(event) {
-    onChange(event)
+    onChange(event);
   }
-  
+
   return (
     <div>
       <FormContainer>
         <StyledLabel>Salary Range</StyledLabel>
         <InputBox>
-          <AmountInput name="min" type="number" value={price.min} placeholder="min" onChange={handleChange}></AmountInput>
+          <AmountInput
+            name="min"
+            type="number"
+            value={price.min}
+            placeholder="min"
+            onChange={handleChange}
+          ></AmountInput>
           <div>-</div>
-          <AmountInput name="max" type="number" value={price.max} placeholder="max" onChange={handleChange}></AmountInput>
+          <AmountInput
+            name="max"
+            type="number"
+            value={price.max}
+            placeholder="max"
+            onChange={handleChange}
+          ></AmountInput>
         </InputBox>
       </FormContainer>
     </div>

@@ -105,13 +105,14 @@ const PeopleImg = styled.img`
 const PeopleContainer = styled.div`
   display: flex;
   justify-content: center;
+  align-items: flex-end;
   gap: 1.31rem;
   margin: auto;
   margin-top: 2rem;
 `;
 
 const LandingPage = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <>
       <Header />
@@ -124,7 +125,11 @@ const LandingPage = () => {
           With our Machine Learning algorithm you will get that job in no time.
           We promise you! Just give us the money and we will take care of it.
         </Intro>
-        <Button type={"primary"} size={"lg"} onClick={() => navigate("/signup")}>
+        <Button
+          type={"primary"}
+          size={"lg"}
+          onClick={() => navigate("/signup")}
+        >
           Create an account now
         </Button>
         <PeopleContainer>

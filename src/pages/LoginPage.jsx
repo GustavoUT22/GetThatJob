@@ -19,8 +19,10 @@ const Main = styled.main`
   display: flex;
   flex-direction: row;
   width: auto;
+  // right: 2rem;
   align-items: flex-start;
   justify-content: center;
+  margin-top: 4rem;
   background-color: ${colors.gray.bg_light};
 `;
 

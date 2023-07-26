@@ -17,6 +17,8 @@ import {
 import { useNavigate } from "react-router";
 import { useCallback } from "react";
 
+import CircularCheckbox from "../components/inputs/circularCheckbox";
+
 const FilterName = styled.span`
   font-family: Inter;
   font-size: 10px;
@@ -35,8 +37,16 @@ const ApliFound = styled.span`
   letter-spacing: 0.15px;
 `;
 
+const OptionContainer = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+`;
+
 function YourApplicationsPage() {
   const [applyData, setApplyData] = useState([]);
+  const [selectedValue, setSelectedValue] = useState("");
   const navigate = useNavigate();
 
   useCallback(
@@ -45,10 +55,16 @@ function YourApplicationsPage() {
     }, [])
   );
 
+  function handleChange(event) {
+    setSelectedValue(event.target.value)
+  }
+
   async function handleDecline(id) {
     deleteApplications(id);
     await getApplications().then(setApplyData).catch(console.log);
   }
+
+  console.log(selectedValue)
 
   return (
     <ContainerSearch>
@@ -58,16 +74,31 @@ function YourApplicationsPage() {
           <div>
             <FilterName>Filter your applications</FilterName>
             <FlexRowSm>
-              <label htmlFor="radio1">option 1</label>
-              <input type="radio" id="radio1" name="radio"/>
-              <label htmlFor="radio2">option 2</label>
-              <input type="radio" id="radio2" name="radio"/>
-              <label htmlFor="radio3">option 3</label>
-              <input type="radio" id="radio3" name="radio"/>
-              <label htmlFor="radio4">option 4</label>
-              <input type="radio" id="radio4" name="radio"/>
-              <label htmlFor="radio5">option 5</label>
-              <input type="radio" id="radio5" name="radio"/>
+              <OptionContainer>
+                <CircularCheckbox />
+                <label htmlFor="radio1">All</label>
+                {/* <input type="radio" id="radio1" name="radio" /> */}
+              </OptionContainer>
+              <OptionContainer>
+                <CircularCheckbox />
+                <label htmlFor="radio2">Waiting</label>
+                {/* <input type="radio" id="radio2" name="radio" /> */}
+              </OptionContainer>
+              <OptionContainer>
+                <CircularCheckbox />
+                <label htmlFor="radio3">In progress</label>
+                {/* <input type="radio" id="radio3" name="radio" /> */}
+              </OptionContainer>
+              <OptionContainer>
+                <CircularCheckbox />
+                <label htmlFor="radio4">Finished</label>
+                {/* <input type="radio" id="radio4" name="radio" /> */}
+              </OptionContainer>
+              <OptionContainer>
+                <CircularCheckbox />
+                <label htmlFor="radio5">Declined</label>
+                {/* <input type="radio" id="radio5" name="radio" /> */}
+              </OptionContainer>
             </FlexRowSm>
           </div>
         </FlexColumnXs>

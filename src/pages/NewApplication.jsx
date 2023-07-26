@@ -147,7 +147,7 @@ function NewApplicationPage() {
               children={"apply now"}
               icon={<LuMousePointer2 />}
               type={"primary"}
-              size={"sm"}
+              size={"lg"}
             />
           </div>
         </div>
@@ -218,7 +218,7 @@ function NewApplicationPage() {
               children={"Send application"}
               icon={<RiMailLine />}
               type={"primary"}
-              size={"sm"}
+              size={"lg"}
             />
           </div>
         </form>

@@ -2,6 +2,10 @@ import styled from "@emotion/styled";
 import JobPostCard from "./JobPostCard";
 import { useState, useEffect } from "react";
 import { getJobs } from "../../services/jobs-pro-services";
+
+import CircularCheckbox from "../inputs/circularCheckbox";
+import { FlexRowSm } from "../utils";
+
 const Container = styled.div`
   display: block;
   width: 960px;
@@ -64,6 +68,13 @@ const JobPostContainer = styled.div`
   }
 `;
 
+const OptionContainer = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+`;
+
 const JobPostings = () => {
   const [jobsData, setJobsData] = useState([]);
 
@@ -78,12 +89,23 @@ const JobPostings = () => {
         <div>
           <p>Filter your Job Postings</p>
           <div>
-            <input type="checkbox" id="all" />
-            <label htmlFor="all">All</label>
-            <input type="checkbox" id="onTrack" />
-            <label htmlFor="onTrack">With candidates on track</label>
-            <input type="checkbox" id="closed" />
-            <label htmlFor="closed">Closed</label>
+            <FlexRowSm>
+              <OptionContainer>
+                <CircularCheckbox />
+                {/* <input type="checkbox" id="all" /> */}
+                <label htmlFor="all">All</label>
+              </OptionContainer>
+              <OptionContainer>
+                <CircularCheckbox />
+                {/* <input type="checkbox" id="onTrack" /> */}
+                <label htmlFor="onTrack">With candidates on track</label>
+              </OptionContainer>
+              <OptionContainer>
+                <CircularCheckbox />
+                {/* <input type="checkbox" id="closed" /> */}
+                <label htmlFor="closed">Closed</label>
+              </OptionContainer>
+            </FlexRowSm>
           </div>
         </div>
         <div>
