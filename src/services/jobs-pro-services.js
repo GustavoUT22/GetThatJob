@@ -25,34 +25,9 @@ export async function showJob(id) {
   return data;
 }
 
-// export async function createContact(
-//   newContact = { name, email, number, relation }
-// ) {
-//   return await apiFetch("contacts", { body: newContact });
-// }
-
-// export async function deleteContact(id) {
-//   return  await apiFetch(`contacts/${id}`, {
-//     method: "DELETE"
-//   });
-// }
-
-// export async function showContact(id) {
-//   return await apiFetch(`contacts/${id}`, {
-//     method: "GET"
-//   });
-
-// }
-
-// export async function editContact(id, favorite) {
-//   return await apiFetch(`contacts/${id}`, {
-//     method: "PATCH",
-//     body: { favorite: favorite },
-//   });
-// }
-
-// export async function listContacts() {
-//   return await apiFetch(`contacts`, {
-//     method: "GET"
-//    });
-// }
+export async function deleteJob(id) {
+  const data = await getJobClient(`/jobs/${id}`, {
+    method: "DELETE",
+  });
+  return data;
+}
