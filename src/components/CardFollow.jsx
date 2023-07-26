@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { showJob } from "../services/jobs-pro-services";
 import { typography } from "../styles";
+import CompanyFollowed from "./CompanyFollowed";
 
 const CardJobWrapper = styled.div`
   display: flex;
@@ -137,10 +138,10 @@ const JobsOpen = styled.span`
 
 function FollowCards({ props }) {
   const navigate = useNavigate();
-  
+
   const [followData, setFollowData] = useState([]);
   const id = props.followable_id;
-  console.log(followData.id)
+  console.log(followData.id);
   useEffect(() => {
     if (props.followable_type == "Job") {
       showJob(id).then(setFollowData).catch(console.log);
@@ -148,8 +149,6 @@ function FollowCards({ props }) {
       showJob(id).then(setFollowData);
     }
   }, []);
-  
- 
 
   return (
     <CardJobWrapper>
@@ -199,9 +198,11 @@ function FollowCards({ props }) {
           <RiFocus3Line style={{ width: "24px", height: "24px" }} />
           FOLLOW
         </FollowButtonWrapper>
-        <SeeMore to= {`/jobs/${id}`}>
-          SEE MORE
-        </SeeMore>
+        {props.followable_type == "Job" ? (
+          <SeeMore to={`/jobs/${id}`}>SEE MORE</SeeMore>
+        ) : (
+          <SeeMore to={`/following/${id}`}>SEE MORE</SeeMore>
+        )}
       </ButtonsContainer>
     </CardJobWrapper>
   );
