@@ -7,10 +7,12 @@ import {
   RiPhoneLine,
   RiPauseCircleLine,
   RiArrowDownSLine,
+  RiDownloadLine,
 } from "react-icons/ri";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../context/auth-context";
 import ApplicationStatus from "../ApplicationStatus";
+import Button from "../buttons/Button";
 
 const Container = styled.div`
   display: flex;
@@ -126,11 +128,16 @@ const JobDetailCard = styled.div`
     letter-spacing: 0.25px;
     width: 760px;
   }
+  & > :last-child {
+    // background-color: red;
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 // const AplicationContainer = styled.div``;
 
-const Button = styled.div`
+const ButtonS = styled.div`
   width: auto;
 
   padding: 8px 16px;
@@ -160,6 +167,11 @@ const CandidateCard = ({ job, status, setStatus }) => {
 
   function handleShow() {
     navigate(`/jobs`);
+  }
+
+  function handleDownload() {
+    console.log("donwload");
+    console.log(job.cv);
   }
 
   return (
@@ -198,12 +210,26 @@ const CandidateCard = ({ job, status, setStatus }) => {
         <JobDetailCard>
           <div>
             <h3>Professional Experience</h3>
-            {/* <p>{about}</p> */}
+            <p>{job.experience}</p>
           </div>
           <div>
             <h3>Why are you interested in working at The company name SA</h3>
-            {/* <p>{mandatory}</p> */}
+            <p>{job.why_interested}</p>
           </div>
+          <a
+            href={job.cv}
+            download="cv"
+            target="_blank"
+            style={{ textDecoration: "none" }}
+          >
+            <Button
+              children={"download cv"}
+              icon={<RiDownloadLine />}
+              type={"secondary"}
+              size={"sm"}
+              onClick={handleDownload}
+            />
+          </a>
         </JobDetailCard>
       )}
     </Container>
