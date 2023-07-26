@@ -6,6 +6,12 @@ import { getJobs } from "../../services/jobs-pro-services";
 import CircularCheckbox from "../inputs/circularCheckbox";
 import { FlexRowSm } from "../utils";
 
+import { deleteJob } from "../../services/jobs-pro-services";
+
+import CircularCheckbox from "../inputs/circularCheckbox";
+import { FlexRowSm } from "../utils";
+
+
 const Container = styled.div`
   display: block;
   width: 960px;
@@ -84,8 +90,24 @@ const JobPostings = () => {
     getJobs().then(setJobsData).catch(console.log);
   }, []);
 
+
   function handleFilterChange(event) {
     setFilter(event.target.value)
+  }
+
+  async function handleDelete(id) {
+    try {
+      const response = await deleteJob(id);
+      if (response.success) {
+        // If the deletion was successful, update the state to remove the deleted job
+        setJobsData((prevJobsData) => prevJobsData.filter((job) => job.id !== id));
+        console.log("Trabajo eliminado exitosamente");
+      } else {
+        console.error("Error al eliminar el trabajo");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   }
 
   useEffect(() => {
@@ -111,6 +133,7 @@ const JobPostings = () => {
 
   console.log(jobsData)
   // I need jobsData.status and close button change status for job posted
+
 
   return (
     <Container>
@@ -143,6 +166,9 @@ const JobPostings = () => {
           <div>
             {filteredJobs.map((job, index) => (
               <JobPostCard
+              handleDelete={handleDelete}
+              jobsData={jobsData}
+              setJobsData={setJobsData}
                 id={job.id}
                 title={job.title}
                 category={job.category}

@@ -136,7 +136,12 @@ const JobDetailCard = styled.div`
   }
 `;
 
+
+
 function JobPostCard({
+  handleDelete,
+  jobsData,
+  setJobsData,
   id,
   title,
   category,
@@ -169,18 +174,8 @@ function JobPostCard({
     navigate(`/jobs/${id}`);
   }
 
-  async function handleDelete(id) {
-    try {
-      const response = await deleteJob(id);
-       if (response.success) {
-         console.log("Trabajo eliminado exitosamente");
-       } else {
-         console.error("Error al eliminar el trabajo");
-       }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  }
+  
+  
 
   const formattedDate = created_at ? getFormattedDate(created_at) : "";
   const { length } = applications
@@ -240,7 +235,7 @@ function JobPostCard({
               }
               type={"primary"}
               size={"sm"}
-              onClick={async () => handleDelete(id)}
+              onClick={() => handleDelete(id)}
             />
           </div>
           <div onClick={handleShowDetail}>
