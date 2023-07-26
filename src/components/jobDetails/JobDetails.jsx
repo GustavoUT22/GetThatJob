@@ -189,7 +189,7 @@ const JobDetails = () => {
   ];
 
   console.log(jobData);
-  function FormatDateAgo(isoDate) {
+  function formatDateAgo(isoDate) {
     const date = new Date(isoDate);
     const currentDate = new Date();
     const differenceInTime = currentDate - date;

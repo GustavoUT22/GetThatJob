@@ -144,10 +144,11 @@ function NewApplicationPage() {
           </div>
           <div>
             <Button
-              children={"apply now"}
-              icon={<LuMousePointer2 />}
+             children={"Send application"}
+             icon={<RiMailLine />}
               type={"primary"}
               size={"lg"}
+              onClick={handleSubmit}
             />
           </div>
         </div>
