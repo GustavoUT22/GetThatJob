@@ -1,4 +1,4 @@
-import getThatJobLogo from "../assets/header/gtj-logo.svg";
+import getThatJobLogo from "../assets/header/logo-landing.svg";
 import signupLogo from "../assets/header/signup-logo.svg";
 import loginLogo from "../assets/header/login-logo.svg";
 import styled from "@emotion/styled";
@@ -8,6 +8,8 @@ const HeaderWrapper = styled.div`
   width: auto;
   height: 8vh;
   padding: 0 32px;
+  z-index: 10;
+  position: relative;
   background-color: white;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
   display: flex;

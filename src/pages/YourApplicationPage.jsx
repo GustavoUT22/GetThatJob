@@ -46,6 +46,7 @@ const OptionContainer = styled.span`
 
 function YourApplicationsPage() {
   const [applyData, setApplyData] = useState([]);
+  const [selectedValue, setSelectedValue] = useState("");
   const navigate = useNavigate();
 
   useCallback(
@@ -54,10 +55,16 @@ function YourApplicationsPage() {
     }, [])
   );
 
+  function handleChange(event) {
+    setSelectedValue(event.target.value)
+  }
+
   async function handleDecline(id) {
     deleteApplications(id);
     await getApplications().then(setApplyData).catch(console.log);
   }
+
+  console.log(selectedValue)
 
   return (
     <ContainerSearch>

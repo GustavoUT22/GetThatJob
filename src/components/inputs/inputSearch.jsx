@@ -12,8 +12,10 @@ const InputSearchWrapper = styled.div`
   align-self: stretch;
   border-radius: 8px;
   border: 1px solid ${colors.pink.light};
+  background-color: ${colors.white};
   :hover {
-    background-color: ${colors.gray.bg_light};
+    border-color: #ff6f80;
+    box-shadow: 0 0 5px rgba(255, 111, 128, 0.5);
   }
   :focus {
     border: 2px solid ${colors.pink.pink};
@@ -47,7 +49,7 @@ const SearchWrapper = styled.div`
   margin-bottom: 8px;
 `;
 
-function InputSearch({onChange, value}) {
+function InputSearch({ onChange, value }) {
   return (
     <SearchWrapper>
       <StyledLabel>search by job title or company name</StyledLabel>
@@ -59,7 +61,11 @@ function InputSearch({onChange, value}) {
             color: `${colors.gray.light}`,
           }}
         />
-        <SearchInput onChange={onChange} value={value} placeholder="manufacturing, sales, swim" />
+        <SearchInput
+          onChange={onChange}
+          value={value}
+          placeholder="manufacturing, sales, swim"
+        />
       </InputSearchWrapper>
     </SearchWrapper>
   );

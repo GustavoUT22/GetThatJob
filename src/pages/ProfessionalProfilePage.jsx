@@ -32,7 +32,7 @@ const Container = styled.div`
   }
 
   ::-webkit-scrollbar-track {
-    background-color: white;
+    background-color: none;
   }
 `;
 
