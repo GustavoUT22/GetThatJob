@@ -56,9 +56,9 @@ function ShowJobPosted() {
       );
       setFilteredJobs(filtered);
     } else {
-      setFilteredJobs(jobsData.applications);
+      jobsData.applications ? setFilteredJobs(jobsData.applications) : setFilteredJobs([])
     }
-  }, [filter]);
+  }, [filter, jobsData]);
 
   function handleBack() {
     navigate("/jobs");
@@ -67,6 +67,8 @@ function ShowJobPosted() {
   function handleFilterChange(event) {
     setFilter(event.target.value);
   }
+
+  console.log(jobsData)
 
   return (
     <Container>
@@ -134,9 +136,9 @@ function ShowJobPosted() {
       </div>
       <CandidatesCount>
         {" "}
-        {filteredJobs === undefined ? 0 : filteredJobs.length} candidates found
+        {filteredJobs.length === 0 ? 0 : filteredJobs.length} candidates found
       </CandidatesCount>
-      {filteredJobs === undefined
+      {filteredJobs.length === 0
         ? ""
         : filteredJobs.map((job, index) => (
             <CandidateCard

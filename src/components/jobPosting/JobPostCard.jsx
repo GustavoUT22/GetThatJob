@@ -182,15 +182,13 @@ function JobPostCard({
     }
   }
 
-  console.log(id);
-  
   const formattedDate = created_at ? getFormattedDate(created_at) : "";
   const { length } = applications
     ? applications.filter(
         (application) => application.status !== "Review finished"
       )
     : "";
-  console.log(id);
+    
   return (
     <Container>
       <CardContainer>
