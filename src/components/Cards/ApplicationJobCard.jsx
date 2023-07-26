@@ -164,7 +164,7 @@ function ApplicationJobCard({ props, onDelete }) {
                 style={{ width: "15px", height: "15px", alignSelf: "center" }}
               />
               <MessageSmall style={{ color: "pink" }}>
-                Waiting for review
+                {props.status}
               </MessageSmall>
             </FlexColumn>
             <ButtonDownUp onClick={handleShowDetail}>
