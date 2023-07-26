@@ -35,8 +35,8 @@ function ShowJobPosted() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [jobsData, setJobsData] = useState([]);
-  const [filteredJobs, setFilteredJobs] = useState([])
-  const [filter, setFilter] = useState("all")
+  const [filteredJobs, setFilteredJobs] = useState([]);
+  const [filter, setFilter] = useState("all");
 
   useEffect(() => {
     getJobRecruiter(id).then(setJobsData).catch(console.log);
@@ -50,25 +50,30 @@ function ShowJobPosted() {
   }, [status]);
 
   useEffect(() => {
-    if(filter !== "all") {
-      const filtered = jobsData.applications.filter((job) => job.status === filter)
-      setFilteredJobs(filtered)
+    if (filter !== "all") {
+      const filtered = jobsData.applications.filter(
+        (job) => job.status === filter
+      );
+      setFilteredJobs(filtered);
     } else {
-      setFilteredJobs(jobsData.applications)
+      setFilteredJobs(jobsData.applications);
     }
-  },[filter])
-  
+  }, [filter]);
+
   function handleBack() {
     navigate("/jobs");
   }
 
   function handleFilterChange(event) {
-    setFilter(event.target.value)
+    setFilter(event.target.value);
   }
-  
+
   return (
     <Container>
-      <div style={{display: "flex", alignContent: "center", cursor: "pointer"}} onClick={handleBack}>
+      <div
+        style={{ display: "flex", alignContent: "center", cursor: "pointer" }}
+        onClick={handleBack}
+      >
         <RiArrowLeftSLine style={{ height: "24px", width: "24px" }} />
         <span>BACK</span>
       </div>
@@ -89,21 +94,49 @@ function ShowJobPosted() {
       <div style={{ marginTop: "1rem", marginBottom: "1rem" }}>
         <p>Filter your Job Postings</p>
         <div>
-          <input type="radio" id="all" value={"all"} name="filter" onChange={handleFilterChange} checked={filter === "all"} />
+          <input
+            type="radio"
+            id="all"
+            value={"all"}
+            name="filter"
+            onChange={handleFilterChange}
+            checked={filter === "all"}
+          />
           <label htmlFor="all">All</label>
-          <input type="radio" id="waiting" value={"Waiting for review"} name="filter" onChange={handleFilterChange} checked={filter === "Waiting for review"} />
+          <input
+            type="radio"
+            id="waiting"
+            value={"Waiting for review"}
+            name="filter"
+            onChange={handleFilterChange}
+            checked={filter === "Waiting for review"}
+          />
           <label htmlFor="waiting">Waiting</label>
-          <input type="radio" id="inProgress" value={"Review in progress"} name="filter" onChange={handleFilterChange} checked={filter === "Review in progress"} />
+          <input
+            type="radio"
+            id="inProgress"
+            value={"Review in progress"}
+            name="filter"
+            onChange={handleFilterChange}
+            checked={filter === "Review in progress"}
+          />
           <label htmlFor="inProgress">In progress</label>
-          <input type="radio" id="finished" value={"Review finished"} name="filter" onChange={handleFilterChange} checked={filter === "Review finished"} />
+          <input
+            type="radio"
+            id="finished"
+            value={"Review finished"}
+            name="filter"
+            onChange={handleFilterChange}
+            checked={filter === "Review finished"}
+          />
           <label htmlFor="finished">Finished</label>
         </div>
       </div>
       <CandidatesCount>
         {" "}
-        {filteredJobs.length ?? 0} candidates found
+        {filteredJobs === undefined ? 0 : filteredJobs.length} candidates found
       </CandidatesCount>
-      {filteredJobs.length === 0
+      {filteredJobs === undefined
         ? ""
         : filteredJobs.map((job, index) => (
             <CandidateCard

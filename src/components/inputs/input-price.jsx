@@ -59,7 +59,7 @@ function Price({ price, onChange }) {
           <AmountInput
             name="min"
             type="number"
-            value={price.min}
+            // value={price.min}
             placeholder="min"
             onChange={handleChange}
           ></AmountInput>
@@ -67,7 +67,7 @@ function Price({ price, onChange }) {
           <AmountInput
             name="max"
             type="number"
-            value={price.max}
+            // value={price.max}
             placeholder="max"
             onChange={handleChange}
           ></AmountInput>
