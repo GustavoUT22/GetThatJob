@@ -18,7 +18,7 @@ import {
 import { useNavigate } from "react-router";
 
 const Container = styled.div`
-  diplay: flex;
+  display: flex;
   flex-direction: column;
   background-color: blue;
   padding: 1rem;
