@@ -2,6 +2,13 @@ import styled from "@emotion/styled";
 import JobPostCard from "./JobPostCard";
 import { useState, useEffect } from "react";
 import { getJobs } from "../../services/jobs-pro-services";
+
+import { deleteJob } from "../../services/jobs-pro-services";
+
+import CircularCheckbox from "../inputs/circularCheckbox";
+import { FlexRowSm } from "../utils";
+
+
 const Container = styled.div`
   display: block;
   width: 960px;
@@ -70,7 +77,51 @@ const JobPostings = () => {
   useEffect(() => {
     getJobs().then(setJobsData).catch(console.log);
   }, []);
-  console.log(jobsData);
+
+
+  function handleFilterChange(event) {
+    setFilter(event.target.value)
+  }
+
+  async function handleDelete(id) {
+    try {
+      const response = await deleteJob(id);
+      if (response.success) {
+        // If the deletion was successful, update the state to remove the deleted job
+        setJobsData((prevJobsData) => prevJobsData.filter((job) => job.id !== id));
+        console.log("Trabajo eliminado exitosamente");
+      } else {
+        console.error("Error al eliminar el trabajo");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
+  useEffect(() => {
+    if(filter !== "all") {
+      switch (filter) {
+        case "onTrack":
+          const filtered1 = jobsData.filter((job) => job.applications.some((application) => application.status !== "Review finished") )
+          // this filter is test only
+          setFilteredJobs(filtered1)
+          break;
+        case "closed":
+          const filtered2 = jobsData.filter((job) => job.category === "Legal" )
+          // this filter is test only
+          setFilteredJobs(filtered2)
+        default:
+          break;
+      }
+    } else {
+      setFilteredJobs(jobsData)
+    }
+  }, [filter])
+
+  console.log(jobsData)
+  // I need jobsData.status and close button change status for job posted
+
+
   return (
     <Container>
       <h1>Job Postings</h1>
@@ -91,6 +142,9 @@ const JobPostings = () => {
           <div>
             {jobsData.map((job, index) => (
               <JobPostCard
+              handleDelete={handleDelete}
+              jobsData={jobsData}
+              setJobsData={setJobsData}
                 id={job.id}
                 title={job.title}
                 category={job.category}
