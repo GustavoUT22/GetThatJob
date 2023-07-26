@@ -131,7 +131,6 @@ const JobDetailCard = styled.div`
 
 // const AplicationContainer = styled.div``;
 
-const CandidateCard = ({ job, status, setStatus }) => {
   
 const Button = styled.div`
   width: auto;
@@ -148,7 +147,7 @@ const Button = styled.div`
   background-color: transparent;
 `;
 
-const CandidateCard = ({ job }) => {
+const CandidateCard = ({ job, status, setStatus }) => {
   console.log(job);
 
   const { user } = useAuth();
