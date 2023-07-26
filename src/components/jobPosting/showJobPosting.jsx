@@ -6,6 +6,7 @@ import CandidateCard from "./CandidateCard";
 import { useEffect, useState } from "react";
 import { getJobs } from "../../services/jobs-pro-services";
 import { getJobRecruiter } from "../../services/jobs-pro-services";
+import { typography } from "../../styles";
 
 const Container = styled.div`
   display: block;
@@ -25,18 +26,47 @@ const Container = styled.div`
   }
 `;
 
+const CandidatesCount = styled.span`
+  ${typography.head.xs};
+  
+`;
+
 function ShowJobPosted() {
+  const [status, setStatus] = useState(false)
   const navigate = useNavigate();
   const { id } = useParams();
   const [jobsData, setJobsData] = useState([]);
 
+  
+   useEffect(() => {
+     getJobRecruiter(id).then(setJobsData).catch(console.log);
+   }, []);
+
+  // useEffect(() => {
+  //   async function getJob() {
+  //     try {
+  //       const data = await getJobRecruiter(id);
+  //       setJobsData(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+
+  //   getJob();
+  // }, [id]);
+
   useEffect(() => {
-    getJobRecruiter(id).then(setJobsData).catch(console.log);
-  }, []);
+    if (status){
+      console.log("any")
+    } 
+   },[status])
+
+  console.log(jobsData);
+
   function handleBack() {
     navigate("/jobs");
   }
-  // console.log(jobsData.applications);
+
   return (
     <Container>
       <div onClick={handleBack}>
@@ -65,11 +95,11 @@ function ShowJobPosted() {
           <label htmlFor="closed">Closed</label>
         </div>
       </div>
-      <h3>candidates found</h3>
+      <CandidatesCount> {jobsData.applications?.length ?? 0} candidates found</CandidatesCount>
       {jobsData.length === 0
         ? ""
         : jobsData.applications.map((job, index) => (
-            <CandidateCard key={index} job={job} />
+            <CandidateCard key={index} job={job} status={status} setStatus={setStatus}/>
           ))}
     </Container>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import {
   RiLinkedinBoxLine,
@@ -10,6 +10,7 @@ import {
 } from "react-icons/ri";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../context/auth-context";
+import ApplicationStatus from "../ApplicationStatus";
 
 const Container = styled.div`
   diplay: flex;
@@ -86,7 +87,7 @@ const CardContainer = styled.div`
     line-height: 16px; /* 133.333% */
     letter-spacing: 0.4px;
     color: #616161;
-    width: 80px;
+    
     height: 48px;
   }
   & > div:nth-of-type(3) > div:last-child {
@@ -127,6 +128,11 @@ const JobDetailCard = styled.div`
   }
 `;
 
+
+// const AplicationContainer = styled.div``;
+
+const CandidateCard = ({ job, status, setStatus }) => {
+  
 const Button = styled.div`
   width: auto;
 
@@ -144,9 +150,10 @@ const Button = styled.div`
 
 const CandidateCard = ({ job }) => {
   console.log(job);
+
   const { user } = useAuth();
   const navigate = useNavigate();
-  console.log(user);
+  console.log(job.id);
   const [showDetail, setShowDetail] = useState(false);
   function handleShowDetail() {
     if (showDetail) {
@@ -156,6 +163,7 @@ const CandidateCard = ({ job }) => {
       setShowDetail(true);
     }
   }
+
 
   function handleShow() {
     navigate(`/jobs`);
@@ -181,24 +189,10 @@ const CandidateCard = ({ job }) => {
           </div>
         </div>
         <div>
-          <div>
-            <RiMailLine />
-            <p>Send 1 day</p>
-            <p>ago</p>
-          </div>
+          
+          <ApplicationStatus props={job} status={status} setStatus={setStatus}/>
 
-          <div>
-            <div>
-              <RiPauseCircleLine />
-            </div>
-            <p>Waiting for</p>
-            <p>review</p>
-          </div>
-        </div>
-        <div>
-          <div>
-            <Button onClick={handleShow}>MARK AS STARTED</Button>
-          </div>
+        
           <div onClick={handleShowDetail}>
             <RiArrowDownSLine />
           </div>

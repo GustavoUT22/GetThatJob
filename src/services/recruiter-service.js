@@ -64,3 +64,21 @@ export async function updateSignupRecruiter(recruiterData) {
 
   return recruiter;
 }
+
+export async function getStatus(id) {
+  const { token, ...recruiter } = await getJobClient(`/recruiters/applications/${id}`, {
+    method: "GET",
+  });
+
+  return recruiter;
+}
+
+
+export async function updateStatus(id, statusData) {
+  const { token, ...recruiter } = await getJobClient(`/recruiters/applications/${id}`, {
+    method: "PATCH",
+    body: statusData,
+  });
+
+  return recruiter;
+}

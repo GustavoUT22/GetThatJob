@@ -15,6 +15,7 @@ export async function getApplications() {
   return data;
 }
 
+
 export async function deleteApplications(id) {
   return await getJobClient(`/applications/${id}`, {
     method: "DELETE",
