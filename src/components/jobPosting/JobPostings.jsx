@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import JobPostCard from "./JobPostCard";
 import { useState, useEffect } from "react";
 import { getJobs } from "../../services/jobs-pro-services";
+import { deleteJob } from "../../services/jobs-pro-services";
 
 import CircularCheckbox from "../inputs/circularCheckbox";
 import { FlexRowSm } from "../utils";
@@ -88,6 +89,21 @@ const JobPostings = () => {
     setFilter(event.target.value)
   }
 
+  async function handleDelete(id) {
+    try {
+      const response = await deleteJob(id);
+      if (response.success) {
+        // If the deletion was successful, update the state to remove the deleted job
+        setJobsData((prevJobsData) => prevJobsData.filter((job) => job.id !== id));
+        console.log("Trabajo eliminado exitosamente");
+      } else {
+        console.error("Error al eliminar el trabajo");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
   useEffect(() => {
     if(filter !== "all") {
       switch (filter) {
@@ -140,8 +156,11 @@ const JobPostings = () => {
         <div>
           <h3>{filteredJobs.length} jobs postings found</h3>
           <div>
-            {filteredJobs.map((job, index) => (
+            {jobsData.map((job, index) => (
               <JobPostCard
+              handleDelete={handleDelete}
+              jobsData={jobsData}
+              setJobsData={setJobsData}
                 id={job.id}
                 title={job.title}
                 category={job.category}
