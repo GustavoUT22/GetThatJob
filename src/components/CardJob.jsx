@@ -175,7 +175,7 @@ function CardJob({ props }) {
           </FollowIconWrapper>
           {followStatus ? "FOLLOWING" : "FOLLOW"}
         </FollowButtonWrapper>
-        <SeeMore to={`/jobs/${props.id}`}>see more</SeeMore>
+        <SeeMore to={`/jobs/${props.id}`}>SEE MORE</SeeMore>
       </ButtonsContainer>
     </CardJobWrapper>
   );

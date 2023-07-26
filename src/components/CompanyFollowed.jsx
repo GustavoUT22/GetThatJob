@@ -5,6 +5,9 @@ import { colors } from "../styles/colors";
 import CompanyImg from "../assets/job-card.png";
 import { RiFocus3Line } from "react-icons/ri";
 import CardJob from "./CardJob";
+import { useParams } from "react-router";
+import { useEffect, useState } from "react";
+import { getJobRecruiter } from "../services/jobs-pro-services";
 
 const BackButton = styled.div`
   background: none;
@@ -128,7 +131,19 @@ const JobsPending = styled.div`
   }
 `;
 
-function CompanyFollowed() {
+function CompanyFollowed({props}) {
+  // const { id } = useParams()
+  // const [companyData, setCompanyData] = useState({})
+  // const id_recruiter = props.followable_id
+
+  //  useEffect (() => {
+  //    getJobRecuiter(id_recruiter).then(setCompanyData())
+
+
+  //  }, []);
+
+  console.log(props)
+
   return (
     <ContainerFollowing>
       <FlexColumn>
@@ -139,7 +154,7 @@ function CompanyFollowed() {
         <CompanyBox>
           <ImgCompany src={CompanyImg} />
           <CompanyInfobox>
-            <CompanyNameFollow>The company name SA</CompanyNameFollow>
+            <CompanyNameFollow>{props.category ? props.category :""}</CompanyNameFollow>
             <WrapperFollowing>
               <ContainerIconFocus>
                 <RiFocus3Line
@@ -153,14 +168,15 @@ function CompanyFollowed() {
         <OpeningsJob>
           <JobsOpeningsTitle>2 job openings</JobsOpeningsTitle>
           <JobsPending>
+            {/* <CardJob />
             <CardJob />
             <CardJob />
             <CardJob />
             <CardJob />
             <CardJob />
             <CardJob />
-            <CardJob />
-            <CardJob />
+            <CardJob /> */}
+            
           </JobsPending>
         </OpeningsJob>
       </FlexColumn>
