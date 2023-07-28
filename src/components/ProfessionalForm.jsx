@@ -124,6 +124,7 @@ export default function ProfessionalForm({ step, setStatus }) {
     console.log(userData);
 
     const formFile = new FormData();
+
     if (resume) {
       formFile.append("resume", resume);
       for (const [key, value] of Object.entries(userData)) {
@@ -131,6 +132,7 @@ export default function ProfessionalForm({ step, setStatus }) {
       }
 
       console.log(formFile);
+
     }
 
     try {
@@ -147,6 +149,7 @@ export default function ProfessionalForm({ step, setStatus }) {
       email,
       password,
     };
+
 
     login(credentials);
   }
@@ -212,6 +215,7 @@ export default function ProfessionalForm({ step, setStatus }) {
 
       login(credentials);
     }
+
   }
 
   function handleChange(event) {

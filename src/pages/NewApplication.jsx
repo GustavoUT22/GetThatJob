@@ -88,7 +88,7 @@ function NewApplicationPage() {
     why_interested: "",
     job_id: +id,
     professional_id: user.id,
-    status: "Waiting for review"
+    status: "Waiting for review",
   });
   const navigate = useNavigate();
 
@@ -136,7 +136,7 @@ function NewApplicationPage() {
               <img src={jobLogo} />
             </div>
             <div>
-               <h3>{jobData.company_name}</h3> 
+              <h3>{jobData.company_name}</h3>
               <div>
                 <img src={followingIcon} />
               </div>
@@ -144,8 +144,8 @@ function NewApplicationPage() {
           </div>
           <div>
             <Button
-             children={"Send application"}
-             icon={<RiMailLine />}
+              children={"Send application"}
+              icon={<RiMailLine />}
               type={"primary"}
               size={"lg"}
               onClick={handleSubmit}
@@ -174,12 +174,11 @@ function NewApplicationPage() {
       <JobFormContainer>
         <form onSubmit={handleSubmit}>
           <CompleteApply>Complete your application</CompleteApply>
-          <div>
+          {/* <div>
             <StyledLabel>Send your cv updated</StyledLabel>
 
             <div>
-              {/* <CircularCheckbox children={"Use current CV"} />
-              <CircularCheckbox children={"Upload newCV"} /> */}
+           
               <RadioComponent />
             </div>
           </div>
@@ -188,7 +187,7 @@ function NewApplicationPage() {
               <InputFile />
             </div>
             <p>Only PDF. Max size 5MB</p>
-          </div>
+          </div> */}
           {/* <div> */}
           <TextArea
             label={"Professional experience (taken from your profile)"}
