@@ -82,7 +82,7 @@ export default function ProfessionalForm({ step, setStatus }) {
             1: "In Progress",
             2: "Pending",
           });
-          console.log(formData)
+          console.log(formData);
           break;
         case 2:
           setStatus({
@@ -91,9 +91,9 @@ export default function ProfessionalForm({ step, setStatus }) {
             1: "Done!",
             2: "In Progress",
           });
-          console.log(formData)
+          console.log(formData);
           break;
-          default:
+        default:
           break;
       }
     } else {
@@ -116,23 +116,29 @@ export default function ProfessionalForm({ step, setStatus }) {
     event.preventDefault();
 
     const userData = Object.keys(formData).reduce((acc, key) => {
-      if (formData[key] !== "" && formData[key] !== null && key !== "passwordConfirmation") {
+      if (
+        formData[key] !== "" &&
+        formData[key] !== null &&
+        key !== "passwordConfirmation"
+      ) {
         acc[key] = formData[key];
       }
       return acc;
     }, {});
 
-    console.log(userData)
+    console.log(userData);
 
     const formFile = new FormData();
-    formFile.append("file", resume);
+    formFile.append("resume", resume);
     for (const [key, value] of Object.entries(userData)) {
       formFile.append(key, value);
     }
 
     console.log(formFile);
     try {
-      await createUser(formFile).then(console.log("User created successfully.")).catch(console.log);
+      await createUser(formFile)
+        .then(console.log("User created successfully."))
+        .catch(console.log);
     } catch (error) {
       console.error("Error creating user:", error);
     }
@@ -140,7 +146,7 @@ export default function ProfessionalForm({ step, setStatus }) {
     const credentials = {
       email,
       password,
-    }
+    };
 
     login(credentials);
   }
@@ -173,26 +179,27 @@ export default function ProfessionalForm({ step, setStatus }) {
           resume: null,
         });
         break;
-        default:
-          break;
+      default:
+        break;
+    }
+    if (step === 3) {
+      const userData = Object.keys(formData).reduce((acc, key) => {
+        if (formData[key] !== "" && formData[key] !== null) {
+          acc[key] = formData[key];
         }
-        if(step === 3) {
-          const userData = Object.keys(formData).reduce((acc, key) => {
-            if (formData[key] !== "" && formData[key] !== null) {
-              acc[key] = formData[key];
-            }
-            return acc;
-          }, {});
+        return acc;
+      }, {});
 
-          console.log(userData);
-          try {
-            await createUser(userData).then(console.log("User created successfully.")).catch(console.log);
-      
-          } catch (error) {
-            console.error("Error creating user:", error);
-          }
-          login(userData);
-        }
+      console.log(userData);
+      try {
+        await createUser(userData)
+          .then(console.log("User created successfully."))
+          .catch(console.log);
+      } catch (error) {
+        console.error("Error creating user:", error);
+      }
+      login(userData);
+    }
   }
 
   function handleChange(event) {

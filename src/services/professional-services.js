@@ -16,7 +16,7 @@ export async function logout() {
 }
 
 export async function createUser(userData) {
-  const { token, ...user } = await getJobClient("signup/professionals", {
+  const { token, ...user } = await getCvClient("signup/professionals", {
     method: "POST",
 
     body: userData,

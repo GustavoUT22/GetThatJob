@@ -194,12 +194,12 @@ function ApplicationJobCard({ props, onDelete }) {
               justifyContent: "space-evenly",
             }}
           >
-            {/* <Button
-              children={"download"}
-              icon={<RiDownloadLine />}
-              type={"secondary"}
-              size={"sm"}
-            /> */}
+              {/* <Button
+                children={"download"}
+                icon={<RiDownloadLine />}
+                type={"secondary"}
+                size={"sm"}
+              /> */}
             <Button
               children={"decline application"}
               icon={<RiCloseCircleLine />}
