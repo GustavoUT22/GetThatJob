@@ -53,7 +53,7 @@ export default function ProfessionalForm({ step, setStatus }) {
     title: "",
     experience: "",
     education: "",
-    file: null,
+    resume: null,
   });
 
   const {
@@ -67,7 +67,7 @@ export default function ProfessionalForm({ step, setStatus }) {
     title,
     experience,
     education,
-    file,
+    resume,
   } = formData;
 
   async function handleSubmit(event) {
@@ -82,21 +82,7 @@ export default function ProfessionalForm({ step, setStatus }) {
             1: "In Progress",
             2: "Pending",
           });
-          const userData = {
-            email,
-            password,
-          };
-          // Add fetch to create new User
-          console.log(userData);
-          try {
-            await createUser(userData)
-              .then(console.log("User created successfully."))
-              .catch(console.log);
-          } catch (error) {
-            console.error("Error creating user:", error);
-          }
-
-          // console.log(userData);
+          console.log(formData)
           break;
         case 2:
           setStatus({
@@ -105,30 +91,9 @@ export default function ProfessionalForm({ step, setStatus }) {
             1: "Done!",
             2: "In Progress",
           });
-          const data = {
-            name,
-            phone,
-            birth_date,
-            linkedin,
-          };
-
-          const userData1 = Object.keys(data).reduce((acc, key) => {
-            if (formData[key] !== "") {
-              acc[key] = formData[key];
-            }
-            return acc;
-          }, {});
-          // Add fetch to update user data using userData1
-          console.log(userData1);
-          try {
-            await updateSignupUser(userData1)
-              .then(console.log("User info saved successfully."))
-              .catch(console.log);
-          } catch (error) {
-            console.error("Error saving user info:", error);
-          }
+          console.log(formData)
           break;
-        default:
+          default:
           break;
       }
     } else {
@@ -147,35 +112,40 @@ export default function ProfessionalForm({ step, setStatus }) {
     });
   }
 
-  function handleFinish(event) {
+  async function handleFinish(event) {
     event.preventDefault();
 
-    const data = {
-      title,
-      experience,
-      education,
-      file,
-    };
-
-    const userData = Object.keys(data).reduce((acc, key) => {
-      if (formData[key] !== "" && formData[key] !== null) {
+    const userData = Object.keys(formData).reduce((acc, key) => {
+      if (formData[key] !== "" && formData[key] !== null && key !== "passwordConfirmation") {
         acc[key] = formData[key];
       }
       return acc;
     }, {});
 
+    console.log(userData)
+
     const formFile = new FormData();
-    formFile.append("file", file);
+    formFile.append("file", resume);
+    for (const [key, value] of Object.entries(userData)) {
+      formFile.append(key, value);
+    }
 
-    userData.file = formFile;
-    console.log(userData);
+    console.log(formFile);
+    try {
+      await createUser(formFile).then(console.log("User created successfully.")).catch(console.log);
+    } catch (error) {
+      console.error("Error creating user:", error);
+    }
 
-    const credentials = { email, password };
-    console.log(credentials);
+    const credentials = {
+      email,
+      password,
+    }
+
     login(credentials);
   }
 
-  function handleSkip(event) {
+  async function handleSkip(event) {
     event.preventDefault();
 
     switch (step) {
@@ -200,16 +170,29 @@ export default function ProfessionalForm({ step, setStatus }) {
           title: "",
           exp: "",
           education: "",
-          file: null,
+          resume: null,
         });
-        // redirect to user main page
-        const credentials = { email, password };
-        console.log(credentials);
-        login(credentials);
         break;
-      default:
-        break;
-    }
+        default:
+          break;
+        }
+        if(step === 3) {
+          const userData = Object.keys(formData).reduce((acc, key) => {
+            if (formData[key] !== "" && formData[key] !== null) {
+              acc[key] = formData[key];
+            }
+            return acc;
+          }, {});
+
+          console.log(userData);
+          try {
+            await createUser(userData).then(console.log("User created successfully.")).catch(console.log);
+      
+          } catch (error) {
+            console.error("Error creating user:", error);
+          }
+          login(userData);
+        }
   }
 
   function handleChange(event) {
@@ -230,7 +213,7 @@ export default function ProfessionalForm({ step, setStatus }) {
   function handleFileChange(event) {
     setFormData({
       ...formData,
-      file: event.target.files[0],
+      resume: event.target.files[0],
     });
   }
 
@@ -374,7 +357,7 @@ export default function ProfessionalForm({ step, setStatus }) {
               label={"Upload/Update your CV"}
               caption={"Only PDF. Max size 5MB"}
               onChange={handleFileChange}
-              file={file}
+              file={resume}
             ></InputFile>
           </InfoSection>
           <ButtonSection>
