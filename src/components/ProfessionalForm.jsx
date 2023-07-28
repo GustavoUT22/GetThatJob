@@ -146,7 +146,12 @@ export default function ProfessionalForm({ step, setStatus }) {
     const credentials = {
       email,
       password,
+
     };
+
+
+    }
+    
 
     login(credentials);
   }
@@ -187,6 +192,7 @@ export default function ProfessionalForm({ step, setStatus }) {
         if (formData[key] !== "" && formData[key] !== null) {
           acc[key] = formData[key];
         }
+
         return acc;
       }, {});
 
@@ -200,8 +206,35 @@ export default function ProfessionalForm({ step, setStatus }) {
       }
       login(userData);
     }
-  }
 
+        
+        if(step === 3) {
+          const optionRegex = /(title|exp|education|resume)/
+          const userData = Object.keys(formData).reduce((acc, key) => {
+            if (formData[key] !== "" && formData[key] !== null && !optionRegex.test(key)) {
+              acc[key] = formData[key];
+            }
+            return acc;
+          }, {});
+          
+          console.log(userData);
+          try {
+            await createUser(userData).then(console.log("User created successfully.")).catch(console.log);
+      
+          } catch (error) {
+            console.error("Error creating user:", error);
+          }
+
+          const credentials = {
+            email,
+            password,
+          }
+          
+          login(credentials);
+        }
+
+  }
+  
   function handleChange(event) {
     const { name, value } = event.target;
 
