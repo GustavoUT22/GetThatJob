@@ -31,10 +31,13 @@ function AuthProvider(props) {
   // }
 
   function logout() {
-    auth.logout().then(() => {
-      sessionStorage.removeItem(tokenKey);
-      setUser(null);
-    });
+    auth
+      .logout()
+      .then(() => {
+        sessionStorage.removeItem(tokenKey);
+        setUser(null);
+      })
+      .catch(console.log());
   }
 
   const value = {

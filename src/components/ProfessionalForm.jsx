@@ -7,12 +7,7 @@ import Input from "./inputs/Input";
 import TextArea from "./inputs/Input-textarea";
 import Button from "../components/buttons/Button";
 import InputFile from "./inputs/InputFile";
-import {
-  createUser,
-  updateSignupUser,
-  updateUser,
-} from "../services/professional-services";
-import { useNavigate } from "react-router";
+import { createUser, createUserWFile } from "../services/professional-services";
 import { useAuth } from "../context/auth-context";
 
 const Form = styled.form`
@@ -129,16 +124,23 @@ export default function ProfessionalForm({ step, setStatus }) {
     console.log(userData);
 
     const formFile = new FormData();
-    formFile.append("resume", resume);
-    for (const [key, value] of Object.entries(userData)) {
-      formFile.append(key, value);
+
+    if (resume) {
+      formFile.append("resume", resume);
+      for (const [key, value] of Object.entries(userData)) {
+        formFile.append(key, value);
+      }
+
+      console.log(formFile);
+
     }
 
-    console.log(formFile);
     try {
-      await createUser(formFile)
-        .then(console.log("User created successfully."))
-        .catch(console.log);
+      resume
+        ? await createUserWFile(formFile)
+        : await createUser(userData)
+            .then(console.log("User created successfully."))
+            .catch(console.log);
     } catch (error) {
       console.error("Error creating user:", error);
     }
@@ -146,12 +148,8 @@ export default function ProfessionalForm({ step, setStatus }) {
     const credentials = {
       email,
       password,
-
     };
 
-
-    }
-    
 
     login(credentials);
   }
@@ -187,12 +185,17 @@ export default function ProfessionalForm({ step, setStatus }) {
       default:
         break;
     }
+
     if (step === 3) {
+      const optionRegex = /(title|exp|education|resume)/;
       const userData = Object.keys(formData).reduce((acc, key) => {
-        if (formData[key] !== "" && formData[key] !== null) {
+        if (
+          formData[key] !== "" &&
+          formData[key] !== null &&
+          !optionRegex.test(key)
+        ) {
           acc[key] = formData[key];
         }
-
         return acc;
       }, {});
 
@@ -204,37 +207,17 @@ export default function ProfessionalForm({ step, setStatus }) {
       } catch (error) {
         console.error("Error creating user:", error);
       }
-      login(userData);
+
+      const credentials = {
+        email,
+        password,
+      };
+
+      login(credentials);
     }
 
-        
-        if(step === 3) {
-          const optionRegex = /(title|exp|education|resume)/
-          const userData = Object.keys(formData).reduce((acc, key) => {
-            if (formData[key] !== "" && formData[key] !== null && !optionRegex.test(key)) {
-              acc[key] = formData[key];
-            }
-            return acc;
-          }, {});
-          
-          console.log(userData);
-          try {
-            await createUser(userData).then(console.log("User created successfully.")).catch(console.log);
-      
-          } catch (error) {
-            console.error("Error creating user:", error);
-          }
-
-          const credentials = {
-            email,
-            password,
-          }
-          
-          login(credentials);
-        }
-
   }
-  
+
   function handleChange(event) {
     const { name, value } = event.target;
 
