@@ -2,7 +2,7 @@
 import getJobClient from "./api-fecth";
 
 export async function createUser(userData) {
-  const { token, ...user } = await getJobClient("/signup/professionals", {
+  const { token, ...user } = await getJobClient("signup/professionals", {
     method: "POST",
     body: userData,
   });
@@ -11,7 +11,7 @@ export async function createUser(userData) {
 }
 
 export async function getUser() {
-  const { token, ...user } = await getJobClient("/profile/professionals");
+  const { token, ...user } = await getJobClient("profile/professionals");
 
   return user;
 }
