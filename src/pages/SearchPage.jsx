@@ -12,6 +12,7 @@ import CheckSelect from "../components/inputs/CheckSelect";
 import { StyledLabel } from "../components/inputs/Input";
 import { Filter, priceFilter, searchBarFilter } from "../components/utils";
 import Button from "../components/buttons/Button";
+import { postFollows } from "../services/following-services";
 
 export const ContainerSearch = styled.div`
   display: "flex";

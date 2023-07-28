@@ -26,6 +26,17 @@ export async function createUser(userData) {
   return user;
 }
 
+export async function createUserWFile(userData) {
+  const { token, ...user } = await getCvClient("signup/professionals", {
+    method: "POST",
+
+    body: userData,
+  });
+
+  sessionStorage.setItem(tokenKey, token);
+  return user;
+}
+
 export async function getUser() {
   const { token, ...user } = await getJobClient("profile/professionals", {
     method: "GET",

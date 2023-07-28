@@ -7,12 +7,7 @@ import Input from "./inputs/Input";
 import TextArea from "./inputs/Input-textarea";
 import Button from "../components/buttons/Button";
 import InputFile from "./inputs/InputFile";
-import {
-  createUser,
-  updateSignupUser,
-  updateUser,
-} from "../services/professional-services";
-import { useNavigate } from "react-router";
+import { createUser, createUserWFile } from "../services/professional-services";
 import { useAuth } from "../context/auth-context";
 
 const Form = styled.form`
@@ -82,7 +77,7 @@ export default function ProfessionalForm({ step, setStatus }) {
             1: "In Progress",
             2: "Pending",
           });
-          console.log(formData)
+          console.log(formData);
           break;
         case 2:
           setStatus({
@@ -91,9 +86,9 @@ export default function ProfessionalForm({ step, setStatus }) {
             1: "Done!",
             2: "In Progress",
           });
-          console.log(formData)
+          console.log(formData);
           break;
-          default:
+        default:
           break;
       }
     } else {
@@ -116,23 +111,34 @@ export default function ProfessionalForm({ step, setStatus }) {
     event.preventDefault();
 
     const userData = Object.keys(formData).reduce((acc, key) => {
-      if (formData[key] !== "" && formData[key] !== null && key !== "passwordConfirmation") {
+      if (
+        formData[key] !== "" &&
+        formData[key] !== null &&
+        key !== "passwordConfirmation"
+      ) {
         acc[key] = formData[key];
       }
       return acc;
     }, {});
 
-    console.log(userData)
+    console.log(userData);
 
     const formFile = new FormData();
-    formFile.append("file", resume);
-    for (const [key, value] of Object.entries(userData)) {
-      formFile.append(key, value);
+    if (resume) {
+      formFile.append("resume", resume);
+      for (const [key, value] of Object.entries(userData)) {
+        formFile.append(key, value);
+      }
+
+      console.log(formFile);
     }
 
-    console.log(formFile);
     try {
-      await createUser(formFile).then(console.log("User created successfully.")).catch(console.log);
+      resume
+        ? await createUserWFile(formFile)
+        : await createUser(userData)
+            .then(console.log("User created successfully."))
+            .catch(console.log);
     } catch (error) {
       console.error("Error creating user:", error);
     }
@@ -140,8 +146,8 @@ export default function ProfessionalForm({ step, setStatus }) {
     const credentials = {
       email,
       password,
-    }
-    
+    };
+
     login(credentials);
   }
 
@@ -173,36 +179,41 @@ export default function ProfessionalForm({ step, setStatus }) {
           resume: null,
         });
         break;
-        default:
-          break;
-        }
-        
-        if(step === 3) {
-          const optionRegex = /(title|exp|education|resume)/
-          const userData = Object.keys(formData).reduce((acc, key) => {
-            if (formData[key] !== "" && formData[key] !== null && !optionRegex.test(key)) {
-              acc[key] = formData[key];
-            }
-            return acc;
-          }, {});
-          
-          console.log(userData);
-          try {
-            await createUser(userData).then(console.log("User created successfully.")).catch(console.log);
-      
-          } catch (error) {
-            console.error("Error creating user:", error);
-          }
+      default:
+        break;
+    }
 
-          const credentials = {
-            email,
-            password,
-          }
-          
-          login(credentials);
+    if (step === 3) {
+      const optionRegex = /(title|exp|education|resume)/;
+      const userData = Object.keys(formData).reduce((acc, key) => {
+        if (
+          formData[key] !== "" &&
+          formData[key] !== null &&
+          !optionRegex.test(key)
+        ) {
+          acc[key] = formData[key];
         }
+        return acc;
+      }, {});
+
+      console.log(userData);
+      try {
+        await createUser(userData)
+          .then(console.log("User created successfully."))
+          .catch(console.log);
+      } catch (error) {
+        console.error("Error creating user:", error);
+      }
+
+      const credentials = {
+        email,
+        password,
+      };
+
+      login(credentials);
+    }
   }
-  
+
   function handleChange(event) {
     const { name, value } = event.target;
 
