@@ -141,7 +141,7 @@ export default function ProfessionalForm({ step, setStatus }) {
       email,
       password,
     }
-
+    
     login(credentials);
   }
 
@@ -176,14 +176,16 @@ export default function ProfessionalForm({ step, setStatus }) {
         default:
           break;
         }
+        
         if(step === 3) {
+          const optionRegex = /(title|exp|education|resume)/
           const userData = Object.keys(formData).reduce((acc, key) => {
-            if (formData[key] !== "" && formData[key] !== null) {
+            if (formData[key] !== "" && formData[key] !== null && !optionRegex.test(key)) {
               acc[key] = formData[key];
             }
             return acc;
           }, {});
-
+          
           console.log(userData);
           try {
             await createUser(userData).then(console.log("User created successfully.")).catch(console.log);
@@ -191,10 +193,16 @@ export default function ProfessionalForm({ step, setStatus }) {
           } catch (error) {
             console.error("Error creating user:", error);
           }
-          login(userData);
+
+          const credentials = {
+            email,
+            password,
+          }
+          
+          login(credentials);
         }
   }
-
+  
   function handleChange(event) {
     const { name, value } = event.target;
 
