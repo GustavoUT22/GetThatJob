@@ -126,17 +126,23 @@ export default function ProfessionalForm({ step, setStatus }) {
 
     const formFile = new FormData();
     formFile.append("file", resume);
+    for (const [key, value] of Object.entries(userData)) {
+      formFile.append(key, value);
+    }
 
-    userData.resume = formFile;
-    console.log(userData);
+    console.log(formFile);
     try {
-      await createUser(userData).then(console.log("User created successfully.")).catch(console.log);
-
+      await createUser(formFile).then(console.log("User created successfully.")).catch(console.log);
     } catch (error) {
       console.error("Error creating user:", error);
     }
 
-    login(userData);
+    const credentials = {
+      email,
+      password,
+    }
+
+    login(credentials);
   }
 
   async function handleSkip(event) {
